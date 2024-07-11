@@ -230,3 +230,31 @@ btnTransfer.addEventListener('click', (e) => {
   inputTransferAmount.value = '';
   inputTransferAmount.blur();
 });
+
+btnClose.addEventListener('click', (e) => {
+  e.preventDefault();
+
+  const closeUsername = inputCloseUsername.value.toLowerCase().trim();
+  const closePin = Number(inputClosePin.value.trim());
+
+  if (
+    closeUsername === currentAccount.userName &&
+    closePin === currentAccount.pin
+  ) {
+    const index = accounts.findIndex(
+      (account) => account.userName === currentAccount.userName
+    );
+
+    accounts.splice(index, 1); // Delete user account from database
+    containerApp.style.opacity = 0; // Logout (Hide UI)
+    labelWelcome.textContent = `Log in to get started`;
+
+    console.log(accounts);
+  } else {
+    alert('Invalid User Credential!');
+  }
+
+  // Clear Input Fields
+  inputCloseUsername.value = '';
+  inputClosePin.value = '';
+});
