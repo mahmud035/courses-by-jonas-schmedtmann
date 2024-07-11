@@ -375,3 +375,105 @@ const result = accounts2.find((account) => account.owner === 'Jessica Davis');
 
 console.log(result);
  */
+
+//* The findIndex Method
+
+/*
+const array = [5, 12, 8, 130, 44];
+
+const index = array.findIndex((element) => element > 13);
+
+console.log(index); // Output: 3
+
+// In this example, findIndex finds the index of the first element in the array that is greater than 13. The first element that satisfies this condition is 130, which is at index 3.
+
+// Practical Usage
+const users = [
+  { id: 1, name: 'John' },
+  { id: 2, name: 'Jane' },
+  { id: 3, name: 'Mike' },
+];
+
+const index2 = users.findIndex((user) => user.id == 2);
+
+console.log(index2); // Output: 1
+
+// Example: Finding an Object by a Property
+const users2 = [
+  { id: 1, name: 'John', age: 25 },
+  { id: 2, name: 'Jane', age: 30 },
+  { id: 3, name: 'Mike', age: 35 },
+];
+
+// Find the index of the user with the name 'Jane'
+const index3 = users2.findIndex((user) => user.name === 'Jane');
+
+console.log(index3); // Output: 1
+
+// Example: Using findIndex with Optional Parameters
+const index4 = array.findIndex((element, index, array) => {
+  console.log(`Checking element: ${element}, at index: ${index}`);
+  return element > 10;
+});
+
+console.log(index4); // Output: 1 (and logs for each element check)
+
+// Example: Complex Conditions
+const products = [
+  { name: 'Laptop', price: 1000, available: true },
+  { name: 'Phone', price: 500, available: false },
+  { name: 'Tablet', price: 700, available: true },
+];
+
+// Find the index of the first available product costing more than $600
+const index5 = products.findIndex(
+  (product) => product.available && product.price > 600
+);
+
+console.log(index5); // Output: 0 (the Laptop)
+
+// Example: Error Handling with findIndex
+const numbers = [1, 2, 3, 4, 5];
+
+const index6 = numbers.findIndex((number) => number > 10);
+
+if (index6 === -1) {
+  console.log('No elements match the condition.');
+} else {
+  console.log(`First matching element index: ${index6}`);
+}
+// Output: No elements match the condition.
+
+// Comparison with indexOf
+const array2 = [5, 12, 8, 130, 44];
+
+// Using indexOf
+console.log(array2.indexOf(12)); // Output: 1
+console.log(array2.indexOf(100)); // Output: -1
+
+// Using findIndex
+console.log(array2.findIndex((element) => element > 100)); // Output: 3
+console.log(array2.findIndex((element) => element === 100)); // Output: -1
+
+// Example: Using findIndex with Strings
+const fruits = ['apple', 'banana', 'grapes', 'mango', 'orange'];
+
+// Find the index of the first fruit with more than 5 characters
+const index7 = fruits.findIndex((fruit) => fruit.length > 5);
+
+console.log(index7); // Output: 1 (banana)
+
+// Example: Using findIndex in a Function
+const cars = [
+  { brand: 'Toyota', model: 'Corolla', year: 2020 },
+  { brand: 'Honda', model: 'Civic', year: 2019 },
+  { brand: 'Ford', model: 'Mustang', year: 2021 },
+];
+
+const findCarByModel = (cars, model) => {
+  return cars.findIndex((car) => car.model === model);
+};
+
+console.log(findCarByModel(cars, 'Civic')); // Output: 1
+console.log(findCarByModel(cars, 'Model S')); // Output: -1 
+*/
