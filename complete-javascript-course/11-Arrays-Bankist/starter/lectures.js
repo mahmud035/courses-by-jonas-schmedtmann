@@ -630,6 +630,7 @@ console.log(items);
 // ]
  */
 
+/* 
 // 1. Sorting Numbers
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
@@ -651,3 +652,4 @@ console.log(owners); // ['Adam', 'Jonas', 'Martha', 'Zach']
 // Descending order
 owners.sort().reverse();
 console.log(owners); // ['Zach', 'Martha', 'Jonas', 'Adam']
+*/
