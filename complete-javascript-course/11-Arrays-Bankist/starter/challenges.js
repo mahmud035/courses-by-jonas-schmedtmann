@@ -155,6 +155,7 @@ const dogs = [
 GOOD LUCK 😀
 */
 
+/* 
 // 1. Loop over the array containing dog objects, and for each dog, calculate the recommended food portion and add it to the object as a new property. Do NOT create a new array, simply loop over the array. Formula: recommendedFood = weight ** 0.75 * 28. (The result is in grams of food, and the weight needs to be in kg)
 
 // Solution: 1
@@ -251,3 +252,4 @@ const dogsSorted = dogs
   .slice() // copy the dogs array
   .sort((a, b) => a.recommendedFood - b.recommendedFood);
 console.log(dogsSorted);
+ */
