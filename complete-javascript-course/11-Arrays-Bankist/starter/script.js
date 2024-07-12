@@ -231,6 +231,26 @@ btnTransfer.addEventListener('click', (e) => {
   inputTransferAmount.blur();
 });
 
+btnLoan.addEventListener('click', (e) => {
+  e.preventDefault();
+
+  const loanAmount = Number(inputLoanAmount.value);
+
+  if (
+    loanAmount > 0 &&
+    currentAccount.movements.some((movement) => movement >= loanAmount * 0.1)
+  ) {
+    // Add positive movement to current user
+    currentAccount.movements.push(loanAmount);
+
+    // Update UI
+    updateUI(currentAccount);
+  }
+
+  // Clear Input Fields
+  inputLoanAmount.value = '';
+});
+
 btnClose.addEventListener('click', (e) => {
   e.preventDefault();
 

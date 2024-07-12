@@ -477,3 +477,177 @@ const findCarByModel = (cars, model) => {
 console.log(findCarByModel(cars, 'Civic')); // Output: 1
 console.log(findCarByModel(cars, 'Model S')); // Output: -1 
 */
+
+//* some and every method
+
+/* 
+const array = [1, 2, 3, 4, 5];
+
+const hasEvenNumber = array.some((element) => element % 2 === 0);
+console.log(hasEvenNumber); // Output: true
+
+const allLessThanTen = array.every((element) => element < 10);
+console.log(allLessThanTen); // Output: true
+
+const allEvenNumbers = array.every((element) => element % 2 === 0);
+console.log(allEvenNumbers); // Output: false
+ */
+
+/* 
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+// EQUALITY
+console.log(movements.includes(-130));
+
+// SOME: CONDITION
+const anyDeposits = movements.some((movement) => movement > 0);
+console.log(anyDeposits);
+ */
+
+//* flat and flatMap method
+
+/* 
+let arr1 = [1, 2, [3, 4]];
+console.log(arr1.flat()); // [1, 2, 3, 4]
+
+let arr2 = [1, 2, [3, 4, [5, 6]]];
+console.log(arr2.flat()); // [1, 2, 3, 4, [5, 6]]
+console.log(arr2.flat(2)); // [1, 2, 3, 4, 5, 6]; 
+*/
+
+/* 
+// flat
+const arr = [[1, 2, 3], [4, 5, 6], 7, 8];
+console.log(arr.flat()); // [1, 2, 3, 4, 5, 6, 7, 8]
+
+const arrDeep = [[[1, 2], 3], [4, [5, 6]], 7, 8];
+
+console.log(arrDeep.flat()); // [[1, 2], 3, 4, [5, 6], 7, 8]
+console.log(arrDeep.flat(2)); // [1, 2, 3, 4, 5, 6, 7, 8]
+
+const accounts2 = [
+  {
+    owner: 'Jonas Schmedtmann',
+    movements: [200, 450, -400, 3000, -650, -130, 70, 1300],
+    interestRate: 1.2, // %
+    pin: 1111,
+  },
+  {
+    owner: 'Jessica Davis',
+    movements: [5000, 3400, -150, -790, -3210, -1000, 8500, -30],
+    interestRate: 1.5,
+    pin: 2222,
+  },
+  {
+    owner: 'Steven Thomas Williams',
+    movements: [200, -200, 340, -300, -20, 50, 400, -460],
+    interestRate: 0.7,
+    pin: 3333,
+  },
+  {
+    owner: 'Sarah Smith',
+    movements: [430, 1000, 700, 50, 90],
+    interestRate: 1,
+    pin: 4444,
+  },
+];
+
+// Practical Example: Calculate the overallBalance of all the movements of all the accounts
+
+// (flat)
+const overallBalance = accounts2
+  .map((account) => account.movements)
+  .flat()
+  .reduce((accumulator, currentValue) => {
+    return accumulator + currentValue;
+  }, 0);
+
+console.log(overallBalance); // 17840
+
+// (flatMap)
+const overallBalance2 = accounts2
+  .flatMap((account) => account.movements)
+  .reduce((accumulator, currentValue) => {
+    return accumulator + currentValue;
+  }, 0);
+
+console.log(overallBalance2); // 17840
+ */
+
+//* Sorting Arrays
+
+/* 
+// 1. Sorting Numbers using Compare function
+const numbers = [4, 2, 5, 1, 3];
+
+// Ascending order
+numbers.sort((a, b) => a - b);
+console.log(numbers); // Output: [1, 2, 3, 4, 5]
+
+// Descending order
+numbers.sort((a, b) => b - a);
+console.log(numbers); // Output: [5, 4, 3, 2, 1]
+
+// 2. Sorting Strings
+const fruits = ['banana', 'apple', 'cherry', 'date'];
+
+// Ascending order
+fruits.sort();
+console.log(fruits); // Output: ['apple', 'banana', 'cherry', 'date']
+
+// Descending order
+// fruits.sort((a, b) => b.localeCompare(a));
+fruits.sort().reverse();
+console.log(fruits); // Output: ['date', 'cherry', 'banana', 'apple']
+
+// 3. Custom Sorting
+const items = [
+  { name: 'apple', quantity: 2 },
+  { name: 'banana', quantity: 5 },
+  { name: 'cherry', quantity: 3 },
+];
+
+// Sort by quantity in ascending order
+items.sort((a, b) => a.quantity - b.quantity);
+console.log(items);
+
+// Output:
+// [
+//   { name: 'apple', quantity: 2 },
+//   { name: 'cherry', quantity: 3 },
+//   { name: 'banana', quantity: 5 }
+// ]
+
+// Sort by name in alphabetical order
+items.sort((a, b) => a.name.localeCompare(b.name));
+console.log(items);
+
+// Output:
+// [
+//   { name: 'apple', quantity: 2 },
+//   { name: 'banana', quantity: 5 },
+//   { name: 'cherry', quantity: 3 }
+// ]
+ */
+
+// 1. Sorting Numbers
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+// Ascending order
+movements.sort((a, b) => a - b);
+console.log(movements); // [-650, -400, -130, 70, 200, 450, 1300, 3000]
+
+// Descending order
+movements.sort((a, b) => b - a);
+console.log(movements); // [3000, 1300, 450, 200, 70, -130, -400, -650]
+
+// 2. Sorting Strings
+const owners = ['Jonas', 'Zach', 'Adam', 'Martha'];
+
+// Ascending order
+owners.sort();
+console.log(owners); // ['Adam', 'Jonas', 'Martha', 'Zach']
+
+// Descending order
+owners.sort().reverse();
+console.log(owners); // ['Zach', 'Martha', 'Jonas', 'Adam']
