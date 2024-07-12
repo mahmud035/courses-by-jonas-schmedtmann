@@ -653,3 +653,188 @@ console.log(owners); // ['Adam', 'Jonas', 'Martha', 'Zach']
 owners.sort().reverse();
 console.log(owners); // ['Zach', 'Martha', 'Jonas', 'Adam']
 */
+
+//* Dynamically Creating and Filling Arrays
+
+// https://chatgpt.com/share/dc6d9ddf-c1ee-4694-86b5-1df176f1b3af
+
+// In JavaScript, you can dynamically create and fill arrays using a variety of methods. Here are a few common techniques:
+
+/* 
+// 1. Using a Loop: You can use a for loop to fill an array with values dynamically.
+let array = [];
+for (let i = 0; i < 10; i++) {
+  array.push(i);
+}
+console.log(array); // Output: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+// 2. Using Array.from(): Array.from() can create an array from any iterable object, including array-like objects. It can also take a mapping function as a second argument.
+
+const array2 = Array.from({ length: 10 }, (_, i) => i);
+console.log(array2); // Output: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+// 3. Using Array.map(): You can create an array with a certain length and then use map to fill it.
+
+const array3 = new Array(10).fill(null).map((_, i) => i);
+console.log(array3); // Output: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+// 4. Using Array.fill(): You can create an array and fill it with the same value using fill.
+
+const array4 = new Array(10).fill(0);
+console.log(array4); // Output: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+
+// 5. Using Spread Operator with Array.keys(): The spread operator can be used in combination with Array.keys() to create arrays with dynamic values.
+
+const array5 = [...Array(10).keys()];
+console.log(array5); // Output: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+// 6. Using reduce(): You can also use reduce to build an array.
+
+const array6 = Array(10)
+  .fill()
+  .reduce((acc, _, i) => {
+    acc.push(i);
+    return acc;
+  }, []);
+
+console.log(array6); // Output: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+ */
+
+/* 
+// Empty arrays + fill method
+const array = new Array(7).fill(0);
+console.log(array); // Output: [0, 0, 0, 0, 0, 0, 0]
+
+// Array.from
+const array2 = Array.from({ length: 7 }, (_, i) => i + 1);
+console.log(array2); // Output: [1, 2, 3, 4, 5, 6, 7]
+
+// Task: Create an array with 100 random dice rolls.
+const diceRolls = Array.from(
+  { length: 100 },
+  (_, i) => Math.floor(Math.random() * 6) + 1
+);
+console.log(diceRolls);
+ */
+
+//* Array Methods Practice
+
+/* 
+const accounts2 = [
+  {
+    owner: 'Jonas Schmedtmann',
+    movements: [200, 450, -400, 3000, -650, -130, 70, 1300],
+    interestRate: 1.2, // %
+    pin: 1111,
+  },
+  {
+    owner: 'Jessica Davis',
+    movements: [5000, 3400, -150, -790, -3210, -1000, 8500, -30],
+    interestRate: 1.5,
+    pin: 2222,
+  },
+  {
+    owner: 'Steven Thomas Williams',
+    movements: [200, -200, 340, -300, -20, 50, 400, -460],
+    interestRate: 0.7,
+    pin: 3333,
+  },
+  {
+    owner: 'Sarah Smith',
+    movements: [430, 1000, 700, 50, 90],
+    interestRate: 1,
+    pin: 4444,
+  },
+];
+
+// Task 1: Calculate how much has been deposited in total in the bank.
+const bankDepositSum = accounts2
+  .map((account) => account.movements)
+  .flat(1)
+  .filter((movement) => movement > 0)
+  .reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+
+console.log(bankDepositSum); // 25180
+
+// Task 2: Count how many deposits there have been in the bank with at least $1000.
+const numDeposits1000 = accounts2
+  .flatMap((account) => account.movements)
+  .filter((movement) => movement >= 1000).length;
+
+console.log(numDeposits1000); // 6
+
+// Using reduce method
+const numDeposits1000Reduce = accounts2
+  .flatMap((account) => account.movements)
+  .reduce((accumulator, currentMovement, currentIndex, array) => {
+    // console.log(array);
+    return currentMovement >= 1000 ? accumulator + 1 : accumulator;
+  }, 0);
+
+console.log(numDeposits1000Reduce); // 6
+
+// Task 3: Create an object which contains the sum of deposits and sum of the withdrawals.
+const sums = accounts2
+  .flatMap((account) => account.movements)
+  .reduce(
+    (accumulator, currentMovement) => {
+      // console.log(accumulator);
+      currentMovement > 0
+        ? (accumulator.deposits += currentMovement)
+        : (accumulator.withdrawals += Math.abs(currentMovement));
+
+      return accumulator;
+    },
+    // NOTE: Initial sums object which will be used as accumulator's initial value
+    {
+      deposits: 0,
+      withdrawals: 0,
+    }
+  );
+
+console.log(sums); // {deposits: 25180, withdrawals: 7340}
+
+// Task 4: Create a simple function to convert any string to a title case. (title case basically means that all the words in a sentence are capitalized except some exceptions => the word that should NOT be capitalized 👇)
+
+// Sample: this is a nice title => This Is a Nice Title
+
+const convertTitleCase = (title) => {
+  const capitalize = (str) => str.at(0).toUpperCase() + str.slice(1);
+
+  const exceptionList = [
+    'a',
+    'an',
+    'the',
+    'and',
+    'but',
+    'or',
+    'nor',
+    'for',
+    'yet',
+    'so',
+    'at',
+    'by',
+    'for',
+    'in',
+    'of',
+    'off',
+    'on',
+    'out',
+    'to',
+    'up',
+    'with',
+  ];
+
+  const titleCase = title
+    .toLowerCase()
+    .split(' ')
+    .map((word) => (exceptionList.includes(word) ? word : capitalize(word)))
+    .join(' ');
+
+  return capitalize(titleCase);
+};
+
+console.log(convertTitleCase('this is a nice title')); // This Is a Nice Title
+console.log(convertTitleCase('this is a LONG title but not too long')); // This Is a Long Title but Not Too Long
+console.log(convertTitleCase('and here is another title with an EXAMPLE')); // And Here Is Another Title with an Example
+ */
