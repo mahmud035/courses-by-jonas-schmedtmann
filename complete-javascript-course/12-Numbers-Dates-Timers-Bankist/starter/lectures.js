@@ -56,3 +56,76 @@ console.log((2.7).toFixed(2)); // 2.70 as string
 console.log((2.3421).toFixed(2)); // 2.34 as string
 console.log((2.7).toPrecision(3)); // 2.70 as string
  */
+
+//* The Remainder Operator
+
+/*
+ console.log(5 % 2); // 1
+console.log(8 % 3); // 2
+
+console.log(6 % 2); // 0
+console.log(7 % 2); // 1
+
+const isEven = (num) => num % 2 === 0;
+
+console.log(isEven(6)); // true
+console.log(isEven(7)); // false
+
+const isOdd = (num) => num % 2 === 1;
+
+console.log(isOdd(7)); // true
+console.log(isOdd(10)); // false
+ */
+
+//* Numeric Separators
+
+/* 
+const diameter = 2_87_46_00_00_000;
+console.log(diameter);
+
+const price = 34_599;
+console.log(price);
+ */
+
+//* Creating Dates
+
+/* 
+// Create a date
+// const now = new Date();
+// console.log(now);
+
+// console.log(new Date('Jul 13 2024 14:37:52'));
+// console.log(new Date('2019-11-18T21:31:17.178Z'));
+
+// console.log(new Date(0)); // milliseconds
+// console.log(new Date(3 * 24 * 60 * 60 * 1000)); // milliseconds
+
+// Working with dates
+const future = new Date(2037, 10, 19, 8, 23);
+console.log(future);
+console.log(future.getFullYear());
+console.log(future.getMonth());
+console.log(future.getDate());
+console.log(future.getDay());
+console.log(future.getHours());
+console.log(future.getMinutes());
+console.log(future.getSeconds());
+console.log(future.toISOString());
+console.log(future.getTime()); // milliseconds
+
+console.log(new Date(2142210180000));
+
+console.log(Date.now()); 
+*/
+
+//* Operations With Dates
+
+const future = new Date(2037, 10, 19, 8, 23);
+console.log(future.getTime()); // milliseconds
+console.log(+future);
+
+const calcDaysPassed = (date1, date2) =>
+  Math.abs(date2 - date1) / (1000 * 60 * 60 * 24);
+
+const days1 = calcDaysPassed(new Date(2037, 3, 14), new Date(2037, 3, 24));
+console.log(days1); // 10 days
