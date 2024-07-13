@@ -107,7 +107,7 @@ const displayMovements = (movements, sort = false) => {
           <div class="movements__type movements__type--${type}">
           ${index + 1} ${type}
           </div>
-          <div class="movements__value">${movement} €</div>
+          <div class="movements__value">${movement.toFixed(2)} €</div>
       </div>
     `;
 
@@ -127,7 +127,7 @@ const calcDisplayBalance = (currentAccount) => {
     initialValue
   );
 
-  labelBalance.textContent = `${currentAccount?.balance} €`;
+  labelBalance.textContent = `${currentAccount?.balance.toFixed(2)} €`;
 };
 
 // Calculate and Display Summary (Chaining Methods)
@@ -138,7 +138,7 @@ const calcDisplaySummary = (currentAccount) => {
       return accumulator + currentDeposit;
     }, 0);
 
-  labelSumIn.textContent = `${income} €`;
+  labelSumIn.textContent = `${income.toFixed(2)} €`;
 
   const out = currentAccount?.movements
     .filter((movement) => movement < 0) // take all withdrawal
@@ -146,7 +146,7 @@ const calcDisplaySummary = (currentAccount) => {
       return accumulator + currentWithdrawal;
     }, 0);
 
-  labelSumOut.textContent = `${Math.abs(out)} €`;
+  labelSumOut.textContent = `${Math.abs(out).toFixed(2)} €`;
 
   const interest = currentAccount?.movements
     .filter((movement) => movement > 0) // take all deposit
@@ -160,7 +160,7 @@ const calcDisplaySummary = (currentAccount) => {
       return accumulator + currentInterest;
     }, 0);
 
-  labelSumInterest.textContent = `${interest} €`;
+  labelSumInterest.textContent = `${interest.toFixed(2)} €`;
 };
 
 // Update UI
@@ -252,7 +252,7 @@ btnTransfer.addEventListener('click', (e) => {
 btnLoan.addEventListener('click', (e) => {
   e.preventDefault();
 
-  const loanAmount = Number(inputLoanAmount.value);
+  const loanAmount = Math.floor(inputLoanAmount.value);
 
   if (
     loanAmount > 0 &&
