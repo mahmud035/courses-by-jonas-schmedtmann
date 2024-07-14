@@ -120,6 +120,7 @@ console.log(Date.now());
 
 //* Operations With Dates
 
+/* 
 const future = new Date(2037, 10, 19, 8, 23);
 console.log(future.getTime()); // milliseconds
 console.log(+future);
@@ -129,3 +130,59 @@ const calcDaysPassed = (date1, date2) =>
 
 const days1 = calcDaysPassed(new Date(2037, 3, 14), new Date(2037, 3, 24));
 console.log(days1); // 10 days
+ */
+
+//* Internationalizing Numbers (Intl)
+
+/* 
+const num = 3884764.23;
+
+console.log('US:      ', new Intl.NumberFormat('en-US').format(num));
+console.log('BD:      ', new Intl.NumberFormat('bn-BD').format(num));
+console.log('Germany: ', new Intl.NumberFormat('de-DE').format(num));
+console.log('Syria:   ', new Intl.NumberFormat('ar-SY').format(num));
+console.log(
+  navigator.language,
+  new Intl.NumberFormat(navigator.language).format(num)
+);
+ */
+
+//* Implementing a Countdown Timer
+
+/* 
+let timeoutId;
+
+const startLogoutTimer = () => {
+  // Set time to 1 minutes
+  let time = 1 * 60; // seconds
+
+  // Clear any existing interval
+  if (timeoutId) {
+    clearInterval(timeoutId);
+  }
+
+  const tick = () => {
+    const minutes = String(Math.trunc(time / 60)).padStart(2, '0');
+    const seconds = String(time % 60).padStart(2, '0');
+
+    // In each call, print the remaining time to UI
+    console.log(`Time left: ${minutes}:${seconds}`);
+    console.log('time', time);
+
+    // When 0 seconds, stop timer and logout user
+    if (time === 0) {
+      clearInterval(timeoutId);
+      console.log('logout');
+    }
+
+    // Decrees 1s
+    time--;
+  };
+
+  // Call the timer every second
+  tick();
+  timeoutId = setInterval(tick, 1000);
+};
+
+startLogoutTimer();
+ */

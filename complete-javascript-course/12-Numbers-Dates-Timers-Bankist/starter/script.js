@@ -1,52 +1,69 @@
 'use strict';
 
 // BANKIST APP
-
-// Data
+// https://simplelocalize.io/data/locales/
 
 // DIFFERENT DATA! Contains movementsDates, currency and locale
 
-const account1 = {
-  owner: 'Jonas Schmedtmann',
-  movements: [200, 455.23, -306.5, 25000, -642.21, -133.9, 79.97, 1300],
-  interestRate: 1.2, // %
-  pin: 1111,
+const accounts = [
+  {
+    owner: 'Jonas Schmedtmann',
+    movements: [200, 455.23, -306.5, 25000, -642.21, -133.9, 79.97, 1300],
+    interestRate: 1.2, // %
+    pin: 1111,
 
-  movementsDates: [
-    '2019-11-18T21:31:17.178Z',
-    '2020-12-23T07:42:02.383Z',
-    '2022-01-28T09:15:04.904Z',
-    '2023-04-01T10:17:24.185Z',
-    '2024-07-06T12:11:59.604Z',
-    '2024-07-10T11:01:17.194Z',
-    '2024-07-11T10:36:17.929Z',
-    '2024-07-12T10:51:36.790Z',
-  ],
-  currency: 'EUR',
-  locale: 'pt-PT', // de-DE
-};
+    movementsDates: [
+      '2019-11-18T21:31:17.178Z',
+      '2020-12-23T07:42:02.383Z',
+      '2022-01-28T09:15:04.904Z',
+      '2023-04-01T10:17:24.185Z',
+      '2024-07-06T12:11:59.604Z',
+      '2024-07-10T11:01:17.194Z',
+      '2024-07-11T10:36:17.929Z',
+      '2024-07-12T10:51:36.790Z',
+    ],
+    currency: 'USD',
+    locale: 'en-US', // de-DE
+  },
+  {
+    owner: 'Jessica Davis',
+    movements: [50000, 34000, -150, -790, -3210, -10000, 8500000, -3000],
+    interestRate: 1.5,
+    pin: 2222,
 
-const account2 = {
-  owner: 'Jessica Davis',
-  movements: [5000, 3400, -150, -790, -3210, -1000, 8500, -30],
-  interestRate: 1.5,
-  pin: 2222,
+    movementsDates: [
+      '2019-10-18T21:31:17.178Z',
+      '2020-11-23T07:42:02.383Z',
+      '2022-01-28T09:15:04.904Z',
+      '2023-04-01T10:17:24.185Z',
+      '2024-07-06T12:11:59.604Z',
+      '2024-07-07T10:36:17.929Z',
+      '2024-07-05T10:51:36.790Z',
+      '2024-07-12T11:01:17.194Z',
+    ],
+    currency: 'BDT',
+    locale: 'bn-BD',
+  },
+  {
+    owner: 'Sarah Smith',
+    movements: [43000, 1000, -700, 50, -4500, 2700, -1600, 70000],
+    interestRate: 1.3,
+    pin: 3333,
 
-  movementsDates: [
-    '2019-10-18T21:31:17.178Z',
-    '2020-11-23T07:42:02.383Z',
-    '2022-01-28T09:15:04.904Z',
-    '2023-04-01T10:17:24.185Z',
-    '2024-07-06T12:11:59.604Z',
-    '2024-07-07T10:36:17.929Z',
-    '2024-07-05T10:51:36.790Z',
-    '2024-07-12T11:01:17.194Z',
-  ],
-  currency: 'USD',
-  locale: 'en-US',
-};
-
-const accounts = [account1, account2];
+    movementsDates: [
+      '2019-08-18T21:31:17.178Z',
+      '2020-07-23T07:42:02.383Z',
+      '2022-02-28T09:15:04.904Z',
+      '2023-03-01T10:17:24.185Z',
+      '2024-07-06T12:11:59.604Z',
+      '2024-07-07T10:36:17.929Z',
+      '2024-07-05T10:51:36.790Z',
+      '2024-07-12T11:01:17.194Z',
+    ],
+    currency: 'EUR', // pound
+    locale: 'pt-PT',
+  },
+];
 
 // Elements
 const labelWelcome = document.querySelector('.welcome');
@@ -77,6 +94,7 @@ const inputClosePin = document.querySelector('.form__input--pin');
 let currentAccount;
 let sorted = false;
 let timerId;
+const locale = navigator.language; // Get Browser Default Locale
 
 // Computing Usernames
 const createUserNames = (accounts) => {
@@ -113,7 +131,13 @@ const displayMovements = (currentAccount, sort = false) => {
           <div class="movements__date">
              ${getDateAndTimeInfo(currentAccount.movementsDates[index], false)}
           </div>
-          <div class="movements__value">${movement.toFixed(2)} €</div>
+          <div class="movements__value">
+             ${formatCurrency(
+               movement,
+               currentAccount.locale,
+               currentAccount.currency
+             )}
+          </div>
       </div>
     `;
 
@@ -133,7 +157,11 @@ const calcDisplayBalance = (currentAccount) => {
     initialValue
   );
 
-  labelBalance.textContent = `${currentAccount?.balance.toFixed(2)} €`;
+  labelBalance.textContent = formatCurrency(
+    currentAccount.balance,
+    currentAccount.locale,
+    currentAccount.currency
+  );
 };
 
 // Calculate and Display Summary (Chaining Methods)
@@ -144,7 +172,11 @@ const calcDisplaySummary = (currentAccount) => {
       return accumulator + currentDeposit;
     }, 0);
 
-  labelSumIn.textContent = `${income.toFixed(2)} €`;
+  labelSumIn.textContent = formatCurrency(
+    income,
+    currentAccount.locale,
+    currentAccount.currency
+  );
 
   const out = currentAccount?.movements
     .filter((movement) => movement < 0) // take all withdrawal
@@ -152,7 +184,11 @@ const calcDisplaySummary = (currentAccount) => {
       return accumulator + currentWithdrawal;
     }, 0);
 
-  labelSumOut.textContent = `${Math.abs(out).toFixed(2)} €`;
+  labelSumOut.textContent = formatCurrency(
+    out,
+    currentAccount.locale,
+    currentAccount.currency
+  );
 
   const interest = currentAccount?.movements
     .filter((movement) => movement > 0) // take all deposit
@@ -166,7 +202,11 @@ const calcDisplaySummary = (currentAccount) => {
       return accumulator + currentInterest;
     }, 0);
 
-  labelSumInterest.textContent = `${interest.toFixed(2)} €`;
+  labelSumInterest.textContent = formatCurrency(
+    interest,
+    currentAccount.locale,
+    currentAccount.currency
+  );
 };
 
 // Update UI
@@ -203,6 +243,7 @@ const getDateAndTimeInfo = (dateStr, shouldReturnTime = false) => {
   if (!shouldReturnTime && diffInDays === 1) return 'Yesterday';
   if (!shouldReturnTime && diffInDays <= 7) return `${diffInDays} Days Ago`;
 
+  /*     
   // Get the day, month and year
   // Add leading zeros to day and month if necessary
   const day = `${dateObj.getDate()}`.padStart(2, '0');
@@ -210,16 +251,25 @@ const getDateAndTimeInfo = (dateStr, shouldReturnTime = false) => {
   const year = dateObj.getFullYear();
 
   // Format the date as 'DD/MM/YYYY'
-  const date = `${day}/${month}/${year}`;
+  const date = `${day}/${month}/${year}`; 
+  */
 
-  // Format time using Intl.DateTimeFormat
-  const options = {
+  // Format date using Intl.DateTimeFormat (MM/DD/YYYY)
+  const optionsForDate = {
+    timeZone: 'Asia/Dhaka',
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric',
+  };
+  const date = new Intl.DateTimeFormat(locale, optionsForDate).format(dateObj);
+
+  // Format time using Intl.DateTimeFormat (H:MM)
+  const optionsForTime = {
     timeZone: 'Asia/Dhaka',
     hour: 'numeric',
     minute: 'numeric',
   };
-
-  const time = new Intl.DateTimeFormat('en-BD', options).format(dateObj);
+  const time = new Intl.DateTimeFormat(locale, optionsForTime).format(dateObj);
 
   return shouldReturnTime ? `${date}, ${time}` : `${date}`;
 };
@@ -231,36 +281,46 @@ const addMovementsDates = (account, date) => {
 
 // Countdown Timer
 const startCountdown = () => {
-  const duration = 10; // Set the countdown duration in minutes
-  const countdownTime = duration * 60 * 1000; // Convert minutes to milliseconds
+  const duration = 10; // Set time to 10 minutes
+  let time = duration * 60; // Convert minutes to seconds
 
   // Clear any existing interval
   if (timerId) {
     clearInterval(timerId);
   }
 
-  // Calculate the end time
-  const endTime = new Date().getTime() + countdownTime; // milliseconds
-
-  // Update the timer every second
-  timerId = setInterval(() => {
-    const now = new Date().getTime(); // milliseconds
-    const timeLeft = endTime - now;
-
-    // Calculate minutes and seconds
-    const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+  const tick = () => {
+    // Calculate remaining minutes and seconds
+    const minutes = String(Math.trunc(time / 60)).padStart(2, '0');
+    const seconds = String(time % 60).padStart(2, '0');
 
     // Display the result in the timer element
     labelTimer.textContent = `${minutes}:${seconds}`;
 
-    // If the countdown is over, clear the interval and logout (Hide UI)
-    if (timeLeft < 0) {
+    // When time is 0 seconds, stop timer and logout (Hide UI)
+    if (time === 0) {
       clearInterval(timerId);
       containerApp.style.opacity = 0; // Logout (Hide UI)
       labelWelcome.textContent = `Log in to get started`;
     }
-  }, 1000);
+
+    // Decrease time by 1 second
+    time--;
+  };
+  // Immediately start the timer
+  tick();
+
+  // And Update the timer every second
+  timerId = setInterval(tick, 1000);
+};
+
+// Format Currency
+const formatCurrency = (value, locale, currency) => {
+  // Format number using Intl.NumberFormat
+  return new Intl.NumberFormat(locale, {
+    style: 'currency',
+    currency: currency,
+  }).format(value);
 };
 
 //* Event handler
@@ -363,14 +423,17 @@ btnLoan.addEventListener('click', (e) => {
     // Start Countdown
     startCountdown();
 
-    // Add positive movement to current user
-    currentAccount.movements.push(loanAmount);
+    // Accept loan request after 1 second
+    setTimeout(() => {
+      // Add positive movement to current user
+      currentAccount.movements.push(loanAmount);
 
-    // Add current time in currentAccount
-    addMovementsDates(currentAccount, now);
+      // Add current time in currentAccount
+      addMovementsDates(currentAccount, now);
 
-    // Update UI
-    updateUI(currentAccount);
+      // Update UI
+      updateUI(currentAccount);
+    }, 1000);
   }
 
   // Clear Input Fields
