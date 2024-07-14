@@ -310,7 +310,7 @@ const startCountdown = () => {
   // Immediately start the timer
   tick();
 
-  // And Update the timer every second
+  // And Then Update the timer every second
   timerId = setInterval(tick, 1000);
 };
 
