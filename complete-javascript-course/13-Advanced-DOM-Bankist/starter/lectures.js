@@ -87,3 +87,32 @@ logo.classList.toggle('class3');
 logo.classList.contains('class4'); 
 
 */
+
+//* Event Propagation in Practice (Bubbling)
+
+// rgb(255, 255, 255)
+
+const randomInt = (min, max) =>
+  Math.floor(Math.random() * (max - min + 1)) + min;
+
+const randomColor = () =>
+  `rgb(${randomInt(0, 255)}, ${randomInt(0, 255)}, ${randomInt(0, 255)})`;
+
+document.querySelector('.nav__link').addEventListener('click', function (e) {
+  // e.stopPropagation();
+  console.log('a', e.target, e.currentTarget);
+  console.log(e.currentTarget === this);
+  this.style.backgroundColor = randomColor();
+});
+
+document.querySelector('.nav__links').addEventListener('click', function (e) {
+  // e.stopPropagation();
+  console.log('ul', e.target, e.currentTarget);
+  this.style.backgroundColor = randomColor();
+});
+
+document.querySelector('.nav').addEventListener('click', function (e) {
+  // e.stopPropagation();
+  console.log('nav', e.target, e.currentTarget);
+  this.style.backgroundColor = randomColor();
+});
