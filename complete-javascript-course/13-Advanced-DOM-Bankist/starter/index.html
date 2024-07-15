@@ -25,7 +25,7 @@
         />
         <ul class="nav__links">
           <li class="nav__item">
-            <a class="nav__link" href="#">Features</a>
+            <a class="nav__link" href="#section--1">Features</a>
           </li>
           <li class="nav__item">
             <a class="nav__link" href="#section--2">Operations</a>
@@ -354,5 +354,26 @@
 
     <script src="./script.js"></script>
     <script src="./lectures.js"></script>
+
+    <!-- Event Delegation Example -->
+    <!--     <ul id="parent-list">
+      <li class="child-item">Item 1</li>
+      <li class="child-item">Item 2</li>
+      <li class="child-item">Item 3</li>
+      <li class="child-item">Item 1</li>
+    </ul>
+
+    <script>
+      const parentList = document.querySelector('#parent-list');
+
+      parentList.addEventListener('click', (e) => {
+        e.preventDefault();
+
+        // Matching strategy
+        if (e.target.classList.contains('child-item')) {
+          alert(`Clicked on ${e.target.textContent}`);
+        }
+      });
+    </script> -->
   </body>
 </html>

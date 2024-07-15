@@ -92,6 +92,7 @@ logo.classList.contains('class4');
 
 // rgb(255, 255, 255)
 
+/* 
 const randomInt = (min, max) =>
   Math.floor(Math.random() * (max - min + 1)) + min;
 
@@ -101,7 +102,7 @@ const randomColor = () =>
 document.querySelector('.nav__link').addEventListener('click', function (e) {
   // e.stopPropagation();
   console.log('a', e.target, e.currentTarget);
-  console.log(e.currentTarget === this);
+  console.log(e.currentTarget === this); // true
   this.style.backgroundColor = randomColor();
 });
 
@@ -116,3 +117,53 @@ document.querySelector('.nav').addEventListener('click', function (e) {
   console.log('nav', e.target, e.currentTarget);
   this.style.backgroundColor = randomColor();
 });
+ */
+
+//* DOM Traversing
+
+/* 
+  Traversing from a Node::
+
+  parentElement: Accesses the parent node of an element.
+  children: Accesses all child elements of an element.
+  firstElementChild: Accesses the first child element.
+  lastElementChild: Accesses the last child element.
+  previousElementSibling: Accesses the previous sibling element.
+  nextElementSibling: Accesses the next sibling element. 
+*/
+
+/* 
+const h1 = document.querySelector('h1');
+
+// Going Downwards: child
+console.log(h1.querySelectorAll('.highlight'));
+console.log(h1.children); // Accesses all child elements of h1
+console.log(h1.firstElementChild); // Accesses the first child element of h1
+console.log(h1.lastElementChild); // Accesses the last child element of h1
+
+h1.firstElementChild.style.color = 'white';
+h1.lastElementChild.style.color = 'gray';
+
+// Going Upwards: parents
+console.log(h1.parentNode);
+console.log(h1.parentElement);
+
+// IMPORTANT: & Need To Remember & Will Use It a Lot:
+// The element.closest() method in JavaScript is used to find the closest ancestor of the current element (or the element itself) that matches a specified CSS selector. It traverses the element and its ancestors (up the DOM tree) until it finds a match. If no matching element is found, it returns null.
+
+h1.closest('.header').style.background = 'var(--gradient-secondary)';
+
+h1.closest('h1').style.background = 'var(--gradient-primary)';
+
+// Going Sideways: siblings
+console.log(h1.previousElementSibling);
+console.log(h1.nextElementSibling);
+
+// Tricks
+console.log(h1.parentNode.children);
+console.log(h1.parentElement.children);
+
+[...h1.parentElement.children].forEach((element) => {
+  if (element !== h1) element.style.transform = 'scale(0.5)';
+});
+ */
