@@ -77,7 +77,7 @@ logo.alt = 'Beautiful logo';
 // Set new attribute and it's value. Syntax: element.setAttribute(attribute, value);
 logo.setAttribute('company', 'Bankist');
 
-// Data attributes
+// IMPORTANT: Data attributes
 console.log(logo.dataset.versionNumber); // 3.0
 
 // Classes

@@ -3,14 +3,14 @@
 // Select Elements
 const modal = document.querySelector('.modal');
 const overlay = document.querySelector('.overlay');
-const section1 = document.querySelector('#section--1');
 
 const btnCloseModal = document.querySelector('.btn--close-modal');
 const btnsOpenModal = document.querySelectorAll('.btn--show-modal');
 const btnScrollTo = document.querySelector('.btn--scroll-to');
 
+const nav = document.querySelector('.nav');
 const navLinksContainer = document.querySelector('.nav__links');
-
+const section1 = document.querySelector('#section--1');
 const tabsContainer = document.querySelector('.operations__tab-container');
 const tabs = document.querySelectorAll('.operations__tab');
 const tabsContent = document.querySelectorAll('.operations__content');
@@ -70,7 +70,7 @@ navLinksContainer.addEventListener('click', (e) => {
   }
 });
 
-// Tabbed Component using Event Delegation
+// Tabbed Component (using Event Delegation)
 tabsContainer.addEventListener('click', (e) => {
   // Get clicked tab
   const clicked = e.target.closest('.operations__tab');
@@ -94,4 +94,31 @@ tabsContainer.addEventListener('click', (e) => {
   document
     .querySelector(`.operations__content--${tabId}`)
     .classList.add('operations__content--active');
+});
+
+// Navbar Menu Fade Animation (using Event Delegation)
+const handleHover = (e, opacity) => {
+  if (e.target.classList.contains('nav__link')) {
+    const link = e.target;
+
+    // Get all links & logo
+    const siblings = link.closest('.nav').querySelectorAll('.nav__link');
+    const logo = link.closest('.nav').querySelector('img');
+
+    // Change opacity of the links
+    siblings.forEach((element) => {
+      if (element !== link) element.style.opacity = opacity;
+    });
+    logo.style.opacity = opacity;
+  }
+};
+nav.addEventListener('mouseover', (e) => handleHover(e, 0.5));
+nav.addEventListener('mouseout', (e) => handleHover(e, 1));
+
+// Sticky Navigation
+const initialCoords = section1.getBoundingClientRect();
+
+window.addEventListener('scroll', () => {
+  if (window.scrollY > initialCoords.top) nav.classList.add('sticky');
+  else nav.classList.remove('sticky');
 });
