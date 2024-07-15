@@ -11,6 +11,10 @@ const btnScrollTo = document.querySelector('.btn--scroll-to');
 
 const navLinksContainer = document.querySelector('.nav__links');
 
+const tabsContainer = document.querySelector('.operations__tab-container');
+const tabs = document.querySelectorAll('.operations__tab');
+const tabsContent = document.querySelectorAll('.operations__content');
+
 // Open Modal
 const openModal = function (e) {
   e.preventDefault();
@@ -64,4 +68,30 @@ navLinksContainer.addEventListener('click', (e) => {
     const id = e.target.getAttribute('href');
     document.querySelector(id).scrollIntoView({ behavior: 'smooth' });
   }
+});
+
+// Tabbed Component using Event Delegation
+tabsContainer.addEventListener('click', (e) => {
+  // Get clicked tab
+  const clicked = e.target.closest('.operations__tab');
+
+  // Guard clause
+  if (!clicked) return;
+
+  // Get clicked tabId
+  const tabId = clicked.dataset.tab;
+
+  // Remove active classes
+  tabs.forEach((tab) => tab.classList.remove('operations__tab--active'));
+  tabsContent.forEach((tabContent) =>
+    tabContent.classList.remove('operations__content--active')
+  );
+
+  // Activate tab
+  clicked.classList.add('operations__tab--active');
+
+  // Activate content area
+  document
+    .querySelector(`.operations__content--${tabId}`)
+    .classList.add('operations__content--active');
 });

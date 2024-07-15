@@ -152,7 +152,6 @@ console.log(h1.parentElement);
 // The element.closest() method in JavaScript is used to find the closest ancestor of the current element (or the element itself) that matches a specified CSS selector. It traverses the element and its ancestors (up the DOM tree) until it finds a match. If no matching element is found, it returns null.
 
 h1.closest('.header').style.background = 'var(--gradient-secondary)';
-
 h1.closest('h1').style.background = 'var(--gradient-primary)';
 
 // Going Sideways: siblings
