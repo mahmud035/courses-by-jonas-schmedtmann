@@ -12,9 +12,14 @@ const header = document.querySelector('.header');
 const nav = document.querySelector('.nav');
 const navLinksContainer = document.querySelector('.nav__links');
 const section1 = document.querySelector('#section--1');
+const allSections = document.querySelectorAll('.section');
+
 const tabsContainer = document.querySelector('.operations__tab-container');
 const tabs = document.querySelectorAll('.operations__tab');
 const tabsContent = document.querySelectorAll('.operations__content');
+
+const lazyImages = document.querySelectorAll('.features__img');
+const features = document.querySelector('.features');
 
 // Open Modal
 const openModal = function (e) {
@@ -119,31 +124,73 @@ nav.addEventListener('mouseout', (e) => handleHover(e, 1));
 // Sticky Navigation (using Intersection Observer API)
 const navHeight = nav.getBoundingClientRect().height;
 
-const observerCallback = (entries) => {
+// Callback
+const stickyNav = (entries) => {
   const [entry] = entries;
+
+  // NOTE: header টা যখন viewport এর বাইরে থাকবে, শুধুমাত্র তখনই nav এ "sticky" class add হবে।
   if (!entry.isIntersecting) nav.classList.add('sticky');
   else nav.classList.remove('sticky');
 };
 
-const observerOptions = {
-  root: null,
-  rootMargin: `-${navHeight}px`,
+const headerObserver = new IntersectionObserver(stickyNav, {
+  root: null, // Use the viewport as the root (Default)
+  rootMargin: `-${navHeight}px`, // Need to provide negative value in this case
   threshold: 0,
+});
+headerObserver.observe(header);
+/* 
+  NOTE: threshold
+  Target Element টা কতটুকু Visible হলে Callback Function টা Execute হবে।
+  It can be a single number or an array of numbers between 0 and 1.
+
+  0: The callback is triggered as soon as any part of the target is visible.
+  1: The callback is triggered only when 100% of the target is visible.
+  An array: The callback is triggered for each specified visibility percentage.
+
+  Default: 0
+*/
+
+// Revealing Sections on Scroll (using Intersection Observer API)
+// Callback
+const revealSection = (entries, observer) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      const section = entry.target;
+      section.classList.remove('section--hidden');
+      observer.unobserve(entry.target);
+    }
+  });
 };
 
-const observer = new IntersectionObserver(observerCallback, observerOptions);
-observer.observe(header);
+const sectionObserver = new IntersectionObserver(revealSection, {
+  threshold: 0.1,
+  // NOTE: যখন section এর 10% অংশ viewport এর মধ্যে আসবে, তখন revealSection callback function টা execute হবে।
+});
+allSections.forEach((section) => {
+  sectionObserver.observe(section);
+  section.classList.add('section--hidden');
+});
 
-// const observerCallback = (entries, observer) => {
-//   entries.forEach((entry) => {
-//     console.log(entry);
-//   });
-// };
+// Lazy Loading Images (using Intersection Observer API)
+// NOTE: Lazy loading images means loading them only when they are about to enter the viewport, which can improve page load time.
 
-// const observerOptions = {
-//   root: null,
-//   threshold: [0, 0.2],
-// };
+// Callback
+const loadImage = (entries, observer) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      const img = entry.target;
+      // Replace src with data-src
+      img.src = img.dataset.src;
+      img.classList.remove('lazy-img');
+      observer.unobserve(img);
+    }
+  });
+};
 
-// const observer = new IntersectionObserver(observerCallback, observerOptions);
-// observer.observe(section1);
+const lazyImageObserver = new IntersectionObserver(loadImage, {
+  root: null,
+  threshold: 0,
+  // NOTE: The callback is triggered as soon as any part of the img is visible.
+});
+lazyImages.forEach((img) => lazyImageObserver.observe(img));

@@ -39,6 +39,7 @@ body {
   padding: 15rem 3rem;
   border-top: 1px solid #ddd;
 
+  /* Back to default state */
   transition: transform 1s, opacity 1s;
 }
 
