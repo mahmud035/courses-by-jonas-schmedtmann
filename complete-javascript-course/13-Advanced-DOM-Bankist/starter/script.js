@@ -21,6 +21,10 @@ const tabsContent = document.querySelectorAll('.operations__content');
 const lazyImages = document.querySelectorAll('.features__img');
 const features = document.querySelector('.features');
 
+const slides = document.querySelectorAll('.slide');
+const btnLeft = document.querySelector('.slider__btn--left');
+const btnRight = document.querySelector('.slider__btn--right');
+
 // Open Modal
 const openModal = function (e) {
   e.preventDefault();
@@ -194,3 +198,45 @@ const lazyImageObserver = new IntersectionObserver(loadImage, {
   // NOTE: The callback is triggered as soon as any part of the img is visible.
 });
 lazyImages.forEach((img) => lazyImageObserver.observe(img));
+
+// Slider
+// const slider = document.querySelector('.slider');
+// slider.style.transform = 'scale(0.3) translateX(-800px)';
+// slider.style.overflow = 'visible';
+
+let currentSlide = 0;
+const maxSlide = slides.length;
+
+const goToSlide = (currentSlide) => {
+  slides.forEach(
+    (s, i) => (s.style.transform = `translateX(${100 * (i - currentSlide)}%)`) // IMPORTANT:
+  );
+};
+goToSlide(0);
+
+// Next Slide
+const nextSlide = () => {
+  if (currentSlide === maxSlide - 1) {
+    currentSlide = 0;
+  } else {
+    currentSlide++;
+  }
+
+  // NOTE: If currentSlide = 1, then goToSlide will return "-100%, 0%, 100%, 200%"
+  goToSlide(currentSlide);
+};
+
+// Previous Slide
+const prevSlide = () => {
+  if (currentSlide === 0) {
+    currentSlide = maxSlide - 1;
+  } else {
+    currentSlide--;
+  }
+
+  // NOTE: If currentSlide = -3, then goToSlide will return "-300%, -200%, -100%, 0%"
+  goToSlide(currentSlide);
+};
+
+btnRight.addEventListener('click', nextSlide);
+btnLeft.addEventListener('click', prevSlide);
