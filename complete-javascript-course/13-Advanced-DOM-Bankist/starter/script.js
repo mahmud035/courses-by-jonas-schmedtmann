@@ -26,6 +26,7 @@ const btnLeft = document.querySelector('.slider__btn--left');
 const btnRight = document.querySelector('.slider__btn--right');
 const dotContainer = document.querySelector('.dots');
 
+//* Modal
 // Open Modal
 const openModal = function (e) {
   e.preventDefault();
@@ -39,7 +40,6 @@ const closeModal = function () {
   overlay.classList.add('hidden');
 };
 
-//* Event Handlers
 // Open Modal Event Listener
 btnsOpenModal.forEach((btnOpenModal) =>
   btnOpenModal.addEventListener('click', openModal)
@@ -56,14 +56,15 @@ document.addEventListener('keydown', (e) => {
   }
 });
 
-// Button Scrolling
+//* Button Scrolling
 btnScrollTo.addEventListener('click', () => {
   section1.scrollIntoView({
     behavior: 'smooth',
   });
 });
 
-// IMPORTANT: Event Delegation: Implementing Page Navigation
+// IMPORTANT:
+//* Event Delegation: Implementing Page Navigation
 /* 
   Steps:
   1. Get the parent element.
@@ -81,7 +82,7 @@ navLinksContainer.addEventListener('click', (e) => {
   }
 });
 
-// Tabbed Component (using Event Delegation)
+//* Tabbed Component (using Event Delegation)
 tabsContainer.addEventListener('click', (e) => {
   // Get clicked tab
   const clicked = e.target.closest('.operations__tab');
@@ -107,7 +108,7 @@ tabsContainer.addEventListener('click', (e) => {
     .classList.add('operations__content--active');
 });
 
-// Navbar Menu Fade Animation (using Event Delegation)
+//* Navbar Menu Fade Animation (using Event Delegation)
 const handleHover = (e, opacity) => {
   if (e.target.classList.contains('nav__link')) {
     const link = e.target;
@@ -126,7 +127,7 @@ const handleHover = (e, opacity) => {
 nav.addEventListener('mouseover', (e) => handleHover(e, 0.5));
 nav.addEventListener('mouseout', (e) => handleHover(e, 1));
 
-// Sticky Navigation (using Intersection Observer API)
+//* Sticky Navigation (using Intersection Observer API)
 const navHeight = nav.getBoundingClientRect().height;
 
 // Callback
@@ -156,7 +157,7 @@ headerObserver.observe(header);
   Default: 0
 */
 
-// Revealing Sections on Scroll (using Intersection Observer API)
+//* Revealing Sections on Scroll (using Intersection Observer API)
 // Callback
 const revealSection = (entries, observer) => {
   entries.forEach((entry) => {
@@ -177,7 +178,7 @@ allSections.forEach((section) => {
   section.classList.add('section--hidden');
 });
 
-// Lazy Loading Images (using Intersection Observer API)
+//* Lazy Loading Images (using Intersection Observer API)
 // NOTE: Lazy loading images means loading them only when they are about to enter the viewport, which can improve page load time.
 
 // Callback
@@ -200,7 +201,7 @@ const lazyImageObserver = new IntersectionObserver(loadImage, {
 });
 lazyImages.forEach((img) => lazyImageObserver.observe(img));
 
-// Slider Component
+//* Slider Component
 const slider = () => {
   let currentSlide = 0;
   const maxSlide = slides.length;
