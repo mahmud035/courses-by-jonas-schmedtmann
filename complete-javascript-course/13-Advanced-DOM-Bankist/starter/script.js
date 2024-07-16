@@ -24,6 +24,7 @@ const features = document.querySelector('.features');
 const slides = document.querySelectorAll('.slide');
 const btnLeft = document.querySelector('.slider__btn--left');
 const btnRight = document.querySelector('.slider__btn--right');
+const dotContainer = document.querySelector('.dots');
 
 // Open Modal
 const openModal = function (e) {
@@ -199,44 +200,88 @@ const lazyImageObserver = new IntersectionObserver(loadImage, {
 });
 lazyImages.forEach((img) => lazyImageObserver.observe(img));
 
-// Slider
-// const slider = document.querySelector('.slider');
-// slider.style.transform = 'scale(0.3) translateX(-800px)';
-// slider.style.overflow = 'visible';
+// Slider Component
+const slider = () => {
+  let currentSlide = 0;
+  const maxSlide = slides.length;
 
-let currentSlide = 0;
-const maxSlide = slides.length;
+  // Create Dots
+  const createDots = () => {
+    slides.forEach((_, i) => {
+      dotContainer.insertAdjacentHTML(
+        'beforeend',
+        `<button class="dots__dot" data-slide=${i}></button>`
+      );
+    });
+  };
 
-const goToSlide = (currentSlide) => {
-  slides.forEach(
-    (s, i) => (s.style.transform = `translateX(${100 * (i - currentSlide)}%)`) // IMPORTANT:
-  );
+  // Activate Dot
+  const activateDot = (slide) => {
+    // Remove active classes
+    document
+      .querySelectorAll('.dots__dot')
+      .forEach((dot) => dot.classList.remove('dots__dot--active'));
+
+    document
+      .querySelector(`.dots__dot[data-slide="${slide}"]`) // class with attribute selector
+      .classList.add('dots__dot--active');
+  };
+
+  // Go To Slide
+  const goToSlide = (currentSlide) => {
+    slides.forEach(
+      (s, i) => (s.style.transform = `translateX(${100 * (i - currentSlide)}%)`) // IMPORTANT:
+    );
+  };
+
+  // Called above 3 functions when page initially load or reload the page.
+  const init = () => {
+    createDots();
+    activateDot(0);
+    goToSlide(0);
+  };
+  init();
+
+  // Next Slide
+  const nextSlide = () => {
+    if (currentSlide === maxSlide - 1) {
+      currentSlide = 0;
+    } else {
+      currentSlide++;
+    }
+
+    // NOTE: If currentSlide = 1, then goToSlide will return "-100%, 0%, 100%, 200%"
+    goToSlide(currentSlide);
+    activateDot(currentSlide);
+  };
+
+  // Previous Slide
+  const prevSlide = () => {
+    if (currentSlide === 0) {
+      currentSlide = maxSlide - 1;
+    } else {
+      currentSlide--;
+    }
+
+    // NOTE: If currentSlide = -3, then goToSlide will return "-300%, -200%, -100%, 0%"
+    goToSlide(currentSlide);
+    activateDot(currentSlide);
+  };
+
+  btnRight.addEventListener('click', nextSlide);
+  btnLeft.addEventListener('click', prevSlide);
+
+  document.addEventListener('keydown', (e) => {
+    e.key === 'ArrowLeft' && prevSlide();
+    e.key === 'ArrowRight' && nextSlide();
+  });
+
+  dotContainer.addEventListener('click', (e) => {
+    if (e.target.classList.contains('dots__dot')) {
+      const { slide } = e.target.dataset;
+      goToSlide(slide);
+      activateDot(slide);
+    }
+  });
 };
-goToSlide(0);
-
-// Next Slide
-const nextSlide = () => {
-  if (currentSlide === maxSlide - 1) {
-    currentSlide = 0;
-  } else {
-    currentSlide++;
-  }
-
-  // NOTE: If currentSlide = 1, then goToSlide will return "-100%, 0%, 100%, 200%"
-  goToSlide(currentSlide);
-};
-
-// Previous Slide
-const prevSlide = () => {
-  if (currentSlide === 0) {
-    currentSlide = maxSlide - 1;
-  } else {
-    currentSlide--;
-  }
-
-  // NOTE: If currentSlide = -3, then goToSlide will return "-300%, -200%, -100%, 0%"
-  goToSlide(currentSlide);
-};
-
-btnRight.addEventListener('click', nextSlide);
-btnLeft.addEventListener('click', prevSlide);
+slider();
