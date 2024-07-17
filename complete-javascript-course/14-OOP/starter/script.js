@@ -2,6 +2,7 @@
 
 //* The 4 Fundamental OOP Principles
 
+/* 
 {
   // 👉Abstraction
   // Abstraction involves hiding complex implementation details and showing only the essential features of an object.It allows us to focus on what an object does rather than how it does it.
@@ -130,4 +131,128 @@
   makeFly(myPenguin); // Pingu can not fly.
 
   // Here, makeFly can accept any object that is a Bird or a subclass of Bird, demonstrating polymorphism by allowing different implementations of the fly method.
+}
+*/
+
+//* Constructor Functions and the new Operator
+
+/* 
+{
+  function Person(firstName, birthYear) {
+    // Instance properties
+    this.firstName = firstName;
+    this.birthYear = birthYear;
+
+    // WARNING: Never do this
+    // this.calcAge = function () {
+    //   console.log(2037 - this.birthYear);
+    // };
+  }
+
+  // IMPORTANT: How Constructor Functions Works: যখন Constructor Function (new Person) কে call করা হয়, তখন 👇
+  // 1. A new {} object is created
+  // 2. function is called, this = {}
+  // 3. {} linked to prototype
+  // 4. function automatically return {}
+
+  // Create Instance From Constructor Function
+  const jonas = new Person('Jonas', 1991);
+  const matilda = new Person('Matilda', 2000);
+
+  console.log(jonas);
+  console.log(matilda);
+
+  console.log(jonas instanceof Person); // true
+  console.log(matilda instanceof Person); // true
+}
+*/
+
+//* Prototypes
+
+/* 
+{
+  function Person(firstName, birthYear) {
+    // Instance properties
+    this.firstName = firstName;
+    this.birthYear = birthYear;
+
+    // WARNING: Never do this
+    // this.calcAge = function () {
+    //   console.log(2037 - this.birthYear);
+    // };
+  }
+
+  // IMPORTANT: How Constructor Functions Works: যখন Constructor Function (new Person) কে call করা হয়, তখন 👇
+  // 1. A new {} object is created
+  // 2. function is called, this = {}
+  // 3. {} linked to prototype
+  // 4. function automatically return {}
+
+  // Create Instance From Constructor Function
+  const jonas = new Person('Jonas', 1991);
+  const matilda = new Person('Matilda', 2000);
+
+  //* Prototypes
+  // Each and every function in JavaScript automatically has a property called prototype.
+
+  // TODO: Instead of Do This:
+  // Adding a Method to a Constructor
+  Person.prototype.calcAge = function () {
+    console.log(2037 - this.birthYear);
+  };
+
+  jonas.calcAge(); // 46
+  matilda.calcAge(); // 37
+
+  console.log(jonas.__proto__);
+  console.log(jonas.__proto__ === Person.prototype); // true
+
+  console.log(Person.prototype.isPrototypeOf(jonas)); // true
+  console.log(Person.prototype.isPrototypeOf(matilda)); // true
+  console.log(Person.prototype.isPrototypeOf(Person)); // false
+
+  // Adding a Property to a Constructor
+  Person.prototype.species = 'Home Sapiens';
+  // console.log(jonas.species, matilda.species);
+
+  console.log(jonas.hasOwnProperty('firstName')); // true
+  console.log(jonas.hasOwnProperty('species')); // false
+}
+ */
+
+//* Prototypal Inheritance on Built-In Objects
+
+{
+  function Person(firstName, birthYear) {
+    this.firstName = firstName;
+    this.birthYear = birthYear;
+  }
+
+  // Create Instance From Constructor Function
+  const jonas = new Person('Jonas', 1991);
+  const matilda = new Person('Matilda', 2000);
+
+  // Each and every function in JavaScript automatically has a property called prototype.
+  // Each and every object in JavaScript automatically has a property called prototype.
+
+  // Adding a Method to a Constructor
+  Person.prototype.calcAge = function () {
+    console.log(2037 - this.birthYear);
+  };
+
+  jonas.calcAge(); // 46
+  matilda.calcAge(); // 37
+
+  console.log(jonas.__proto__);
+  console.log(jonas.__proto__ === Person.prototype); // true
+
+  console.log(Person.prototype.isPrototypeOf(jonas)); // true
+  console.log(Person.prototype.isPrototypeOf(matilda)); // true
+  console.log(Person.prototype.isPrototypeOf(Person)); // false
+
+  // Adding a Property to a Constructor
+  Person.prototype.species = 'Home Sapiens';
+
+  console.log(jonas.hasOwnProperty('firstName')); // true
+  console.log(jonas.hasOwnProperty('species')); // false
 }
