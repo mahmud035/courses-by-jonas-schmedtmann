@@ -149,10 +149,10 @@
     // };
   }
 
-  // IMPORTANT: How The "new" Operator Works:
+  //? IMPORTANT: How The "new" Operator Works:
   // যখন constructor function কে "new" operator দিয়ে call করা হয়, তখন নিচের ঘটনা গুলো ঘটে 👇
 
-  // 1. A new {} object is created
+  // 1. A new empty object {} is created
   // 2. function is called, this = {}
   // 3. {} linked to prototype
   // 4. function automatically return the new object
@@ -171,23 +171,17 @@
 
 //* Prototypes
 
-/* 
 {
   function Person(firstName, birthYear) {
     // Instance properties
     this.firstName = firstName;
     this.birthYear = birthYear;
-
-    // WARNING: Never Do This
-    // this.calcAge = function () {
-    //   console.log(2037 - this.birthYear);
-    // };
   }
 
-  // IMPORTANT: How The "new" Operator Works:
+  //? IMPORTANT: How The "new" Operator Works:
   // যখন constructor function কে "new" operator দিয়ে call করা হয়, তখন নিচের ঘটনা গুলো ঘটে 👇
 
-  // 1. A new {} object is created
+  // 1. A new empty object {} is created
   // 2. function is called, this = {}
   // 3. {} linked to prototype
   // 4. function automatically return the new object
@@ -203,18 +197,24 @@
   console.log(matilda instanceof Person); // true
 
   //* Prototypes
-  // Each and every function in JavaScript automatically has a property called prototype.
+  // In JavaScript, every object and function has a hidden internal property called [[Prototype]]. This property can be another object or null, and it forms the basis of JavaScript's prototype chain.
 
-  // TODO: Instead of Do This:
+  //? IMPORTANT: How Prototypal Inheritance Works:
+  //* Constructor function এর "prototype" property এর মধ্যে আমরা যতগুলো Method Add করবো, সেই Methods গুলোকে ঐ Constructor function ব্যবহার করে তৈরি করা প্রতিটা instance access করতে পারবে।
+
+  //* For example: নিচে, Person constructor function এর "prototype" property এর মধ্যে calcAge নামে একটা Method Add করেছি। এখন এই calcAge Method কে Person constructor function ব্যবহার করে তৈরি করা ২ টা instance (jonas & matilda) access করতে পারবে। এভাবে, "prototype" property এর মধ্যে যতগুলো Method Add করবো, সেই সবগুলো Method কে ঐ Constructor function ব্যবহার করে তৈরি করা প্রতিটা instance access করতে পারবে। এটাকেই Prototypal Inheritance বলে।
+
   // Adding a Method to a Constructor
   Person.prototype.calcAge = function () {
     console.log(2037 - this.birthYear);
   };
 
-  jonas.calcAge(); // 46
-  matilda.calcAge(); // 37
+  jonas.calcAge(); // 46   NOTE: (Access calcAge method using Prototypal Inheritance)
+  matilda.calcAge(); // 37 NOTE: (Access calcAge method using Prototypal Inheritance)
 
   console.log(jonas.__proto__);
+  console.log(Person.prototype);
+
   console.log(jonas.__proto__ === Person.prototype); // true
 
   console.log(Person.prototype.isPrototypeOf(jonas)); // true
@@ -226,9 +226,8 @@
   // console.log(jonas.species, matilda.species);
 
   console.log(jonas.hasOwnProperty('firstName')); // true
-  console.log(jonas.hasOwnProperty('species')); // false
+  console.log(jonas.hasOwnProperty('species')); // false => because (species is on the prototype)
 }
- */
 
 //* Prototypal Inheritance on Built-In Objects
 
