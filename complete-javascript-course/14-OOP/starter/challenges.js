@@ -14,6 +14,7 @@
   GOOD LUCK 😀
 */
 
+/* 
 {
   // Constructor Function
   function Car(make, speed) {
@@ -44,3 +45,4 @@
   console.log(car1.__proto__ === Car.prototype); // true
   console.log(car2.__proto__ === Car.prototype); // true
 }
+ */

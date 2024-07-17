@@ -143,19 +143,21 @@
     this.firstName = firstName;
     this.birthYear = birthYear;
 
-    // WARNING: Never do this
+    // WARNING: Never Do This
     // this.calcAge = function () {
     //   console.log(2037 - this.birthYear);
     // };
   }
 
-  // IMPORTANT: How Constructor Functions Works: যখন Constructor Function (new Person) কে call করা হয়, তখন 👇
+  // IMPORTANT: How The "new" Operator Works:
+  // যখন constructor function কে "new" operator দিয়ে call করা হয়, তখন নিচের ঘটনা গুলো ঘটে 👇
+
   // 1. A new {} object is created
   // 2. function is called, this = {}
   // 3. {} linked to prototype
-  // 4. function automatically return {}
+  // 4. function automatically return the new object
 
-  // Create Instance From Constructor Function
+  // Create instance from constructor function
   const jonas = new Person('Jonas', 1991);
   const matilda = new Person('Matilda', 2000);
 
@@ -165,7 +167,7 @@
   console.log(jonas instanceof Person); // true
   console.log(matilda instanceof Person); // true
 }
-*/
+ */
 
 //* Prototypes
 
@@ -176,21 +178,29 @@
     this.firstName = firstName;
     this.birthYear = birthYear;
 
-    // WARNING: Never do this
+    // WARNING: Never Do This
     // this.calcAge = function () {
     //   console.log(2037 - this.birthYear);
     // };
   }
 
-  // IMPORTANT: How Constructor Functions Works: যখন Constructor Function (new Person) কে call করা হয়, তখন 👇
+  // IMPORTANT: How The "new" Operator Works:
+  // যখন constructor function কে "new" operator দিয়ে call করা হয়, তখন নিচের ঘটনা গুলো ঘটে 👇
+
   // 1. A new {} object is created
   // 2. function is called, this = {}
   // 3. {} linked to prototype
-  // 4. function automatically return {}
+  // 4. function automatically return the new object
 
-  // Create Instance From Constructor Function
+  // Create instance from constructor function
   const jonas = new Person('Jonas', 1991);
   const matilda = new Person('Matilda', 2000);
+
+  console.log(jonas);
+  console.log(matilda);
+
+  console.log(jonas instanceof Person); // true
+  console.log(matilda instanceof Person); // true
 
   //* Prototypes
   // Each and every function in JavaScript automatically has a property called prototype.
@@ -222,6 +232,7 @@
 
 //* Prototypal Inheritance on Built-In Objects
 
+/* 
 {
   function Person(firstName, birthYear) {
     this.firstName = firstName;
@@ -269,3 +280,6 @@
   // Object.prototype (top of prototype chain)
   console.log(array.__proto__.__proto__);
 }
+ */
+
+//* ES6 Classes
