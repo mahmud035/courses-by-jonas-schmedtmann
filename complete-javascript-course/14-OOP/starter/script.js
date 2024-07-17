@@ -255,4 +255,17 @@
 
   console.log(jonas.hasOwnProperty('firstName')); // true
   console.log(jonas.hasOwnProperty('species')); // false
+
+  //* Prototypal Inheritance on Built-In Objects
+  console.log(jonas.__proto__);
+  // Object.prototype (top of prototype chain)
+  console.log(jonas.__proto__.__proto__);
+  console.log(jonas.__proto__.__proto__.__proto__); // null
+
+  const array = [1, 2, 3, 4, 5]; // [] === new Array()
+  console.log(array.__proto__);
+  console.log(array.__proto__ === Array.prototype); // true
+
+  // Object.prototype (top of prototype chain)
+  console.log(array.__proto__.__proto__);
 }
