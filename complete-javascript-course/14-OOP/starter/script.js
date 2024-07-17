@@ -171,6 +171,7 @@
 
 //* Prototypes
 
+/* 
 {
   function Person(firstName, birthYear) {
     // Instance properties
@@ -228,32 +229,45 @@
   console.log(jonas.hasOwnProperty('firstName')); // true
   console.log(jonas.hasOwnProperty('species')); // false => because (species is on the prototype)
 }
+ */
 
+//* Prototypal Inheritance and The Prototype Chain
 //* Prototypal Inheritance on Built-In Objects
 
-/* 
 {
   function Person(firstName, birthYear) {
     this.firstName = firstName;
     this.birthYear = birthYear;
   }
 
-  // Create Instance From Constructor Function
+  // Create instance from constructor function
   const jonas = new Person('Jonas', 1991);
   const matilda = new Person('Matilda', 2000);
 
-  // Each and every function in JavaScript automatically has a property called prototype.
-  // Each and every object in JavaScript automatically has a property called prototype.
+  console.log(jonas);
+  console.log(matilda);
+
+  console.log(jonas instanceof Person); // true
+  console.log(matilda instanceof Person); // true
+
+  //* Prototypal Inheritance
+
+  //? IMPORTANT: How Prototypal Inheritance Works:
+  //* Constructor function এর "prototype" property এর মধ্যে আমরা যতগুলো Method Add করবো, সেই Methods গুলোকে ঐ Constructor function ব্যবহার করে তৈরি করা প্রতিটা instance access করতে পারবে।
+
+  //* For example: নিচে, Person constructor function এর "prototype" property এর মধ্যে calcAge নামে একটা Method Add করেছি। এখন এই calcAge Method কে Person constructor function ব্যবহার করে তৈরি করা ২ টা instance (jonas & matilda) access করতে পারবে। এভাবে, "prototype" property এর মধ্যে যতগুলো Method Add করবো, সেই সবগুলো Method কে ঐ Constructor function ব্যবহার করে তৈরি করা প্রতিটা instance access করতে পারবে। এটাকেই Prototypal Inheritance বলে।
 
   // Adding a Method to a Constructor
   Person.prototype.calcAge = function () {
     console.log(2037 - this.birthYear);
   };
 
-  jonas.calcAge(); // 46
-  matilda.calcAge(); // 37
+  jonas.calcAge(); // 46   NOTE: (Access calcAge method using Prototypal Inheritance)
+  matilda.calcAge(); // 37 NOTE: (Access calcAge method using Prototypal Inheritance)
 
   console.log(jonas.__proto__);
+  console.log(Person.prototype);
+
   console.log(jonas.__proto__ === Person.prototype); // true
 
   console.log(Person.prototype.isPrototypeOf(jonas)); // true
@@ -264,21 +278,48 @@
   Person.prototype.species = 'Home Sapiens';
 
   console.log(jonas.hasOwnProperty('firstName')); // true
-  console.log(jonas.hasOwnProperty('species')); // false
+  console.log(jonas.hasOwnProperty('species')); // false => because (species is on the prototype)
 
-  //* Prototypal Inheritance on Built-In Objects
+  // ====================   ========================
+  //* The Prototype Chain
+
+  //? IMPORTANT: How Prototype Chain Works:
+  //* When you access a property or method on an object, JavaScript first looks at the object itself. If it doesn't find the property or method, it looks at the object's prototype, and so on, up the chain until it finds the property or reaches the end of the chain (null).
+
+  // Ex:1 Prototype Chain with Constructor Function and it's instances.
+  // 1 level deep
   console.log(jonas.__proto__);
-  // Object.prototype (top of prototype chain)
-  console.log(jonas.__proto__.__proto__);
+  console.log(Person.prototype);
+  console.log(jonas.__proto__ === Person.prototype); // true
+
+  // 2 level deep
+  console.log(jonas.__proto__.__proto__); // NOTE: The top of the prototype chain
+  console.log(Object.prototype); // NOTE: The top of the prototype chain
+
+  console.log(jonas.__proto__.__proto__ === Object.prototype); // true
+
+  // 3 level deep
   console.log(jonas.__proto__.__proto__.__proto__); // null
 
+  // ====================   ========================
+  //* Prototypal Inheritance on Built-In Objects
+
+  // Ex:2 Prototype Chain with built in Constructor Array
   const array = [1, 2, 3, 4, 5]; // [] === new Array()
+
+  // 1 level deep
   console.log(array.__proto__);
+  console.log(Array.prototype);
   console.log(array.__proto__ === Array.prototype); // true
 
-  // Object.prototype (top of prototype chain)
-  console.log(array.__proto__.__proto__);
+  // 2 level deep
+  console.log(array.__proto__.__proto__); // NOTE: The top of the prototype chain
+  console.log(Object.prototype); // NOTE: The top of the prototype chain
+
+  console.log(array.__proto__.__proto__ === Object.prototype); // true
+
+  // 3 level deep
+  console.log(array.__proto__.__proto__.__proto__); // null
 }
- */
 
 //* ES6 Classes
