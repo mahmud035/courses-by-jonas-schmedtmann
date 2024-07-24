@@ -1,6 +1,6 @@
 'use strict';
 
-// Challenge #1
+//* Challenge #1
 
 /* const calcAverage = (score1, score2, score3) => {
   const averageScore = (score1 + score2 + score3) / 3;
@@ -27,7 +27,7 @@ const checkWinner = (avgDolphins, avgKoalas) => {
 
 checkWinner(scoreDolphins, scoreKoalas); */
 
-// Challenge #2
+//* Challenge #2
 
 /* const calcTip = (bill) => {
   const tip = bill >= 50 && bill <= 300 ? bill * 0.15 : bill * 0.2;
@@ -47,7 +47,7 @@ console.log(bills);
 console.log(tips);
 console.log(totals); */
 
-// Challenge #3
+//* Challenge #3
 
 /* const mark = {
   fullName: 'Mark Miller',
@@ -89,7 +89,7 @@ if (johnBMI > markBMI) {
 }
  */
 
-// Challenge #4
+//* Challenge #4
 
 /* const calcTip = (bill) => {
   return bill >= 50 && bill <= 300 ? bill * 0.15 : bill * 0.2;

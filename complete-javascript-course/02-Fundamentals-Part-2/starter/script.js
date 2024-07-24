@@ -88,7 +88,7 @@ console.log('ages', ages); */
 //   }
 // }
 
-// Roll a dice
+//* Roll a dice
 // let dice;
 
 // while (dice !== 6) {
