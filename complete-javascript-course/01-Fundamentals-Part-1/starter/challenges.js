@@ -1,5 +1,6 @@
 'use strict';
-// Challenge: #1 & #2
+
+//* Challenge: #1 & #2
 
 /* const massMark = 78;
 const heightMark = 1.69;
@@ -18,7 +19,7 @@ if (BMIMark > BMIJohn) {
 }
  */
 
-// Challenge: #3
+//* Challenge: #3
 
 /* const scoreDolphins = (96 + 108 + 89) / 3;
 const scoreKoalas = (88 + 91 + 110) / 3;
@@ -32,7 +33,7 @@ if (scoreDolphins > scoreKoalas) {
 }
  */
 
-// Challenge: #4
+//* Challenge: #4
 
 /* const bill = 275;
 const tip = bill >= 50 && bill <= 300 ? bill * 0.15 : bill * 0.2;
