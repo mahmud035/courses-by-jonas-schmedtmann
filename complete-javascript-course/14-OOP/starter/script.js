@@ -420,3 +420,141 @@
   // 3. Class are executed in strict mode
 }
  */
+
+//* Setters and Getters
+
+/* 
+{
+  //? Why Using Getters and Setters?
+  // 1. It gives simpler syntax
+  // 2. It allows equal syntax for properties and methods
+  // 3. 👉It can secure better data quality👈
+  // 4. It is useful for doing things behind-the-scenes
+
+  // Basic: Setters and Getters in regular object
+  const account = {
+    owner: 'Jonas',
+    movements: [200, 530, 120, 300],
+
+    get latest() {
+      return this.movements.slice(-1).pop();
+    },
+
+    set latest(movement) {
+      this.movements.push(movement);
+    },
+  };
+
+  // Get latest value of movements using a getter:
+  console.log(account.latest);
+
+  // Set latest value of movements using a setter:
+  account.latest = 50;
+  console.log(account);
+
+  // ================   =================
+  //* Setters and Getters in ES6 Classes
+  class PersonCl {
+    constructor(fullName, birthYear) {
+      this.fullName = fullName;
+      this.birthYear = birthYear;
+    }
+
+    //* Method will be added to .prototype property
+    calcAge() {
+      console.log(2037 - this.birthYear);
+    }
+
+    // Getter for age
+    get age() {
+      return 2037 - this.birthYear;
+    }
+
+    // IMPORTANT: Set a property that already exists (Data validation)
+    set fullName(name) {
+      if (name.includes(' ')) this._fullName = name;
+      else alert(`${name} is not a full name!`);
+    }
+
+    // Getter for fullName
+    get fullName() {
+      return this._fullName;
+    }
+  }
+
+  // Creating an instance of the PersonCl class
+  const jessica = new PersonCl('Jessica Davis', 1996);
+
+  // Using Getters & Setter
+  console.log(jessica.age); // 41
+  console.log(jessica.fullName); // Jessica Davis
+
+  console.log(jessica);
+}
+ */
+
+//* Static Methods
+
+{
+  // NOTE: The static keyword defines a static method or property for a class. Static properties cannot be directly accessed on instances of the class. Instead, they're accessed on the class itself. (mdn)
+
+  // Ex: 1
+  class ClassWithStaticMethod {
+    static staticProperty = 'someValue';
+
+    static staticMethod() {
+      return 'static method has been called.';
+    }
+  }
+
+  console.log(ClassWithStaticMethod.staticProperty); // someValue
+  console.log(ClassWithStaticMethod.staticMethod()); // static method has been called.
+
+  // Ex: 2
+  class MathUtilities {
+    // A static method
+    static add(a, b) {
+      return a + b;
+    }
+
+    // Another static method
+    static multiply(a, b) {
+      return a * b;
+    }
+  }
+
+  // Calling static methods on the class itself
+  console.log(MathUtilities.add(5, 3)); // 8
+  console.log(MathUtilities.multiply(5, 3)); // 15
+
+  // In this example, add and multiply are static methods. They are called on the MathUtilities class directly, without creating an instance of the class.
+
+  // NOTE: Key Points
+  // 1. Static methods are called on the class itself, not on instances of the class.
+  // 2. They are useful for utility functions, helper methods, and factory patterns.
+  // 3. Static methods do not have access to this keyword, which refers to instance-specific properties and methods.
+
+  // Ex: 3
+  // Example of a static method being used in a factory pattern:
+  class Car {
+    constructor(make, model) {
+      this.make = make;
+      this.model = model;
+    }
+
+    // Static factory method
+    static createHonda(model) {
+      return new Car('Honda', model);
+    }
+  }
+
+  const myCar = Car.createHonda('Civic');
+  console.log(myCar); // Output: Car { make: 'Honda', model: 'Civic' }
+
+  // In this example, the createHonda static method is used to create a Car instance with a predefined make (Honda), demonstrating how static methods can streamline the creation of class instances.
+}
+
+// Lecture Code
+
+{
+}
