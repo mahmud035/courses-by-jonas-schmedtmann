@@ -112,7 +112,9 @@
   GOOD LUCK 😀
 */
 
+/* 
 {
+  // Parent
   function Car(make, speed) {
     this.make = make;
     this.speed = speed;
@@ -128,6 +130,7 @@
     console.log(`${this.make} is going at ${this.speed} km/h`);
   };
 
+  // Child
   function EV(make, speed, charge) {
     // NOTE: Here we called Car constructor function as a regular function. And in a regular function call, in strict mode, this is set to undefined. So, we need to manually set the this keyword as well.
     Car.call(this, make, speed);
@@ -156,7 +159,7 @@
   tesla.accelerate();
   tesla.accelerate();
   tesla.break();
-  tesla.break();
   tesla.chargeBattery(90);
   console.log(tesla);
 }
+ */

@@ -696,7 +696,9 @@
 
 //* Inheritance Between "Classes": Constructor Functions
 
+/* 
 {
+  // Parent
   function Person(firstName, birthYear) {
     this.firstName = firstName;
     this.birthYear = birthYear;
@@ -706,6 +708,7 @@
     console.log(2037 - this.birthYear);
   };
 
+  // Child
   function Student(firstName, birthYear, course) {
     // NOTE: Here we called Person constructor function as a regular function. And in a regular function call, in strict mode, this is set to undefined. So, we need to manually set the this keyword as well.
     Person.call(this, firstName, birthYear);
@@ -734,4 +737,49 @@
   console.dir(Student.prototype.constructor);
 
   // console.log(mike);
+}
+ */
+
+//* Inheritance Between "Classes": ES6 Classes
+
+{
+  // Parent Class
+  class PersonCl {
+    constructor(firstName, birthYear) {
+      this.firstName = firstName;
+      this.birthYear = birthYear;
+    }
+
+    calcAge() {
+      console.log(2037 - this.birthYear);
+    }
+
+    greet() {
+      console.log(`Hey, ${this.firstName}`);
+    }
+  }
+
+  // Child Class
+  class StudentCl extends PersonCl {
+    constructor(firstName, birthYear, course) {
+      // Always needs to happen first!
+      super(firstName, birthYear);
+      this.course = course;
+    }
+
+    introduce() {
+      console.log(`My name is ${this.firstName} and I study ${this.course}`);
+    }
+
+    //* NOTE: Overwrite the calcAge method (Polymorphism)
+    calcAge() {
+      console.log(`I am ${2037 - this.birthYear} years old`);
+    }
+  }
+
+  const mike = new StudentCl('Mike', 2020, 'CSE');
+  mike.introduce();
+  mike.calcAge();
+  mike.greet();
+  console.log(mike);
 }
