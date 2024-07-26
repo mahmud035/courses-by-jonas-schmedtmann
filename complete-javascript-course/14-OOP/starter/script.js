@@ -529,13 +529,8 @@
 
   // In this example, add and multiply are static methods. They are called on the MathUtilities class directly, without creating an instance of the class.
 
-  // NOTE: Key Points
-  // 1. Static methods are called on the class itself, not on instances of the class.
-  // 2. They are useful for utility functions, helper methods, and factory patterns.
-  // 3. Static methods do not have access to this keyword, which refers to instance-specific properties and methods.
-
-  // Ex: 3
   // Example of a static method being used in a factory pattern:
+  // Ex: 3
   class Car {
     constructor(make, model) {
       this.make = make;
@@ -552,6 +547,11 @@
   console.log(myCar); // Output: Car { make: 'Honda', model: 'Civic' }
 
   // In this example, the createHonda static method is used to create a Car instance with a predefined make (Honda), demonstrating how static methods can streamline the creation of class instances.
+
+  // NOTE: Key Points
+  // 1. Static methods are called on the class itself, not on instances of the class.
+  // 2. They are useful for utility functions, helper methods, and factory patterns.
+  // 3. Static methods do not have access to this keyword, which refers to instance-specific properties and methods.
 }
 
 // Lecture Code
