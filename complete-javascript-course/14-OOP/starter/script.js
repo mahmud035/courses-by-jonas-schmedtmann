@@ -581,6 +581,7 @@
 
 //* Object.create()
 
+/* 
 {
   // IMPORTANT: Object.create() creates a new object and the prototype of the that object will be the object that we passed in.
 
@@ -658,9 +659,11 @@
   // Flexibility: It provides flexibility in creating objects with specific prototypes and properties.
   // Simplicity: It can be simpler and more intuitive compared to constructor functions or ES6 classes for certain use cases.
 }
+ */
 
 // Lecture Code
 
+/* 
 {
   // The object that will be the prototype of the new object
   const PersonProto = {
@@ -688,4 +691,47 @@
   sarah.calcAge(); // 37
 
   console.log(sarah.__proto__ === PersonProto); // true
+}
+ */
+
+//* Inheritance Between "Classes": Constructor Functions
+
+{
+  function Person(firstName, birthYear) {
+    this.firstName = firstName;
+    this.birthYear = birthYear;
+  }
+
+  Person.prototype.calcAge = function () {
+    console.log(2037 - this.birthYear);
+  };
+
+  function Student(firstName, birthYear, course) {
+    // NOTE: Here we called Person constructor function as a regular function. And in a regular function call, in strict mode, this is set to undefined. So, we need to manually set the this keyword as well.
+    Person.call(this, firstName, birthYear);
+    this.course = course;
+  }
+
+  //* Linking prototypes
+  Student.prototype = Object.create(Person.prototype);
+
+  Student.prototype.introduce = function () {
+    console.log(`My name is ${this.firstName} and I study ${this.course}`);
+  };
+
+  const mike = new Student('Mike', 2020, 'CSE');
+  mike.introduce();
+  mike.calcAge();
+
+  console.log(mike.__proto__);
+  console.log(mike.__proto__.__proto__);
+
+  console.log(mike instanceof Student); // true
+  console.log(mike instanceof Person); // true
+  console.log(mike instanceof Object); // true
+
+  Student.prototype.constructor = Student;
+  console.dir(Student.prototype.constructor);
+
+  // console.log(mike);
 }

@@ -60,6 +60,7 @@
   GOOD LUCK 😀
 */
 
+/* 
 {
   class CarCl {
     constructor(make, speed) {
@@ -89,10 +90,11 @@
   // Create instance from class
   const ford = new CarCl('Ford', 120);
 
-  // console.log(ford.speedUS); // getter
-  // ford.accelerate();
-  // ford.accelerate();
-  // ford.break();
-  // ford.speedUS = 50; // setter
-  // console.log(ford);
+  console.log(ford.speedUS); // getter => 75
+  ford.accelerate();
+  ford.accelerate();
+  ford.break();
+  ford.speedUS = 50; // setter
+  console.log(ford);
 }
+ */
