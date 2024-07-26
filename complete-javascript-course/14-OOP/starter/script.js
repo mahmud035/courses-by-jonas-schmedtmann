@@ -495,8 +495,14 @@
 
 //* Static Methods
 
+/* 
 {
   // NOTE: The static keyword defines a static method or property for a class. Static properties cannot be directly accessed on instances of the class. Instead, they're accessed on the class itself. (mdn)
+
+  // NOTE: Key Points
+  // 1. Static methods are called on the class itself, not on instances of the class.
+  // 2. They are useful for utility functions, helper methods, and factory patterns.
+  // 3. Static methods do not have access to this keyword, which refers to instance-specific properties and methods.
 
   // Ex: 1
   class ClassWithStaticMethod {
@@ -547,14 +553,139 @@
   console.log(myCar); // Output: Car { make: 'Honda', model: 'Civic' }
 
   // In this example, the createHonda static method is used to create a Car instance with a predefined make (Honda), demonstrating how static methods can streamline the creation of class instances.
+}
+ */
 
-  // NOTE: Key Points
-  // 1. Static methods are called on the class itself, not on instances of the class.
-  // 2. They are useful for utility functions, helper methods, and factory patterns.
-  // 3. Static methods do not have access to this keyword, which refers to instance-specific properties and methods.
+// Lecture Code
+
+/* 
+{
+  function Person(firstName, birthYear) {
+    // Instance properties
+    this.firstName = firstName;
+    this.birthYear = birthYear;
+  }
+
+  // Create instance from constructor function
+  const jonas = new Person('Jonas', 1991);
+
+  Person.hey = function () {
+    console.log(`Hey there ✋`);
+  };
+
+  // NOTE: Add a static method into Person constructor function. It will not be inherited by the instance of the Person constructor. Because it is not inside the Person's constructor prototype.
+  Person.hey();
+  // jonas.hey(); // TypeError: jonas.hey is not a function
+}
+ */
+
+//* Object.create()
+
+{
+  // IMPORTANT: Object.create() creates a new object and the prototype of the that object will be the object that we passed in.
+
+  // Syntax: Object.create(proto, propertiesObject) 👇
+
+  // proto: The object which should be the prototype of the newly-created object.
+  // propertiesObject (optional): An object specifying property descriptors to be added to the newly-created object.
+
+  // Basic Usage
+  // The object that will be the prototype of the new object
+  const PersonProto = {
+    isHuman: false,
+    printInformation() {
+      // console.log(this); // {name: 'Mahmud', isHuman: true}
+      console.log(`My name is ${this.name}. Am I human? ${this.isHuman}`);
+    },
+  };
+
+  // Create new object
+  const me = Object.create(PersonProto);
+  me.name = 'Mahmud';
+  me.isHuman = true;
+  me.printInformation(); // Output: My name is Mahmud. Am I human? true
+
+  console.log(me.__proto__ === PersonProto); // true
+
+  // IMPORTANT: In this example:
+  // 👉 PersonProto is an object that will be the prototype of the new object.
+  // 👉 me is the new object created using Object.create(PersonProto).
+  // 👉 me inherits properties and methods from PersonProto, but can also have its own properties.
+
+  //* =============== Use Cases ===============
+
+  // 1. Inheritance: Object.create() is useful for setting up inheritance without the need for constructor functions or classes.
+
+  const AnimalProto = {
+    speak() {
+      console.log(`${this.name} makes a noise.`);
+    },
+  };
+
+  const dog = Object.create(AnimalProto);
+  dog.name = 'Rover';
+  dog.speak(); // Output: Rover makes a noise.
+
+  // 2. Prototype Chain Manipulation: It allows more control over the prototype chain.
+
+  const Proto = { type: 'animal' };
+  const obj = Object.create(Proto);
+  console.log(obj.type); // Output: animal
+
+  // 3. Creating Objects with Specific Properties: You can define property descriptors to add properties to the new object.
+
+  const obj2 = Object.create(
+    {},
+    {
+      property1: {
+        value: true,
+        writable: true,
+        enumerable: true,
+        configurable: true,
+      },
+      property2: {
+        value: 'Hello',
+        writable: false,
+      },
+    }
+  );
+
+  console.log(obj2.property1); // Output: true
+  console.log(obj2.property2); // Output: Hello
+
+  // NOTE: Advantages
+  // Prototypal Inheritance: It directly utilizes JavaScript’s prototypal inheritance model.
+  // Flexibility: It provides flexibility in creating objects with specific prototypes and properties.
+  // Simplicity: It can be simpler and more intuitive compared to constructor functions or ES6 classes for certain use cases.
 }
 
 // Lecture Code
 
 {
+  // The object that will be the prototype of the new object
+  const PersonProto = {
+    calcAge() {
+      console.log(2037 - this.birthYear);
+    },
+
+    init(firstName, birthYear) {
+      this.firstName = firstName;
+      this.birthYear = birthYear;
+    },
+  };
+
+  // Create new object
+  const steven = Object.create(PersonProto);
+  // steven.name = 'Steven';
+  // steven.birthYear = 1991;
+  steven.init('Steven', 1991);
+  steven.calcAge(); // 46
+
+  console.log(steven.__proto__ === PersonProto); // true
+
+  const sarah = Object.create(PersonProto);
+  sarah.init('Sarah', 2000);
+  sarah.calcAge(); // 37
+
+  console.log(sarah.__proto__ === PersonProto); // true
 }
