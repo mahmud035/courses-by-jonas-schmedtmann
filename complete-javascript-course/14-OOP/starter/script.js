@@ -788,6 +788,7 @@
 
 //* Inheritance Between "Classes": Object.create()
 
+/* 
 {
   const PersonProto = {
     calcAge() {
@@ -819,4 +820,49 @@
   jay.introduce();
   jay.calcAge();
   console.log(jay);
+}
+ */
+
+//* Another Class Example
+
+{
+  class Account {
+    constructor(owner, currency, pin) {
+      this.owner = owner;
+      this.currency = currency;
+      this.pin = pin;
+      this.movements = [];
+      this.locale = navigator.language;
+
+      console.log(`Thanks for opening an account, ${owner}.`);
+    }
+
+    // Public Interface (API)
+    deposit(value) {
+      this.movements.push(value);
+    }
+
+    // NOTE: আমরা চাইলে class এর একটা method এর মধ্যে অন্য আরেকটা method কে call করতে পারি।
+    withdraw(value) {
+      this.deposit(-value);
+    }
+
+    approveLoan(value) {
+      return true;
+    }
+
+    requestLoan(value) {
+      if (this.approveLoan(value)) {
+        this.deposit(value);
+        console.log(`Loan approved`);
+      }
+    }
+  }
+
+  const account1 = new Account('Jonas', 'EUR', 1111);
+  account1.deposit(500);
+  account1.withdraw(200);
+  account1.requestLoan(100);
+
+  console.log(account1);
 }
