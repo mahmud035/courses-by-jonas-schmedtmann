@@ -437,7 +437,7 @@
     movements: [200, 530, 120, 300],
 
     get latest() {
-      return this.movements.slice(-1).pop();
+      return this._movements.slice(-1).pop();
     },
 
     set latest(movement) {
@@ -825,6 +825,7 @@
 
 //* Another Class Example
 
+/* 
 {
   class Account {
     constructor(owner, currency, pin) {
@@ -865,4 +866,47 @@
   account1.requestLoan(100);
 
   console.log(account1);
+}
+ */
+
+//* Encapsulation: Protected Properties and Methods
+
+{
+  class Account {
+    constructor(owner, currency, pin) {
+      this.owner = owner;
+      this.currency = currency;
+      // Protected property (convention)
+      this._pin = pin;
+      this._movements = [];
+      this.locale = navigator.language;
+    }
+
+    _approveLoan(value) {
+      return true;
+    }
+
+    // Public Interface (API)
+    getMovements() {
+      return this._movements;
+    }
+
+    deposit(value) {
+      this._movements.push(value);
+    }
+
+    withdraw(value) {
+      this.deposit(-value);
+    }
+
+    requestLoan(value) {
+      if (this._approveLoan(value)) {
+        this.deposit(value);
+        console.log(`Loan approved`);
+      }
+    }
+  }
+
+  const account1 = new Account('Jonas', 'EUR', 1111);
+  console.log(account1.getMovements());
 }
