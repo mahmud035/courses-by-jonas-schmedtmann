@@ -869,8 +869,9 @@
 }
  */
 
-//* Encapsulation: Protected Properties and Methods
+//* Encapsulation: Protected Properties and Methods => using underscore (_) convention
 
+/* 
 {
   class Account {
     constructor(owner, currency, pin) {
@@ -909,4 +910,67 @@
 
   const account1 = new Account('Jonas', 'EUR', 1111);
   console.log(account1.getMovements());
+}
+ */
+
+//* Encapsulation: Private Class Fields and Methods
+
+{
+  class Account {
+    // NOTE: Private fields are added before the constructor runs in a base class.
+
+    //* Private fields
+    #pin;
+    #movements = [];
+
+    constructor(owner, currency, pin) {
+      this.owner = owner;
+      this.currency = currency;
+      this.#pin = pin;
+      this.locale = navigator.language;
+
+      console.log(`Thanks for opening an account, ${owner}.`);
+    }
+
+    //* Private Methods
+    #approveLoan(value) {
+      return true;
+    }
+
+    //* Public method to access the private field
+    getMovements() {
+      return this.#movements;
+    }
+
+    // Public Methods
+    deposit(value) {
+      this.#movements.push(value);
+    }
+
+    withdraw(value) {
+      this.deposit(-value);
+    }
+
+    requestLoan(value) {
+      if (this.#approveLoan(value)) {
+        this.deposit(value);
+        console.log(`Loan approved`);
+      }
+    }
+  }
+
+  // Create instance from Account class
+  const account1 = new Account('Jonas', 'EUR', 1111);
+  account1.deposit(500); // Deposit 500
+  account1.withdraw(200); // Withdraw 200
+  account1.requestLoan(100); // Request a loan of 100
+
+  console.log(account1.getMovements()); // Output: [500, -200, 100]
+
+  //! The following lines will produce errors because they attempt to access private fields/methods:
+  // console.log(account1.#pin); // Error
+  // console.log(account1.#movements); // Error
+  // console.log(account1.#approveLoan(30)); // Error
+
+  console.log(account1); // Output: Account { owner: 'Jonas', currency: 'EUR', locale: 'en-US' }
 }
