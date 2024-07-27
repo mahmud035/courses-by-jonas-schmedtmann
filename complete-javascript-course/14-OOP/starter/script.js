@@ -915,6 +915,7 @@
 
 //* Encapsulation: Private Class Fields and Methods
 
+/* 
 {
   class Account {
     // NOTE: Private fields are added before the constructor runs in a base class.
@@ -973,4 +974,63 @@
   // console.log(account1.#approveLoan(30)); // Error
 
   console.log(account1); // Output: Account { owner: 'Jonas', currency: 'EUR', locale: 'en-US' }
+}
+ */
+
+//* Chaining Methods
+
+{
+  class Account {
+    #pin;
+    #movements = [];
+
+    constructor(owner, currency, pin) {
+      this.owner = owner;
+      this.currency = currency;
+      this.#pin = pin;
+      this.locale = navigator.language;
+
+      console.log(`Thanks for opening an account, ${owner}.`);
+    }
+
+    #approveLoan(value) {
+      return true;
+    }
+
+    // Public method to access the private field
+    getMovements() {
+      return this.#movements;
+    }
+
+    // Public Methods
+    deposit(value) {
+      this.#movements.push(value);
+      return this; // return current object
+    }
+
+    withdraw(value) {
+      this.deposit(-value);
+      return this; // return current object
+    }
+
+    requestLoan(value) {
+      if (this.#approveLoan(value)) {
+        this.deposit(value);
+        console.log(`Loan approved`);
+        return this; // return current object
+      }
+    }
+  }
+
+  const account1 = new Account('Jonas', 'EUR', 1111);
+
+  //* Chaining
+  account1
+    .deposit(400)
+    .deposit(500)
+    .withdraw(300)
+    .requestLoan(2000)
+    .withdraw(1000);
+
+  console.log(account1.getMovements()); // [400, 500, -300, 2000, -1000]
 }
