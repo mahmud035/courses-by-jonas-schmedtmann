@@ -979,6 +979,7 @@
 
 //* Chaining Methods
 
+/* 
 {
   class Account {
     #pin;
@@ -1005,7 +1006,7 @@
     // Public Methods
     deposit(value) {
       this.#movements.push(value);
-      return this; // return current object
+      return this; // return current object for chaining
     }
 
     withdraw(value) {
@@ -1017,7 +1018,7 @@
       if (this.#approveLoan(value)) {
         this.deposit(value);
         console.log(`Loan approved`);
-        return this; // return current object
+        return this; // return current object for chaining
       }
     }
   }
@@ -1034,3 +1035,4 @@
 
   console.log(account1.getMovements()); // [400, 500, -300, 2000, -1000]
 }
+ */

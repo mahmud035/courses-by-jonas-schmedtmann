@@ -163,3 +163,78 @@
   console.log(tesla);
 }
  */
+
+//* Coding Challenge #4
+
+/* 
+  1. Re-create challenge #3, but this time using ES6 classes: create an 'EVCl' child class of the 'CarCl' class
+  2. Make the 'charge' property private;
+  3. Implement the ability to chain the 'accelerate' and 'chargeBattery' methods of this class, and also update the 'brake' method in the 'CarCl' class. Then experiment with chining!
+
+  DATA CAR 1: 'Rivian' going at 120 km/h, with a charge of 23%
+
+  GOOD LUCK 😀
+*/
+
+{
+  //* Parent Class
+  class CarCl {
+    constructor(make, speed) {
+      this.make = make;
+      this.speed = speed;
+    }
+
+    accelerate() {
+      this.speed += 10;
+      console.log(`${this.make} is going at ${this.speed} km/h`);
+    }
+
+    break() {
+      this.speed -= 5;
+      console.log(`${this.make} is going at ${this.speed} km/h`);
+      return this; // return current object for chaining
+    }
+  }
+
+  //* Child Class
+  class EVCl extends CarCl {
+    #charge; // Private Field
+
+    constructor(make, speed, charge) {
+      super(make, speed);
+      this.#charge = charge;
+    }
+
+    chargeBattery(chargeTo) {
+      this.#charge = chargeTo;
+      return this; // return current object for chaining
+    }
+
+    // Overwrite the accelerate method (Polymorphism)
+    accelerate() {
+      this.speed += 20;
+      this.#charge--;
+      console.log(
+        `${this.make} is going at ${this.speed} km/h, with a charge of ${
+          this.#charge
+        }%`
+      );
+      return this; // return current object for chaining
+    }
+  }
+
+  // Create instance from EVCl class
+  const rivian = new EVCl('Rivian', 120, 23);
+  console.log(rivian);
+
+  // Chaining
+  rivian
+    .accelerate()
+    .accelerate()
+    .accelerate()
+    .break()
+    .break()
+    .chargeBattery(90);
+
+  console.log(rivian);
+}
