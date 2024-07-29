@@ -24,6 +24,9 @@ const inputDuration = document.querySelector('.form__input--duration');
 const inputCadence = document.querySelector('.form__input--cadence');
 const inputElevation = document.querySelector('.form__input--elevation');
 
+let map;
+let mapEvent;
+
 const getTime = () => {
   const date = new Date();
   const options = {
@@ -43,31 +46,18 @@ if (navigator.geolocation) {
       const coords = [latitude, longitude];
 
       // Leaflet
-      const map = L.map('map').setView(coords, 13);
+      map = L.map('map').setView(coords, 13);
 
       L.tileLayer('https://tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
         attribution:
           '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
       }).addTo(map);
 
-      //* Event, Popup & Marker Together
-      map.on('click', function (mapEvent) {
-        const { lat, lng } = mapEvent.latlng;
-        const clickedCoords = [lat, lng];
-
-        L.marker(clickedCoords)
-          .addTo(map)
-          .bindPopup(
-            L.popup({
-              maxWidth: 250,
-              minWidth: 100,
-              autoClose: false,
-              closeOnClick: false,
-              className: 'running-popup',
-              content: `🏃‍♂️ Running on ${getTime()} ${mapEvent.latlng.toString()}`,
-            })
-          )
-          .openPopup();
+      //* Handling clicks on map
+      map.on('click', (mapE) => {
+        mapEvent = mapE;
+        form.classList.remove('hidden');
+        inputDistance.focus();
       });
     },
 
@@ -89,3 +79,43 @@ if (navigator.geolocation) {
     }
   );
 }
+
+inputType.addEventListener('change', () => {
+  inputElevation.parentElement.classList.toggle('form__row--hidden');
+  inputCadence.parentElement.classList.toggle('form__row--hidden');
+
+  // inputElevation.closest('.form__row').classList.toggle('form__row--hidden');
+  // inputCadence.closest('.form__row').classList.toggle('form__row--hidden');
+});
+
+//* Form Event Handler
+form.addEventListener('submit', (e) => {
+  e.preventDefault();
+
+  // Clear input fields
+  inputDistance.value =
+    inputDuration.value =
+    inputCadence.value =
+    inputElevation.value =
+      '';
+
+  // Display marker & popup
+  const { lat, lng } = mapEvent?.latlng;
+  const clickedCoords = [lat, lng];
+
+  L.marker(clickedCoords)
+    .addTo(map)
+    .bindPopup(
+      L.popup({
+        maxWidth: 250,
+        minWidth: 100,
+        autoClose: false,
+        closeOnClick: false,
+        className: 'running-popup',
+        content: `🏃‍♂️ Running on ${getTime()} ${mapEvent.latlng.toString()}`,
+      })
+    )
+    .openPopup();
+
+  form.classList.add('hidden');
+});
