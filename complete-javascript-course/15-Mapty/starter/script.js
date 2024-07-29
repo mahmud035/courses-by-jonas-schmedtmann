@@ -24,55 +24,51 @@ const inputDuration = document.querySelector('.form__input--duration');
 const inputCadence = document.querySelector('.form__input--cadence');
 const inputElevation = document.querySelector('.form__input--elevation');
 
+const getTime = () => {
+  const date = new Date();
+  const options = {
+    month: 'long',
+    day: '2-digit',
+  };
+  const time = new Intl.DateTimeFormat(navigator.language, options).format(
+    date
+  );
+  return time;
+};
+
 if (navigator.geolocation) {
   navigator.geolocation.getCurrentPosition(
     (position) => {
       const { latitude, longitude } = position.coords;
-      console.log(
-        `https://www.google.com/maps/@${latitude},${longitude},14z?entry=ttu`
-      );
+      const coords = [latitude, longitude];
 
-      const map = L.map('map').setView([latitude, longitude], 13);
+      // Leaflet
+      const map = L.map('map').setView(coords, 13);
 
-      L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 25,
+      L.tileLayer('https://tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
         attribution:
-          '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+          '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
       }).addTo(map);
 
-      //* Marker
-      // const marker = L.marker([latitude, longitude]).addTo(map);
-
-      //* Popup
-      // const popup = L.popup()
-      //   .setLatLng([latitude, longitude])
-      //   .setContent(
-      //     `<div class="leaflet-popup-content-wrapper"><div class="leaflet-popup-content" style="width: 148px;">🚴‍♀️ Cycling on July 28</div></div>`
-      //   )
-      //   .openOn(map);
-
       //* Event, Popup & Marker Together
-      function onMapClick(e) {
-        // console.log(e);
-        const date = new Date();
-        const options = {
-          month: 'long',
-          day: '2-digit',
-        };
-        const time = new Intl.DateTimeFormat(
-          navigator.language,
-          options
-        ).format(date);
+      map.on('click', function (mapEvent) {
+        const { lat, lng } = mapEvent.latlng;
+        const clickedCoords = [lat, lng];
 
-        const Point = L.point(0, -27);
-        const marker = L.marker([e.latlng.lat, e.latlng.lng]).addTo(map);
-        const popup = L.popup({ offset: Point })
-          .setLatLng(e.latlng)
-          .setContent(`🏃‍♂️ Running on ${time} ${e.latlng.toString()}`)
-          .openOn(map);
-      }
-
-      map.on('click', onMapClick);
+        L.marker(clickedCoords)
+          .addTo(map)
+          .bindPopup(
+            L.popup({
+              maxWidth: 250,
+              minWidth: 100,
+              autoClose: false,
+              closeOnClick: false,
+              className: 'running-popup',
+              content: `🏃‍♂️ Running on ${getTime()} ${mapEvent.latlng.toString()}`,
+            })
+          )
+          .openPopup();
+      });
     },
 
     (error) => {
