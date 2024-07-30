@@ -10,35 +10,38 @@ const countriesContainer = document.querySelector('.countries');
   const loadCountries = async () => {
     const res = await fetch(`https://restcountries.com/v3.1/all`);
     const data = await res.json();
-    // console.log(data);
+    console.log(data);
     displayCountries(data);
   };
 
   const displayCountries = (countries) => {
     countries.forEach((country) => {
+      const name = country?.name?.common;
+      const flag = country?.flags?.svg;
+      const region = country?.region;
+      const population = country?.population;
+      const language = country.languages
+        ? Object.values(country.languages)[0]
+        : 'N/A';
+      const currency = country.currencies
+        ? Object.values(country.currencies)[0].name
+        : 'N/A';
+
       const article = document.createElement('article');
       article.classList.add('country');
       article.innerHTML = `      
-          <img class="country__img" src=${country?.flags?.png} />
+          <img class="country__img" src=${flag} />
           <div class="country__data">
-            <h3 class="country__name">${country?.name?.common}</h3>
-            <h4 class="country__region">${country?.region}</h4>
+            <h3 class="country__name">${name}</h3>
+            <h4 class="country__region">${region}</h4>
             <p class="country__row"><span>👫</span>
-               ${country?.population}
+               ${population}
             </p>
             <p class="country__row"><span>🗣️</span>
-               ${
-                 country?.languages
-                   ? Object.keys(country.languages).join(', ').toUpperCase()
-                   : 'N/A'
-               }
+               ${language}
             </p>
             <p class="country__row"><span>💰</span>
-              ${
-                country.currencies
-                  ? Object.keys(country.currencies).join(', ')
-                  : 'N/A'
-              }
+              ${currency}
             </p>
           </div>`;
       countriesContainer.appendChild(article);
@@ -46,4 +49,28 @@ const countriesContainer = document.querySelector('.countries');
   };
 
   loadCountries();
+}
+
+//* Reverse Geocoding API (Big Data Cloud)
+
+{
+  const fetchReverseGeocoding = async () => {
+    const bigDataCloudAPIKey = 'bdc_9ecc2e2f97424a23bb33127899371025';
+    const latitude = 23.02;
+    const longitude = 89.76999;
+
+    //* Both URL works
+    // const res = await fetch(
+    //   `https://api-bdc.net/data/reverse-geocode?latitude=${latitude}&longitude=${longitude}&key=${bigDataCloudAPIKey}`
+    // );
+
+    //* Without API Key
+    const res = await fetch(
+      `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${latitude}&longitude=${longitude}`
+    );
+    const data = await res.json();
+    return data;
+  };
+
+  // fetchReverseGeocoding();
 }
