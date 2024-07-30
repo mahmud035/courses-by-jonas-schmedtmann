@@ -232,3 +232,26 @@ const countriesContainer = document.querySelector('.countries');
   //* MicroTasks Queue:
   // সমস্ত Promises গুলো Web APIs এ তাদের কাজ শেষ করে সরাসরি MicroTasks Queue তে চলে আসবে। Event Loop MicroTasks Queue কে Higher Priority দেয়। একারণে, Event Loop প্রথমে MicroTasks Queue তে থাকা Promises গুলোকে একটা একটা করে Call Stack এর কাছে পাঠাবে Execute হওয়ার জন্য। যখন MicroTasks Queue তে থাকা সমস্ত Promises গুলো  Execute হয়ে যাবে, তারপরেই কেবল Event Loop Callback Queue দিকে মনোযোগ দিবে।
 }
+
+//* The Event Loop in Practice
+
+/* 
+{
+  // IMPORTANT: MicroTasks Queue:
+  // সমস্ত Promises গুলো Web APIs এ তাদের কাজ শেষ করে সরাসরি MicroTasks Queue তে চলে আসবে। Event Loop MicroTasks Queue কে Higher Priority দেয়। একারণে, Event Loop প্রথমে MicroTasks Queue তে থাকা Promises গুলোকে একটা একটা করে Call Stack এর কাছে পাঠাবে Execute হওয়ার জন্য। যখন MicroTasks Queue তে থাকা সমস্ত Promises গুলো Execute হয়ে যাবে, তারপরেই কেবল Event Loop Callback Queue দিকে মনোযোগ দিবে।
+
+  console.log('Test start');
+
+  setTimeout(() => console.log(`0 second timer`), 0);
+
+  //* NOTE: MicroTasks Queue এর জন্য "Resolved promise 1" এবং "Resolved promise 2" আগে console এ print হবে। 👆
+  Promise.resolve('Resolved promise 1').then((res) => console.log(res));
+
+  Promise.resolve('Resolved promise 2').then((res) => {
+    for (let i = 1; i <= 25000; i++) {}
+    console.log(res);
+  });
+
+  console.log('Test end');
+}
+*/
