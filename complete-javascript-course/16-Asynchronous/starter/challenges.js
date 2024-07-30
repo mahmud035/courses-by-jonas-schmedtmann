@@ -27,6 +27,9 @@
  */
 
 {
+  // TODO: NOTE: IMPORTANT: Combining Promises and Fetch API
+  // Both Promises and Fetch API can be combined to handle network requests in a more readable and manageable way, especially with async/await.
+
   const whereAmI = async (lat, lng) => {
     try {
       //* Reverse Geocoding API (Big Data Cloud)
@@ -64,7 +67,7 @@
     }
   };
 
-  // Display country
+  //* Display country
   const displayCountry = (country) => {
     const name = country?.name?.common;
     const flag = country?.flags?.svg;
