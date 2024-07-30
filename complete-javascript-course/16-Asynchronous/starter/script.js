@@ -159,7 +159,7 @@ const countriesContainer = document.querySelector('.countries');
   //* Fetch API
 
   // Basic Fetch Request
-  fetch(`https://jsonplaceholder.typicode.com/posts/1`)
+  fetch(`https://jsonplaceholder.typicode.com/posts/1sdasdsa`)
     .then((response) => {
       if (!response.ok) {
         throw new Error('Network request was not ok');
