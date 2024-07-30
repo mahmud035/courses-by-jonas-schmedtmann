@@ -10,7 +10,7 @@ const countriesContainer = document.querySelector('.countries');
   const loadCountries = async () => {
     const res = await fetch(`https://restcountries.com/v3.1/all`);
     const data = await res.json();
-    console.log(data);
+    // console.log(data);
     displayCountries(data);
   };
 
@@ -71,6 +71,44 @@ const countriesContainer = document.querySelector('.countries');
     const data = await res.json();
     return data;
   };
-
   // fetchReverseGeocoding();
+}
+
+//* Welcome to Callback Hell
+
+{
+  // 1. First get the country data by fullName
+  const getCountry = async (countryName) => {
+    const res = await fetch(
+      `https://restcountries.com/v3.1/name/${countryName}?fullText=true`
+    );
+    const data = await res.json();
+    console.log(data[0]);
+    getNeighbourCountry(data[0]);
+  };
+  getCountry('Bangladesh');
+
+  // 2. And then get one neighbour country data
+  const getNeighbourCountry = async (data) => {
+    const neighbourCountryCode = data?.borders?.[0]; // get first neighbour country code
+
+    const res = await fetch(
+      `https://restcountries.com/v3.1/alpha/${neighbourCountryCode}`
+    );
+    const neighbourCountry = await res.json();
+    console.log(neighbourCountry[0]);
+  };
+
+  setTimeout(() => {
+    console.log('1 second passed');
+    setTimeout(() => {
+      console.log('2 seconds passed');
+      setTimeout(() => {
+        console.log('3 seconds passed');
+        setTimeout(() => {
+          console.log('4 seconds passed');
+        }, 1000);
+      }, 1000);
+    }, 1000);
+  }, 1000);
 }
