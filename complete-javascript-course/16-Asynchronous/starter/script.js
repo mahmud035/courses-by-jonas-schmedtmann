@@ -129,6 +129,7 @@ const countriesContainer = document.querySelector('.countries');
 //* Handling Rejected Promises
 //* Throwing Errors Manually
 
+/* 
 {
   //* Promise
 
@@ -159,7 +160,7 @@ const countriesContainer = document.querySelector('.countries');
   //* Fetch API
 
   // Basic Fetch Request
-  fetch(`https://jsonplaceholder.typicode.com/posts/1sdasdsa`)
+  fetch(`https://jsonplaceholder.typicode.com/posts/1`)
     .then((response) => {
       if (!response.ok) {
         throw new Error('Network request was not ok');
@@ -222,3 +223,4 @@ const countriesContainer = document.querySelector('.countries');
   };
   fetchPost();
 }
+ */
