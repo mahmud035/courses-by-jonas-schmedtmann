@@ -21,7 +21,7 @@
 
   TEST COORDINATES 1: 52.508, 13.381 (Latitude, Longitude)
   TEST COORDINATES 2: 19.037, 72.873
-  TEST COORDINATES 2: -33.933, 18.474
+  TEST COORDINATES 2: 23.02, 89.769
 
   GOOD LUCK 😀
  */
@@ -45,11 +45,11 @@
     }
   };
 
-  whereAmI(52.508, 13.381);
-  whereAmI(19.037, 72.873);
-  whereAmI(-33.933, 18.474);
+  whereAmI(52.508, 13.381); // Germany
+  whereAmI(19.037, 72.873); // India
+  whereAmI(23.02, 89.769); // Bangladesh
 
-  // Fetch country
+  //* Fetch country
   const fetchCountry = async (countryCode) => {
     try {
       const url = `https://restcountries.com/v3.1/alpha/${countryCode}`;
@@ -65,7 +65,7 @@
   };
 
   // Display country
-  const displayCountry = async (country) => {
+  const displayCountry = (country) => {
     const name = country?.name?.common;
     const flag = country?.flags?.svg;
     const region = country?.region;
