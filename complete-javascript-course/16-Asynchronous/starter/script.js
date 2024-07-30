@@ -125,6 +125,7 @@ const countriesContainer = document.querySelector('.countries');
 
 //* Promises and the Fetch API
 //* Consuming Promises
+//* Chaining Promises
 
 {
   //* Promise
