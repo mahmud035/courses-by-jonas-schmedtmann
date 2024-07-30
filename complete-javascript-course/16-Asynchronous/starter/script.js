@@ -224,3 +224,11 @@ const countriesContainer = document.querySelector('.countries');
   fetchPost();
 }
  */
+
+//* Asynchronous Behind the Scenes: The Event Loop
+
+{
+  // IMPORTANT:
+  //* MicroTasks Queue:
+  // সমস্ত Promises গুলো Web APIs এ তাদের কাজ শেষ করে সরাসরি MicroTasks Queue তে চলে আসবে। Event Loop MicroTasks Queue কে Higher Priority দেয়। একারণে, Event Loop প্রথমে MicroTasks Queue তে থাকা Promises গুলোকে একটা একটা করে Call Stack এর কাছে পাঠাবে Execute হওয়ার জন্য। যখন MicroTasks Queue তে থাকা সমস্ত Promises গুলো  Execute হয়ে যাবে, তারপরেই কেবল Event Loop Callback Queue দিকে মনোযোগ দিবে।
+}

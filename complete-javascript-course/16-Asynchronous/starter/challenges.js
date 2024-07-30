@@ -26,6 +26,7 @@
   GOOD LUCK 😀
  */
 
+/*   
 {
   // TODO: NOTE: IMPORTANT: Combining Promises and Fetch API
   // Both Promises and Fetch API can be combined to handle network requests in a more readable and manageable way, especially with async/await.
@@ -100,3 +101,4 @@
     countriesContainer.prepend(article);
   };
 }
+ */
