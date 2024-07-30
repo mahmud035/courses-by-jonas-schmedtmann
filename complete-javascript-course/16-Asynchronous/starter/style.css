@@ -14,35 +14,33 @@ body {
   color: #555;
   background-color: #f7f7f7;
   min-height: 100vh;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .container {
-  display: flex;
-  flex-flow: column;
-  align-items: center;
+  max-width: 1536px;
+  margin: 0 auto;
+  padding: 2.5rem;
 }
 
 .countries {
-  /* margin-bottom: 8rem; */
-  display: flex;
+  margin-bottom: 8rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 350px));
+  gap: 2rem;
+  justify-content: center;
 
   font-size: 2rem;
-  opacity: 0;
+  opacity: 1;
   transition: opacity 1s;
 }
 
 .country {
+  width: 100%;
+  font-size: 1.8rem;
   background-color: #fff;
   box-shadow: 0 2rem 5rem 1rem rgba(0, 0, 0, 0.1);
-  font-size: 1.8rem;
-  width: 30rem;
   border-radius: 0.7rem;
-  margin: 0 3rem;
-  /* overflow: hidden; */
+  overflow: hidden;
 }
 
 .neighbour::before {
@@ -64,7 +62,7 @@ body {
 }
 
 .country__img {
-  width: 30rem;
+  width: 100%;
   height: 17rem;
   object-fit: cover;
   background-color: #eee;
