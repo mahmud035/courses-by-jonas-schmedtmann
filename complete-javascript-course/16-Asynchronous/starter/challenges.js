@@ -127,6 +127,7 @@
   GOOD LUCK 😀
 */
 
+/* 
 {
   const imgContainer = document.querySelector('.images');
   let currentImage;
@@ -174,3 +175,4 @@
     })
     .catch((error) => console.error(error.message));
 }
+ */
