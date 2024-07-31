@@ -572,3 +572,68 @@ const countriesContainer = document.querySelector('.countries');
   // Explanation: In this example, all three fetch calls start at the same time. Promise.all() waits for all of them to complete before proceeding. If any of the fetches fail, the catch block will handle the error.
 }
  */
+
+//* Other Promise Combinator's: race, allSettled and any
+
+{
+  // Utility function
+  const getJSON = async (url, errorMsg = 'Something went wrong') => {
+    const response = await fetch(url);
+    if (!response.ok) throw new Error(errorMsg);
+    return await response.json();
+  };
+
+  // ===================  =======================
+  // IIFE <=> Promise.race()
+  // Ex: 1
+  (async () => {
+    const res = await Promise.race([
+      getJSON(`https://restcountries.com/v3.1/name/bangladesh?fullText=true`),
+      getJSON(`https://restcountries.com/v3.1/name/india?fullText=true`),
+      getJSON(`https://restcountries.com/v3.1/name/china?fullText=true`),
+    ]);
+    console.log(res[0]);
+  })();
+
+  // Ex: 2
+  const timeout = (seconds) => {
+    return new Promise((_, reject) => {
+      setTimeout(() => {
+        reject(new Error('Request took too long!'));
+      }, seconds * 1000);
+    });
+  };
+
+  Promise.race([
+    getJSON(`https://restcountries.com/v3.1/name/pakistan?fullText=true`),
+    timeout(5),
+  ])
+    .then((res) => console.log(res[0]))
+    .catch((error) => console.error(error));
+
+  // ===================  =======================
+
+  // Promise.allSettled()
+  Promise.allSettled([
+    Promise.resolve('Success'),
+    Promise.reject('ERROR'),
+    Promise.resolve('Another success'),
+  ]).then((res) => console.log(res));
+
+  Promise.all([
+    Promise.resolve('Success'),
+    Promise.reject('ERROR'),
+    Promise.resolve('Another success'),
+  ])
+    .then((res) => console.log(res))
+    .catch((err) => console.error(err));
+
+  // Promise.any()
+  Promise.any([
+    Promise.resolve('Success'),
+    Promise.reject('ERROR'),
+    Promise.resolve('Another success'),
+  ])
+    .then((res) => console.log(res))
+    .catch((err) => console.error(err));
+}
