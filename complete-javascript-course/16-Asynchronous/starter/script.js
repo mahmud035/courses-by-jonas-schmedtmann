@@ -575,6 +575,7 @@ const countriesContainer = document.querySelector('.countries');
 
 //* Other Promise Combinator's: race, allSettled and any
 
+/* 
 {
   // Utility function
   const getJSON = async (url, errorMsg = 'Something went wrong') => {
@@ -637,3 +638,4 @@ const countriesContainer = document.querySelector('.countries');
     .then((res) => console.log(res))
     .catch((err) => console.error(err));
 }
+ */
