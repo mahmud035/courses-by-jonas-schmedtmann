@@ -409,6 +409,9 @@ const countriesContainer = document.querySelector('.countries');
 //* Error Handling With try...catch
 //* Returning Values from Async Functions
 
+// IMPORTANT: The async keyword is used to declare an asynchronous function. "This means that the function (asynchronous function) will automatically return a promise", and within this function, you can use await.
+
+/* 
 {
   const getPosition = () => {
     return new Promise((resolve, reject) => {
@@ -440,6 +443,7 @@ const countriesContainer = document.querySelector('.countries');
       console.log(`You are in ${data.city}, ${data.countryName}`);
     } catch (error) {
       console.error(error.message);
+      throw error;
     }
   };
   whereAmI();
@@ -456,6 +460,7 @@ const countriesContainer = document.querySelector('.countries');
       displayCountry(data[0]);
     } catch (error) {
       console.error(error.message);
+      throw error;
     }
   };
 
@@ -491,4 +496,48 @@ const countriesContainer = document.querySelector('.countries');
           </div>`;
     countriesContainer.prepend(article);
   };
+}
+ */
+
+//* Running Promises in Parallel
+
+{
+  // Utility function
+  const getJSON = async (url, errorMsg = 'Something went wrong') => {
+    const response = await fetch(url);
+    if (!response.ok) throw new Error(errorMsg);
+    return await response.json();
+  };
+
+  const get3Countries = async (country1, country2, country3) => {
+    try {
+      const [data1] = await getJSON(
+        `https://restcountries.com/v3.1/name/${country1}?fullText=true`
+      );
+      const [data2] = await getJSON(
+        `https://restcountries.com/v3.1/name/${country2}?fullText=true`
+      );
+      const [data3] = await getJSON(
+        `https://restcountries.com/v3.1/name/${country3}?fullText=true`
+      );
+      console.log([data1.capital[0], data2.capital[0], data3.capital[0]]); // ['Dhaka', 'New Delhi', 'Beijing']
+
+      //* Running Promises in Parallel
+      const data = await Promise.all([
+        getJSON(
+          `https://restcountries.com/v3.1/name/${country1}?fullText=true`
+        ),
+        getJSON(
+          `https://restcountries.com/v3.1/name/${country2}?fullText=true`
+        ),
+        getJSON(
+          `https://restcountries.com/v3.1/name/${country3}?fullText=true`
+        ),
+      ]);
+      console.log(data.map((country) => country[0].capital[0])); // ['Dhaka', 'New Delhi', 'Beijing']
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  get3Countries('Bangladesh', 'India', 'China');
 }
