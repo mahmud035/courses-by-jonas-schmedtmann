@@ -47,8 +47,7 @@ const countriesContainer = document.querySelector('.countries');
       countriesContainer.appendChild(article);
     });
   };
-
-  loadCountries();
+  // loadCountries();
 }
 
 //* Reverse Geocoding API (Big Data Cloud)
@@ -321,6 +320,7 @@ const countriesContainer = document.querySelector('.countries');
 
 //* Promisifying the Geolocation API
 
+/* 
 {
   const getPosition = async () => {
     return new Promise((resolve, reject) => {
@@ -403,3 +403,4 @@ const countriesContainer = document.querySelector('.countries');
     countriesContainer.prepend(article);
   };
 }
+ */
