@@ -406,6 +406,8 @@ const countriesContainer = document.querySelector('.countries');
  */
 
 //* Consuming Promises with Async/Await
+//* Error Handling With try...catch
+//* Returning Values from Async Functions
 
 {
   const getPosition = () => {
