@@ -258,6 +258,7 @@ const countriesContainer = document.querySelector('.countries');
 
 //* Building a Simple Promise
 
+/* 
 {
   // Creating a Promise
   const lotteryPromise = new Promise((resolve, reject) => {
@@ -315,4 +316,90 @@ const countriesContainer = document.querySelector('.countries');
   // NOTE: How to Immediately resolve or reject Promises
   Promise.resolve('Promise resolved').then((res) => console.log(res));
   Promise.reject('Promise rejected').catch((error) => console.error(error));
+}
+ */
+
+//* Promisifying the Geolocation API
+
+{
+  const getPosition = async () => {
+    return new Promise((resolve, reject) => {
+      navigator.geolocation.getCurrentPosition(
+        (position) => resolve(position),
+        (error) => reject(error)
+      );
+      // navigator.geolocation.getCurrentPosition(resolve, reject);
+    });
+  };
+
+  const whereAmI = async () => {
+    try {
+      //* Get user's geolocation information
+      const positions = await getPosition();
+      const { latitude: lat, longitude: lng } = positions.coords;
+
+      //* Reverse Geocoding API (Big Data Cloud)
+      const url = `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lng}`;
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error(`Network request was not ok: ${response.status}`);
+      }
+      const data = await response.json();
+      const countryCode = data.countryCode;
+      fetchCountry(countryCode);
+
+      console.log(`You are in ${data.city}, ${data.countryName}`);
+    } catch (error) {
+      console.error(error.message);
+    }
+  };
+  whereAmI();
+
+  //* Fetch country
+  const fetchCountry = async (countryCode) => {
+    try {
+      const url = `https://restcountries.com/v3.1/alpha/${countryCode}`;
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error(`Network request was not ok: ${response.status}`);
+      }
+      const data = await response.json();
+      displayCountry(data[0]);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
+  //* Display country
+  const displayCountry = (country) => {
+    const name = country?.name?.common;
+    const flag = country?.flags?.svg;
+    const region = country?.region;
+    const population = country?.population;
+    const language = country.languages
+      ? Object.values(country.languages)[0]
+      : 'N/A';
+    const currency = country.currencies
+      ? Object.values(country.currencies)[0].name
+      : 'N/A';
+
+    const article = document.createElement('article');
+    article.classList.add('country');
+    article.innerHTML = `      
+          <img class="country__img" src=${flag} />
+          <div class="country__data">
+            <h3 class="country__name">${name}</h3>
+            <h4 class="country__region">${region}</h4>
+            <p class="country__row"><span>👫</span>
+               ${population}
+            </p>
+            <p class="country__row"><span>🗣️</span>
+               ${language}
+            </p>
+            <p class="country__row"><span>💰</span>
+              ${currency}
+            </p>
+          </div>`;
+    countriesContainer.prepend(article);
+  };
 }
