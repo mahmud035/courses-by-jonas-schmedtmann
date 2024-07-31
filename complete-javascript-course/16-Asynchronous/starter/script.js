@@ -499,8 +499,11 @@ const countriesContainer = document.querySelector('.countries');
 }
  */
 
-//* Running Promises in Parallel
+//* Running Promises in Parallel => Promise.all()
 
+// IMPORTANT: Promise.all(): Waits for all promises to be fulfilled or for any to be rejected. If any promise is rejected, the entire Promise.all() promise is rejected.
+
+/* 
 {
   // Utility function
   const getJSON = async (url, errorMsg = 'Something went wrong') => {
@@ -541,3 +544,31 @@ const countriesContainer = document.querySelector('.countries');
   };
   get3Countries('Bangladesh', 'India', 'China');
 }
+ */
+
+// ChatGPT Code
+/* 
+{
+  // Practical Example: Suppose you need to fetch data from three different APIs and process the results together:
+
+  const fetchData = async () => {
+    const url1 = `https://jsonplaceholder.typicode.com/posts/1`;
+    const url2 = `https://jsonplaceholder.typicode.com/posts/2`;
+    const url3 = `https://jsonplaceholder.typicode.com/posts/3`;
+
+    const api1 = fetch(url1).then((response) => response.json());
+    const api2 = fetch(url2).then((response) => response.json());
+    const api3 = fetch(url3).then((response) => response.json());
+
+    try {
+      const [data1, data2, data3] = await Promise.all([api1, api2, api3]);
+      console.log({ data1, data2, data3 });
+    } catch (error) {
+      console.log(`One or more promises failed: ${error.message}`);
+    }
+  };
+  fetchData();
+
+  // Explanation: In this example, all three fetch calls start at the same time. Promise.all() waits for all of them to complete before proceeding. If any of the fetches fail, the catch block will handle the error.
+}
+ */
