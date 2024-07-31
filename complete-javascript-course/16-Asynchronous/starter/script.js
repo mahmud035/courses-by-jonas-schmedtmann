@@ -255,3 +255,64 @@ const countriesContainer = document.querySelector('.countries');
   console.log('Test end');
 }
 */
+
+//* Building a Simple Promise
+
+{
+  // Creating a Promise
+  const lotteryPromise = new Promise((resolve, reject) => {
+    console.log('Lottery draw is happening 🔮');
+
+    // Asynchronous operation
+    setTimeout(() => {
+      if (Math.random() >= 0.5) {
+        resolve('You WIN 💰');
+      } else {
+        reject(new Error('You lost you money 😥'));
+      }
+    }, 2000);
+  });
+
+  // Consuming Promises or Using Promises
+  lotteryPromise
+    .then((res) => console.log(res))
+    .catch((error) => console.error(error));
+
+  // IMPORTANT: Promisifying setTimeout(Solution for Callback Hell) 👇
+  const wait = (seconds) => {
+    return new Promise((resolve) => setTimeout(resolve, seconds * 1000));
+  };
+
+  wait(1)
+    .then(() => {
+      console.log('1 second passed');
+      return wait(1);
+    })
+    .then(() => {
+      console.log('2 seconds passed');
+      return wait(1);
+    })
+    .then(() => {
+      console.log('3 seconds passed');
+      return wait(1);
+    })
+    .then(() => console.log('4 seconds passed'));
+
+  //? Solution for this Callback Hell 👇 is above 👆
+  // setTimeout(() => {
+  //   console.log('1 second passed');
+  //   setTimeout(() => {
+  //     console.log('2 seconds passed');
+  //     setTimeout(() => {
+  //       console.log('3 second passed');
+  //       setTimeout(() => {
+  //         console.log('4 second passed');
+  //       }, 1000);
+  //     }, 1000);
+  //   }, 1000);
+  // }, 1000);
+
+  // NOTE: How to Immediately resolve or reject Promises
+  Promise.resolve('Promise resolved').then((res) => console.log(res));
+  Promise.reject('Promise rejected').catch((error) => console.error(error));
+}
