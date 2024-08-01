@@ -42,3 +42,38 @@ message('Jonas', 37);
     console.error(error);
   }
 }
+
+//* The Module Pattern
+
+{
+  const shoppingCart = (() => {
+    const cart = [];
+    const shippingCost = 10;
+    const totalPrice = 237;
+    const totalQuantity = 23;
+
+    const addToCart = (product, quantity) => {
+      cart.push({ product, quantity });
+      console.log(
+        `${quantity} ${product} is added to cart (shipping cost is ${shippingCost})`
+      );
+    };
+
+    const orderStock = (product, quantity) => {
+      console.log(`${quantity} ${product} ordered from supplier`);
+    };
+
+    return {
+      addToCart,
+      cart,
+      totalPrice,
+      totalQuantity,
+    };
+  })();
+
+  console.log('Shopping cart =>', shoppingCart);
+  shoppingCart.addToCart('Apple', 4);
+  shoppingCart.addToCart('Pizza', 2);
+  console.log(shoppingCart.totalPrice); // 237
+  console.log(shoppingCart.shippingCost); // undefined
+}
