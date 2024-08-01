@@ -1,9 +1,9 @@
 {
   "name": "17-modern-js-modules-tooling",
   "version": "1.0.0",
-  "main": "./js/script.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "parcel index.html",
+    "build": "parcel build index.html"
   },
   "keywords": [],
   "author": "Mahmud",
@@ -12,5 +12,8 @@
   "dependencies": {
     "leaflet": "^1.9.4",
     "lodash-es": "^4.17.21"
+  },
+  "devDependencies": {
+    "parcel": "^2.12.0"
   }
 }
