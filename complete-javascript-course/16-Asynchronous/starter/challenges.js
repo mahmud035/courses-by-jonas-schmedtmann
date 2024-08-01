@@ -196,10 +196,10 @@
   GOOD LUCK 😀
 */
 
+/* 
 {
   // Code from challenge #2
   const imgContainer = document.querySelector('.images');
-  let currentImage;
 
   const wait = (seconds) => {
     return new Promise((resolve) => setTimeout(resolve, seconds * 1000));
@@ -222,22 +222,21 @@
   };
 
   // Part 1
-  const setAndHideCurrentImage = async (img) => {
-    currentImage = img;
+  const waitAndHideImg = async (img) => {
     await wait(2);
-    currentImage.style.display = 'none';
+    img.style.display = 'none';
   };
 
   const loadNPause = async () => {
     try {
-      const img1 = await createImage('./img/img-1.jpg'); // load image 1
-      await setAndHideCurrentImage(img1);
+      let img = await createImage('./img/img-1.jpg'); // load image 1
+      await waitAndHideImg(img);
 
-      const img2 = await createImage('./img/img-2.jpg'); // load image 2
-      await setAndHideCurrentImage(img2);
+      img = await createImage('./img/img-2.jpg'); // load image 2
+      await waitAndHideImg(img);
 
-      const img3 = await createImage('./img/img-3.jpg'); // load image 3
-      await setAndHideCurrentImage(img3);
+      img = await createImage('./img/img-3.jpg'); // load image 3
+      await waitAndHideImg(img);
     } catch (error) {
       console.error(error.message);
     }
@@ -257,3 +256,4 @@
   };
   loadAll(['img/img-1.jpg', 'img/img-2.jpg', 'img/img-3.jpg']);
 }
+ */
