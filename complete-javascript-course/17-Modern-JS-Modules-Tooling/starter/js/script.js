@@ -1,7 +1,9 @@
 //* Exporting and Importing in ES6 Modules
 
 // Importing modules
-import cloneDeep from '../node_modules/lodash-es/cloneDeep.js';
+// import cloneDeep from '../node_modules/lodash-es/cloneDeep.js';
+
+import cloneDeep from 'lodash-es';
 import message, {
   addToCart,
   cart,
@@ -16,9 +18,7 @@ import message, {
   addToCart('Laptop', 1);
   addToCart('Mouse', 1);
   addToCart('Monitor', 1);
-
   console.log({ shippingCost, cart, totalPrice, tq });
-
   message('Jonas', 37);
 }
 
@@ -86,6 +86,7 @@ import message, {
  */
 
 //* Introduction to NPM
+//* Bundling With Parcel and NPM Script
 
 const state = {
   cart: [
@@ -101,4 +102,4 @@ const state = {
 
 const stateDeepClone = cloneDeep(state);
 state.user.isLoggedIn = false;
-console.log(stateDeepClone);
+console.log(stateDeepClone.__wrapped__);
