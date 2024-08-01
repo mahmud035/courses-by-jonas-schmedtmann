@@ -1,6 +1,7 @@
 //* Exporting and Importing in ES6 Modules
 
 // Importing modules
+import cloneDeep from '../node_modules/lodash-es/cloneDeep.js';
 import message, {
   addToCart,
   cart,
@@ -9,15 +10,17 @@ import message, {
   tq,
 } from './shoppingCart.js';
 
-console.log('Importing modules');
+{
+  console.log('Importing modules');
 
-addToCart('Laptop', 1);
-addToCart('Mouse', 1);
-addToCart('Monitor', 1);
+  addToCart('Laptop', 1);
+  addToCart('Mouse', 1);
+  addToCart('Monitor', 1);
 
-console.log({ shippingCost, cart, totalPrice, tq });
+  console.log({ shippingCost, cart, totalPrice, tq });
 
-message('Jonas', 37);
+  message('Jonas', 37);
+}
 
 //* Top-Level await (ES2022) means (Using await outside of an Asynchronous Function)
 
@@ -27,6 +30,7 @@ message('Jonas', 37);
 
 // IMPORTANT: Ensure proper error handling when using Top-Level await to handle any rejected promises.
 
+/* 
 {
   const getLastPost = async () => {
     const res = await fetch('https://jsonplaceholder.typicode.com/posts');
@@ -42,9 +46,11 @@ message('Jonas', 37);
     console.error(error);
   }
 }
+ */
 
 //* The Module Pattern
 
+/* 
 {
   const shoppingCart = (() => {
     const cart = [];
@@ -77,3 +83,22 @@ message('Jonas', 37);
   console.log(shoppingCart.totalPrice); // 237
   console.log(shoppingCart.shippingCost); // undefined
 }
+ */
+
+//* Introduction to NPM
+
+const state = {
+  cart: [
+    { product: 'bread', quantity: 5 },
+    { product: 'pizza', quantity: 5 },
+  ],
+  user: { isLoggedIn: true },
+};
+
+// const stateClone = { ...state };
+// state.user.isLoggedIn = false;
+// console.log(stateClone);
+
+const stateDeepClone = cloneDeep(state);
+state.user.isLoggedIn = false;
+console.log(stateDeepClone);
