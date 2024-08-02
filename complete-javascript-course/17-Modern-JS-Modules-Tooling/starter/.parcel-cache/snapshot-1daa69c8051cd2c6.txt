@@ -1,11 +1,11 @@
-5552
+5550
 127D:\Web Development\2. Jonas Schemedtmann\complete-javascript-course\17-Modern-JS-Modules-Tooling\starter\node_modules\commander133669982982039285 1
 141D:\Web Development\2. Jonas Schemedtmann\complete-javascript-course\17-Modern-JS-Modules-Tooling\starter\node_modules\js-yaml\lib\type\seq.js133669982799286206 0
 155D:\Web Development\2. Jonas Schemedtmann\complete-javascript-course\17-Modern-JS-Modules-Tooling\starter\node_modules\@parcel\utils\src\prettyDiagnostic.js133669983104332906 0
 124D:\Web Development\2. Jonas Schemedtmann\complete-javascript-course\17-Modern-JS-Modules-Tooling\starter\node_modules\semver133669982873568187 1
 167D:\Web Development\2. Jonas Schemedtmann\complete-javascript-course\17-Modern-JS-Modules-Tooling\starter\node_modules\@parcel\runtime-js\src\helpers\node\css-loader.js133669982948409286 0
 135D:\Web Development\2. Jonas Schemedtmann\complete-javascript-course\17-Modern-JS-Modules-Tooling\starter\node_modules\@msgpackr-extract133669986114066060 1
-115D:\Web Development\2. Jonas Schemedtmann\complete-javascript-course\17-Modern-JS-Modules-Tooling\starter\.gitignore133669928406270153 0
+115D:\Web Development\2. Jonas Schemedtmann\complete-javascript-course\17-Modern-JS-Modules-Tooling\starter\.gitignore133670025127870772 0
 122D:\Web Development\2. Jonas Schemedtmann\complete-javascript-course\17-Modern-JS-Modules-Tooling\starter\package-lock.json133669986119338239 0
 141D:\Web Development\2. Jonas Schemedtmann\complete-javascript-course\17-Modern-JS-Modules-Tooling\starter\node_modules\msgpackr\test-worker.js133669982884309441 0
 194D:\Web Development\2. Jonas Schemedtmann\complete-javascript-course\17-Modern-JS-Modules-Tooling\starter\node_modules\@parcel\optimizer-htmlnano\node_modules\css-tree\lib\lexer\prepare-tokens.js133669983118822904 0
@@ -31,7 +31,7 @@
 126D:\Web Development\2. Jonas Schemedtmann\complete-javascript-course\17-Modern-JS-Modules-Tooling\starter\node_modules\escalade133669982790366176 1
 134D:\Web Development\2. Jonas Schemedtmann\complete-javascript-course\17-Modern-JS-Modules-Tooling\starter\node_modules\msgpackr\pack.js133669982884249414 0
 139D:\Web Development\2. Jonas Schemedtmann\complete-javascript-course\17-Modern-JS-Modules-Tooling\starter\node_modules\lodash-es\includes.js133669931102064158 0
-109D:\Web Development\2. Jonas Schemedtmann\complete-javascript-course\17-Modern-JS-Modules-Tooling\starter\dist133670024064060538 1
+109D:\Web Development\2. Jonas Schemedtmann\complete-javascript-course\17-Modern-JS-Modules-Tooling\starter\dist133670046441708158 1
 144D:\Web Development\2. Jonas Schemedtmann\complete-javascript-course\17-Modern-JS-Modules-Tooling\starter\node_modules\lodash-es\_countHolders.js133669931094244158 0
 152D:\Web Development\2. Jonas Schemedtmann\complete-javascript-course\17-Modern-JS-Modules-Tooling\starter\node_modules\caniuse-lite\data\features\opus.js133669982883589448 0
 142D:\Web Development\2. Jonas Schemedtmann\complete-javascript-course\17-Modern-JS-Modules-Tooling\starter\node_modules\postcss-value-parser\lib133669982790626171 1
@@ -735,7 +735,7 @@
 146D:\Web Development\2. Jonas Schemedtmann\complete-javascript-course\17-Modern-JS-Modules-Tooling\starter\node_modules\htmlparser2\lib\Tokenizer.js133669982790136193 0
 133D:\Web Development\2. Jonas Schemedtmann\complete-javascript-course\17-Modern-JS-Modules-Tooling\starter\node_modules\semver\index.js133669982872788159 0
 146D:\Web Development\2. Jonas Schemedtmann\complete-javascript-course\17-Modern-JS-Modules-Tooling\starter\node_modules\lodash-es\_arrayEachRight.js133669931091124154 0
-127D:\Web Development\2. Jonas Schemedtmann\complete-javascript-course\17-Modern-JS-Modules-Tooling\starter\dist\index.4de9b498.js133670023207761784 0
+127D:\Web Development\2. Jonas Schemedtmann\complete-javascript-course\17-Modern-JS-Modules-Tooling\starter\dist\index.4de9b498.js133670046083247727 0
 131D:\Web Development\2. Jonas Schemedtmann\complete-javascript-course\17-Modern-JS-Modules-Tooling\starter\node_modules\lmdb\index.js133669982989165996 0
 152D:\Web Development\2. Jonas Schemedtmann\complete-javascript-course\17-Modern-JS-Modules-Tooling\starter\node_modules\type-fest\source\package-json.d.ts133669982798646180 0
 147D:\Web Development\2. Jonas Schemedtmann\complete-javascript-course\17-Modern-JS-Modules-Tooling\starter\node_modules\@parcel\optimizer-swc\LICENSE133669982974409289 0
@@ -3937,7 +3937,6 @@
 166D:\Web Development\2. Jonas Schemedtmann\complete-javascript-course\17-Modern-JS-Modules-Tooling\starter\node_modules\@swc\helpers\_\_to_consumable_array\package.json133669982839652909 0
 166D:\Web Development\2. Jonas Schemedtmann\complete-javascript-course\17-Modern-JS-Modules-Tooling\starter\node_modules\caniuse-lite\data\features\screen-orientation.js133669982885919428 0
 162D:\Web Development\2. Jonas Schemedtmann\complete-javascript-course\17-Modern-JS-Modules-Tooling\starter\node_modules\caniuse-lite\data\features\scrollintoview.js133669982885959423 0
-127D:\Web Development\2. Jonas Schemedtmann\complete-javascript-course\17-Modern-JS-Modules-Tooling\starter\dist\index.30ba2b9c.js133670022548546880 0
 170D:\Web Development\2. Jonas Schemedtmann\complete-javascript-course\17-Modern-JS-Modules-Tooling\starter\node_modules\caniuse-lite\data\features\scrollintoviewifneeded.js133669982885969417 0
 152D:\Web Development\2. Jonas Schemedtmann\complete-javascript-course\17-Modern-JS-Modules-Tooling\starter\node_modules\caniuse-lite\data\features\sdch.js133669982885999428 0
 161D:\Web Development\2. Jonas Schemedtmann\complete-javascript-course\17-Modern-JS-Modules-Tooling\starter\node_modules\caniuse-lite\data\features\selection-api.js133669982886039413 0
@@ -4157,6 +4156,7 @@
 150D:\Web Development\2. Jonas Schemedtmann\complete-javascript-course\17-Modern-JS-Modules-Tooling\starter\node_modules\@swc\helpers\_\_write_only_error133669982840012509 1
 164D:\Web Development\2. Jonas Schemedtmann\complete-javascript-course\17-Modern-JS-Modules-Tooling\starter\node_modules\@swc\helpers\_\_wrap_native_super\package.json133669982840002506 0
 136D:\Web Development\2. Jonas Schemedtmann\complete-javascript-course\17-Modern-JS-Modules-Tooling\starter\node_modules\@swc\core\spack.js133669983007008696 0
+127D:\Web Development\2. Jonas Schemedtmann\complete-javascript-course\17-Modern-JS-Modules-Tooling\starter\dist\index.fe4ee265.js133670046441538193 0
 167D:\Web Development\2. Jonas Schemedtmann\complete-javascript-course\17-Modern-JS-Modules-Tooling\starter\node_modules\@swc\helpers\_\_wrap_async_generator\package.json133669982839982516 0
 152D:\Web Development\2. Jonas Schemedtmann\complete-javascript-course\17-Modern-JS-Modules-Tooling\starter\node_modules\@swc\helpers\_\_using\package.json133669982839962508 0
 174D:\Web Development\2. Jonas Schemedtmann\complete-javascript-course\17-Modern-JS-Modules-Tooling\starter\node_modules\@swc\helpers\esm\_class_static_private_field_spec_set.js133669982835852532 0
@@ -4322,7 +4322,7 @@
 155D:\Web Development\2. Jonas Schemedtmann\complete-javascript-course\17-Modern-JS-Modules-Tooling\starter\node_modules\@swc\helpers\esm\_get_prototype_of.js133669982836092523 0
 154D:\Web Development\2. Jonas Schemedtmann\complete-javascript-course\17-Modern-JS-Modules-Tooling\starter\node_modules\@parcel\core\src\summarizeRequest.js133669983107252889 0
 147D:\Web Development\2. Jonas Schemedtmann\complete-javascript-course\17-Modern-JS-Modules-Tooling\starter\node_modules\@swc\helpers\esm\_identity.js133669982836122521 0
-117D:\Web Development\2. Jonas Schemedtmann\complete-javascript-course\17-Modern-JS-Modules-Tooling\starter\js\script.js133670023203861803 0
+117D:\Web Development\2. Jonas Schemedtmann\complete-javascript-course\17-Modern-JS-Modules-Tooling\starter\js\script.js133670036673013943 0
 147D:\Web Development\2. Jonas Schemedtmann\complete-javascript-course\17-Modern-JS-Modules-Tooling\starter\node_modules\@swc\helpers\esm\_inherits.js133669982836142524 0
 171D:\Web Development\2. Jonas Schemedtmann\complete-javascript-course\17-Modern-JS-Modules-Tooling\starter\node_modules\@parcel\optimizer-svgo\node_modules\svgo\lib\style.js133669983084773029 0
 168D:\Web Development\2. Jonas Schemedtmann\complete-javascript-course\17-Modern-JS-Modules-Tooling\starter\node_modules\@parcel\runtime-js\src\helpers\node\html-loader.js133669982948509292 0
@@ -5056,7 +5056,7 @@
 195D:\Web Development\2. Jonas Schemedtmann\complete-javascript-course\17-Modern-JS-Modules-Tooling\starter\node_modules\@parcel\optimizer-htmlnano\node_modules\svgo\plugins\moveElemsAttrsToGroup.js133669983083633042 0
 195D:\Web Development\2. Jonas Schemedtmann\complete-javascript-course\17-Modern-JS-Modules-Tooling\starter\node_modules\@parcel\optimizer-htmlnano\node_modules\svgo\plugins\moveGroupAttrsToElems.js133669983083643062 0
 183D:\Web Development\2. Jonas Schemedtmann\complete-javascript-course\17-Modern-JS-Modules-Tooling\starter\node_modules\@parcel\optimizer-htmlnano\node_modules\svgo\plugins\prefixIds.js133669983083743060 0
-120D:\Web Development\2. Jonas Schemedtmann\complete-javascript-course\17-Modern-JS-Modules-Tooling\starter\dist\index.html133670024063560538 0
+120D:\Web Development\2. Jonas Schemedtmann\complete-javascript-course\17-Modern-JS-Modules-Tooling\starter\dist\index.html133670046441538193 0
 164D:\Web Development\2. Jonas Schemedtmann\complete-javascript-course\17-Modern-JS-Modules-Tooling\starter\node_modules\@parcel\core\test\fixtures\parcel\package.json133669983113122310 0
 179D:\Web Development\2. Jonas Schemedtmann\complete-javascript-course\17-Modern-JS-Modules-Tooling\starter\node_modules\@parcel\optimizer-htmlnano\node_modules\svgo\lib\svgo-node.js133669983084283098 0
 200D:\Web Development\2. Jonas Schemedtmann\complete-javascript-course\17-Modern-JS-Modules-Tooling\starter\node_modules\@parcel\optimizer-htmlnano\node_modules\svgo\plugins\removeAttributesBySelector.js133669983083773048 0
@@ -5207,7 +5207,6 @@
 191D:\Web Development\2. Jonas Schemedtmann\complete-javascript-course\17-Modern-JS-Modules-Tooling\starter\node_modules\@parcel\optimizer-htmlnano\node_modules\css-tree\lib\syntax\config\mix.js133669983093307916 0
 194D:\Web Development\2. Jonas Schemedtmann\complete-javascript-course\17-Modern-JS-Modules-Tooling\starter\node_modules\@parcel\optimizer-htmlnano\node_modules\css-tree\lib\syntax\config\parser.js133669983118792890 0
 197D:\Web Development\2. Jonas Schemedtmann\complete-javascript-course\17-Modern-JS-Modules-Tooling\starter\node_modules\@parcel\optimizer-htmlnano\node_modules\css-tree\lib\syntax\atrule\font-face.js133669983088289651 0
-131D:\Web Development\2. Jonas Schemedtmann\complete-javascript-course\17-Modern-JS-Modules-Tooling\starter\dist\index.30ba2b9c.js.map133670022548766860 0
 194D:\Web Development\2. Jonas Schemedtmann\complete-javascript-course\17-Modern-JS-Modules-Tooling\starter\node_modules\@parcel\optimizer-htmlnano\node_modules\css-tree\lib\syntax\atrule\import.js133669983088469637 0
 193D:\Web Development\2. Jonas Schemedtmann\complete-javascript-course\17-Modern-JS-Modules-Tooling\starter\node_modules\@parcel\optimizer-htmlnano\node_modules\css-tree\lib\syntax\atrule\index.js133669983088599611 0
 193D:\Web Development\2. Jonas Schemedtmann\complete-javascript-course\17-Modern-JS-Modules-Tooling\starter\node_modules\@parcel\optimizer-htmlnano\node_modules\css-tree\lib\syntax\atrule\media.js133669983093247906 0
@@ -5538,7 +5537,7 @@
 164D:\Web Development\2. Jonas Schemedtmann\complete-javascript-course\17-Modern-JS-Modules-Tooling\starter\node_modules\.bin\node-gyp-build-optional-packages-test.ps1133669986102146056 0
 159D:\Web Development\2. Jonas Schemedtmann\complete-javascript-course\17-Modern-JS-Modules-Tooling\starter\node_modules\.bin\node-gyp-build-optional-packages.cmd133669986102516063 0
 159D:\Web Development\2. Jonas Schemedtmann\complete-javascript-course\17-Modern-JS-Modules-Tooling\starter\node_modules\.bin\node-gyp-build-optional-packages.ps1133669986102516063 0
-131D:\Web Development\2. Jonas Schemedtmann\complete-javascript-course\17-Modern-JS-Modules-Tooling\starter\dist\index.4de9b498.js.map133670023207921787 0
+131D:\Web Development\2. Jonas Schemedtmann\complete-javascript-course\17-Modern-JS-Modules-Tooling\starter\dist\index.4de9b498.js.map133670046083377719 0
 133D:\Web Development\2. Jonas Schemedtmann\complete-javascript-course\17-Modern-JS-Modules-Tooling\starter\node_modules\.bin\parcel.ps1133669986102136050 0
 129D:\Web Development\2. Jonas Schemedtmann\complete-javascript-course\17-Modern-JS-Modules-Tooling\starter\node_modules\.bin\semver133669986102526058 0
 145D:\Web Development\2. Jonas Schemedtmann\complete-javascript-course\17-Modern-JS-Modules-Tooling\starter\node_modules\.bin\update-browserslist-db133669986102566054 0
@@ -5548,6 +5547,5 @@
 130D:\Web Development\2. Jonas Schemedtmann\complete-javascript-course\17-Modern-JS-Modules-Tooling\starter\images\2. ES6 Modules.png133669632395049945 0
 149D:\Web Development\2. Jonas Schemedtmann\complete-javascript-course\17-Modern-JS-Modules-Tooling\starter\images\5. Imperative vs Declarative Code.png133669635675852963 0
 152D:\Web Development\2. Jonas Schemedtmann\complete-javascript-course\17-Modern-JS-Modules-Tooling\starter\images\6. Functional Programming Principles.png133669636793873235 0
-127D:\Web Development\2. Jonas Schemedtmann\complete-javascript-course\17-Modern-JS-Modules-Tooling\starter\dist\index.746e081f.js133670024063580521 0
-131D:\Web Development\2. Jonas Schemedtmann\complete-javascript-course\17-Modern-JS-Modules-Tooling\starter\dist\index.746e081f.js.map133670024063950605 0
+131D:\Web Development\2. Jonas Schemedtmann\complete-javascript-course\17-Modern-JS-Modules-Tooling\starter\dist\index.fe4ee265.js.map133670046441708158 0
 126D:\Web Development\2. Jonas Schemedtmann\complete-javascript-course\17-Modern-JS-Modules-Tooling\starter\.vscode\settings.json133669925266193525 0

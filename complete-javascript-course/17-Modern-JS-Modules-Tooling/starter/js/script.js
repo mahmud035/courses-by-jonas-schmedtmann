@@ -3,7 +3,6 @@
 // Importing modules
 // import cloneDeep from '../node_modules/lodash-es/cloneDeep.js';
 
-import cloneDeep from 'lodash-es';
 import message, {
   addToCart,
   cart,
@@ -88,18 +87,22 @@ import message, {
 //* Introduction to NPM
 //* Bundling With Parcel and NPM Script
 
-const state = {
-  cart: [
-    { product: 'bread', quantity: 5 },
-    { product: 'pizza', quantity: 5 },
-  ],
-  user: { isLoggedIn: true },
-};
+/* 
+{
+  const state = {
+    cart: [
+      { product: 'bread', quantity: 5 },
+      { product: 'pizza', quantity: 5 },
+    ],
+    user: { isLoggedIn: true },
+  };
 
-// const stateClone = { ...state };
-// state.user.isLoggedIn = false;
-// console.log(stateClone);
+  // const stateClone = { ...state };
+  // state.user.isLoggedIn = false;
+  // console.log(stateClone);
 
-const stateDeepClone = cloneDeep(state);
-state.user.isLoggedIn = false;
-console.log(stateDeepClone.__wrapped__);
+  const stateDeepClone = cloneDeep(state);
+  state.user.isLoggedIn = false;
+  console.log(stateDeepClone.__wrapped__);
+}
+ */
