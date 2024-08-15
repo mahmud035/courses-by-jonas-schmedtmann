@@ -1,4 +1,4 @@
-// https://forkify-api.herokuapp.com/v2
+// Live link: https://forkify-api.herokuapp.com/v2
 
 const recipeContainer = document.querySelector('.recipe');
 
