@@ -1,4 +1,5 @@
-// API url: https://forkify-api.herokuapp.com/v2
+// API: https://forkify-api.herokuapp.com/v2
+// 2a446002-7d1a-4f80-924c-a17d4c94744a
 
 import * as model from './model.js';
 import recipeView from './views/recipeView.js';
