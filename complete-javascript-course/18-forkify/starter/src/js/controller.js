@@ -4,14 +4,6 @@
 import * as model from './model.js';
 import recipeView from './views/recipeView.js';
 
-const timeout = (s) => {
-  return new Promise((_, reject) => {
-    setTimeout(() => {
-      reject(new Error(`Request took too long! Timeout after ${s} seconds`));
-    }, s * 1000);
-  });
-};
-
 const controlRecipes = async () => {
   try {
     const recipeId = location.hash.slice(1);
