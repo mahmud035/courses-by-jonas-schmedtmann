@@ -22,5 +22,7 @@ const controlRecipes = async () => {
   }
 };
 
-window.addEventListener('load', controlRecipes);
-window.addEventListener('hashchange', controlRecipes);
+const init = () => {
+  recipeView.addHandlerRender(controlRecipes);
+};
+init();
