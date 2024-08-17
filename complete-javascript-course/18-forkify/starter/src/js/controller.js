@@ -3,6 +3,7 @@
 
 import * as model from './model.js';
 import recipeView from './views/recipeView.js';
+import searchView from './views/searchView.js';
 
 const controlRecipes = async () => {
   try {
@@ -22,7 +23,25 @@ const controlRecipes = async () => {
   }
 };
 
+const controlSearchResults = async () => {
+  try {
+    // 1. Get search query
+    const query = searchView.getQuery();
+
+    if (!query) return;
+
+    // 2. Load search results
+    await model.loadSearchResult(query);
+
+    // 3. Render results
+    console.log(model.state.search);
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 const init = () => {
   recipeView.addHandlerRender(controlRecipes);
+  searchView.addHandlerSearch(controlSearchResults);
 };
 init();
