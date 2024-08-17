@@ -23,6 +23,6 @@ export const loadRecipe = async (recipeId) => {
       cookingTime: recipe.cooking_time,
     };
   } catch (error) {
-    console.error(error);
+    throw error;
   }
 };
