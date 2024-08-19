@@ -9,6 +9,7 @@ export const state = {
     page: 1,
     resultsPerPage: RES_PER_PAGE,
   },
+  bookmarks: [],
 };
 
 export const loadRecipe = async (recipeId) => {
