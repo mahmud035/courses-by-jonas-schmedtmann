@@ -29,7 +29,7 @@ export default class View {
       // Updates changed TEXT
       if (
         !newEl.isEqualNode(currEl) &&
-        newEl.firstChild.nodeValue.trim() !== ''
+        newEl.firstChild?.nodeValue.trim() !== ''
       ) {
         currEl.textContent = newEl.textContent;
       }

@@ -28,6 +28,10 @@ export const loadRecipe = async (recipeId) => {
       sourceUrl: recipe.source_url,
       cookingTime: recipe.cooking_time,
     };
+
+    if (state.bookmarks.some((bookmark) => bookmark.id === recipe.id))
+      state.recipe.bookmarked = true;
+    else state.recipe.bookmarked = false;
   } catch (error) {
     throw error;
   }
@@ -47,6 +51,7 @@ export const loadSearchResult = async (query) => {
         image: recipe.image_url,
       };
     });
+    state.search.page = 1;
   } catch (error) {
     throw error;
   }
@@ -69,4 +74,21 @@ export const updateServings = (newServings) => {
   });
 
   state.recipe.servings = newServings;
+};
+
+export const addBookmark = (recipe) => {
+  // Add bookmark
+  state.bookmarks.push(recipe);
+
+  // Mark current recipe as bookmarked
+  if (recipe.id === state.recipe.id) state.recipe.bookmarked = true;
+};
+
+export const deleteBookmark = (id) => {
+  // Delete bookmark
+  const index = state.bookmarks.findIndex((el) => el.id === id);
+  state.bookmarks.splice(index, 1);
+
+  // Mark current recipe as NOT bookmarked
+  if (id === state.recipe.id) state.recipe.bookmarked = false;
 };
