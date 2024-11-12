@@ -290,14 +290,29 @@ const books = [
   // console.log(bookRating);
 
   // 2.6
-  const printBookInfo = ({ title, author, year = 'year unknown' }) =>
-    console.log(`${title} by ${author}, ${year}`);
+  // const printBookInfo = ({ title, author, year = 'year unknown' }) =>
+  //   console.log(`${title} by ${author}, ${year}`);
 
-  printBookInfo({
-    title: 'Algorithms',
-    author: 'Robert Sedgewick',
-    year: '2011',
-  });
+  // printBookInfo({
+  //   title: 'Algorithms',
+  //   author: 'Robert Sedgewick',
+  //   year: '2011',
+  // });
 
-  printBookInfo({ title: 'Algorithms', author: 'Robert Sedgewick' });
+  // printBookInfo({ title: 'Algorithms', author: 'Robert Sedgewick' });
+}
+
+//* The Spread Operator
+{
+  // 3.1
+  const bookAuthors = [...books[0].author, ...books[1].author];
+
+  // console.log(bookAuthors);
+
+  // 3.2
+  const spellWord = (str) => console.log(str.split('').join(' '));
+  const spellWord2 = (str) => console.log(...str);
+
+  spellWord('JavaScript');
+  spellWord2('JavaScript');
 }
