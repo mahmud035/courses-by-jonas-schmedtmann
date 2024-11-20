@@ -361,3 +361,20 @@ const books = [
   //     console.log(`"${book.title}" provides no data about its online content`);
   // });
 }
+
+//* Logical Assignments Operators (||=, &&=, ??=)
+{
+  // 7.1
+  books.forEach((book) => {
+    book.edition ||= 1;
+  });
+
+  // console.log(books);
+
+  // 7.2
+  books.forEach((book) => {
+    book.highlighted &&= !(book.thirdParty.goodreads.rating < 4.2);
+  });
+
+  // console.log(books);
+}
