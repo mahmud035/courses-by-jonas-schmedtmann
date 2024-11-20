@@ -378,3 +378,31 @@ const books = [
 
   // console.log(books);
 }
+
+//* Looping Arrays: The for-of Loop
+{
+  // 8.1
+  let pageSum = 0;
+
+  for (const book of books) {
+    pageSum += book.pages;
+  }
+
+  // console.log(pageSum);
+
+  // 8.2
+  const allAuthors = [];
+
+  for (const book of books) {
+    Array.isArray(book.author)
+      ? allAuthors.push(...book.author)
+      : allAuthors.push(book.author);
+  }
+
+  // console.log(allAuthors);
+
+  // 8.3
+  // for (const [index, author] of allAuthors.entries()) {
+  //   console.log(`${index + 1}. ${author}`);
+  // }
+}
