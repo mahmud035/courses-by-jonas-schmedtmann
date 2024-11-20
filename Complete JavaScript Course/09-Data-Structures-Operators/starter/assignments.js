@@ -335,3 +335,29 @@ const books = [
 
   // printBookAuthorsCount('Algorithms', 'Robert Sedgewick', 'Kevin Wayne');
 }
+
+//* Short Circuiting (&& and ||)
+{
+  // 5.1
+  const hasExamplesInJava = (book) =>
+    book.programmingLanguage?.split(' ').includes('Java') ||
+    'no data available';
+
+  // console.log(hasExamplesInJava(books[0]));
+  // console.log(hasExamplesInJava(books[1]));
+
+  // 5.2
+  // books.forEach((book) => {
+  //   book.onlineContent &&
+  //     console.log(`"${book.title}" provides online content`);
+  // });
+}
+
+//* The Nullish Coalescing Operator (??)
+{
+  // 6.1
+  // books.forEach((book) => {
+  //   book.onlineContent ??
+  //     console.log(`"${book.title}" provides no data about its online content`);
+  // });
+}
