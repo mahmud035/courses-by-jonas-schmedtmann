@@ -406,3 +406,7 @@ const books = [
   //   console.log(`${index + 1}. ${author}`);
   // }
 }
+
+//* Enhanced Object Literals
+{
+}
