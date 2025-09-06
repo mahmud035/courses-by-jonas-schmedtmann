@@ -2,31 +2,34 @@
 
 //* Lecture 2: Hello World!
 
-console.log('Hello World!');
+{
+  console.log('Hello World!');
 
-const javascript = 'amazing';
-if (javascript === 'amazing') console.log(`Let's learn JavaScript!`);
+  const javascript = 'amazing';
+  if (javascript === 'amazing') console.log(`Let's learn JavaScript!`);
 
-// We can also do math
-40 + 8 + 23 - 10; // 61
+  // We can also do math
+  40 + 8 + 23 - 10; // 61
 
-// Store results in variables
-const totalHours = 40 + 8 + 23 - 10;
-console.log(totalHours); // 61
+  // Store results in variables
+  const totalHours = 40 + 8 + 23 - 10;
+  console.log(totalHours); // 61
+}
 
 //* Lecture 5: Values and Variables
 
-// Values
-console.log('Jonas'); // String value
-console.log(23); // Number value
-console.log(23 + 7); // Expression creating a new value (30)
+{
+  // Values
+  console.log('Jonas'); // String value
+  console.log(23); // Number value
+  console.log(23 + 7); // Expression creating a new value (30)
 
-// Storing values in variables
-const userName = 'Jonas';
-console.log(userName);
-console.log(userName);
+  // Storing values in variables
+  const userName = 'Jonas';
+  console.log(userName);
+  console.log(userName);
 
-/*
+  /*
 When naming variables, follow these rules:
  - Use camelCase (first word lowercase, subsequent words capitalized)
  - Names can contain letters, numbers, underscores, or $ signs
@@ -35,90 +38,97 @@ When naming variables, follow these rules:
  - Variable names should be descriptive
 */
 
-// Valid variable names
-let _age = 26;
-let $name = 'Jonas';
-let myFirstJob = 'Programmer'; // Descriptive - good!
+  // Valid variable names
+  let _age = 26;
+  let $name = 'Jonas';
+  let myFirstJob = 'Programmer'; // Descriptive - good!
 
-// Invalid variable names
-// let 3years = 3; // Cannot start with a number
-// let jonas& matilda = 'JM'; // No special characters like &
-// let new = 27; // Cannot use reserved keyword
+  // Invalid variable names
+  // let 3years = 3; // Cannot start with a number
+  // let jonas& matilda = 'JM'; // No special characters like &
+  // let new = 27; // Cannot use reserved keyword
 
-// Less descriptive - avoid
-let job1 = 'Programmer';
-let job2 = 'Teacher';
+  // Less descriptive - avoid
+  let job1 = 'Programmer';
+  let job2 = 'Teacher';
+}
 
 //* Lecture 6: Data Types
 
-// Different data types
-let javascriptIsFun = true; // Boolean
-console.log(typeof javascriptIsFun); // "boolean"
-console.log(typeof 23); // "number"
-console.log(typeof 'Jonas'); // "string"
+{
+  // Different data types
+  let javascriptIsFun = true; // Boolean
+  console.log(typeof javascriptIsFun); // "boolean"
+  console.log(typeof 23); // "number"
+  console.log(typeof 'Jonas'); // "string"
 
-// Dynamic typing in action - type can change
-javascriptIsFun = 'YES!';
-console.log(typeof javascriptIsFun); // Now "string"
+  // Dynamic typing in action - type can change
+  javascriptIsFun = 'YES!';
+  console.log(typeof javascriptIsFun); // Now "string"
 
-// Undefined type
-let year; // Value is undefined
-console.log(year); // undefined
-console.log(typeof year); // "undefined
+  // Undefined type
+  let year; // Value is undefined
+  console.log(year); // undefined
+  console.log(typeof year); // "undefined
 
-// Later define the variable
-year = 1991;
-console.log(typeof year); // Now "number"
+  // Later define the variable
+  year = 1991;
+  console.log(typeof year); // Now "number"
 
-// NOTE: typeof null returns "object" - this is a known JavaScript bug!
-console.log(typeof null); // "object" (should be "null")
+  // NOTE: typeof null returns "object" - this is a known JavaScript bug!
+  console.log(typeof null); // "object" (should be "null")
+}
 
 //* Lecture 7: Let, Const, and Var
 
-// 1. `let` - for variables that can change (mutable)
-let age = 30;
-age = 31; // Reassigning is allowed
+{
+  // 1. `let` - for variables that can change (mutable)
+  let age = 30;
+  age = 31; // Reassigning is allowed
 
-let name; // Can declare without initializing
+  let name; // Can declare without initializing
 
-// 2. `const` - for variables that shouldn't change (immutable)
-const birthYear = 1991;
-// birthYear = 1990; // Error: Assignment to constant variable
-// const job; // Error: Missing initializer in const declaration
+  // 2. `const` - for variables that shouldn't change (immutable)
+  const birthYear = 1991;
+  // birthYear = 1990; // Error: Assignment to constant variable
+  // const job; // Error: Missing initializer in const declaration
 
-// 3. `var` - old way of defining variables (avoid using)
-var job = 'Programmer';
-job = 'Teacher'; // Can be reassigned like let
+  // 3. `var` - old way of defining variables (avoid using)
+  var job = 'Programmer';
+  job = 'Teacher'; // Can be reassigned like let
+}
 
 //* Lecture 8: Basic Operators
 
-// Math operators
-const now = 2037;
-const ageJonas = now - 1991; // 46
-const ageSarah = now - 2018; // 19
-console.log(ageJonas, ageSarah);
+{
+  // Math operators
+  const now = 2037;
+  const ageJonas = now - 1991; // 46
+  const ageSarah = now - 2018; // 19
+  console.log(ageJonas, ageSarah);
 
-console.log(ageJonas * 2); // 92
-console.log(ageJonas / 10); // 4.6
-console.log(2 ** 3); // 2³ = 8 (Exponentiation)
+  console.log(ageJonas * 2); // 92
+  console.log(ageJonas / 10); // 4.6
+  console.log(2 ** 3); // 2³ = 8 (Exponentiation)
 
-// Concatenation with + operator
-const firstName = 'Jonas';
-const lastName = 'Schmedtmann';
-console.log(`${firstName} ${lastName}`); // "Jonas Schmedtmann"
+  // Concatenation with + operator
+  const firstName = 'Jonas';
+  const lastName = 'Schmedtmann';
+  console.log(`${firstName} ${lastName}`); // "Jonas Schmedtmann"
 
-// Assignment operators
-let x = 10 + 5; // 15
-x += 10; // x = x + 10 = 25
-x *= 4; // x = x * 4 = 100
-x++; // x = x + 1 = 101
-x--; // x = x - 1 = 100
-console.log(x); // 100
+  // Assignment operators
+  let x = 10 + 5; // 15
+  x += 10; // x = x + 10 = 25
+  x *= 4; // x = x * 4 = 100
+  x++; // x = x + 1 = 101
+  x--; // x = x - 1 = 100
+  console.log(x); // 100
 
-// Comparison operators (return boolean values)
-console.log(ageJonas > ageSarah); // true
-console.log(ageSarah >= 18); // true
-console.log(now - 1991 > now - 2018); // true
+  // Comparison operators (return boolean values)
+  console.log(ageJonas > ageSarah); // true
+  console.log(ageSarah >= 18); // true
+  console.log(now - 1991 > now - 2018); // true
+}
 
 //* Lecture 9: Operator Precedence
 
