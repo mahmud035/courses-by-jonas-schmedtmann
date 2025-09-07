@@ -43,7 +43,7 @@
         ? `Koalas win (${avgKoalas} vs. ${avgDolphins})`
         : `No team wins...`;
 
-    // console.log(winner);
+    console.log(winner);
   };
 
   checkWinner(scoreDolphins, scoreKoalas);
