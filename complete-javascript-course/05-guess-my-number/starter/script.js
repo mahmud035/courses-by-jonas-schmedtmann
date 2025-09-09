@@ -1,5 +1,6 @@
 'use strict';
 
+// Select elements
 const messageElement = document.querySelector('.message');
 const numberElement = document.querySelector('.number');
 const checkButton = document.querySelector('.check');
@@ -7,7 +8,7 @@ const againButton = document.querySelector('.again');
 const scoreElement = document.querySelector('.score');
 const highScoreElement = document.querySelector('.highscore');
 
-// utility function
+// Utility functions
 const generateRandomNumber = () => {
   return Math.ceil(Math.random() * 20); // between 1 to 20
 };
@@ -24,7 +25,7 @@ const displayHighScore = (highScore) => {
   highScoreElement.textContent = highScore;
 };
 
-// variables
+// Global Variables
 let secretNumber = generateRandomNumber();
 let score = 20;
 let highScore = 0;
@@ -81,7 +82,7 @@ againButton.addEventListener('click', () => {
   document.querySelector('.guess').value = '';
   numberElement.textContent = '?';
   numberElement.style.width = '15rem';
-  document.body.style.backgroundColor = '#222';
+  document.body.style.backgroundColor = '#081215';
   checkButton.disabled = false;
   checkButton.style.cursor = 'pointer';
 });
