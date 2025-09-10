@@ -1,5 +1,6 @@
 'use strict';
 
+// Selecting elements
 const showModalButtons = document.querySelectorAll('.show-modal');
 const modalElement = document.querySelector('.modal');
 const overlayElement = document.querySelector('.overlay');

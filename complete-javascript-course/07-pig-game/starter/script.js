@@ -7,7 +7,7 @@ const holdButton = document.querySelector('.btn--hold');
 const playerSections = document.querySelectorAll('.player');
 const diceImage = document.querySelector('.dice');
 
-// playing state variable
+// Playing state variable
 let playing = true;
 
 // NOTE: Get active player's (id, current--id & score--id) also inactive player's (score--id).
@@ -30,6 +30,7 @@ const getId = () => {
   };
 };
 
+// Utility functions
 // Get current-score and (total) score
 const getScore = (Id) => {
   const score = Number(document.getElementById(Id).textContent);
