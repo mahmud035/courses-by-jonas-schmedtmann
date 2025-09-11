@@ -178,7 +178,7 @@
 
   // Output: 1, 4, 3, 2
   // Event loop manages the execution order!
-
+  f;
   // Runtime Environment Comparison:
   // Browser Runtime: Includes DOM, BOM, Fetch API, etc.
 
