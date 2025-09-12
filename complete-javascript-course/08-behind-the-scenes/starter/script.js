@@ -191,3 +191,59 @@
   // DOM manipulation
   document.querySelector('.button').addEventListener('click', handleClick);
 }
+
+//* Scope and The Scope Chain
+
+{
+  /*
+  Scope refers to the context in which variables and functions are accessible.
+
+  The scope chain is the mechanism that JavaScript uses to resolve variable names when they are referenced. When a variable is used, JavaScript looks for it in the current scope. If it can't find it, it moves up to the next outer scope, continuing until it reaches the global scope. If the variable isn't found in any scope, a ReferenceError is thrown.
+  */
+
+  const a = 'Jonas';
+  first();
+
+  function first() {
+    const b = 'Hello';
+    second();
+
+    function second() {
+      const c = 'Hi';
+      third();
+    }
+  }
+
+  function third() {
+    const d = 'Hey';
+    console.log(a + b + c + d); // ❌ Reference Error: b, c is not defined
+  }
+
+  // Here, `third()` function will look `b` & `c` variable inside its current scope. As they are not declared inside third()  function, then it will look for global scope. Since b & c also not available in global scope, then a ReferenceError is thrown.
+}
+
+//* Scoping in Practice
+
+{
+  const myName = 'Jonas';
+
+  function first() {
+    const age = 30;
+
+    if (age >= 30) {
+      const decade = 3;
+      var millennial = true;
+    }
+
+    function second() {
+      const job = 'teacher';
+
+      console.log(`${myName} is a ${age}-year old ${job}`);
+      // Jonas is a 30-year old teacher
+    }
+
+    second();
+  }
+
+  first();
+}
