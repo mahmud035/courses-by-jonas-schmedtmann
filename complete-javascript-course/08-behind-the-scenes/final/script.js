@@ -80,7 +80,6 @@ function deleteShoppingCart() {
 
 var x = 1;
 let y = 2;
-const z = 3;
 
 console.log(x === window.x);
 console.log(y === window.y);
@@ -190,6 +189,7 @@ console.log('Me', me);
 // Primitives vs. Objects in Practice
 
 // Primitive types
+const z = 3;
 let lastName = 'Williams';
 let oldLastName = lastName;
 lastName = 'Davis';
