@@ -764,3 +764,68 @@
   // console.log('Before:', jessica);
   // console.log('After:', jessicaClone);
 }
+
+//* Memory Management: Garbage Collection
+
+{
+  // https://claude.ai/share/da854bd8-b7a3-4e5b-ab09-a2d07dd84ed8
+  /*
+  What Is Garbage Collection?
+    Garbage collection is an automatic memory management process that identifies and frees up memory that's no longer being used by your program. Think of it as an automated janitor that cleans up memory "trash" so your application doesn't run out of space.
+
+  How Memory Works First
+    Before we get into GC, you need to understand memory allocation:
+    - Stack Memory: Stores primitive values and function call information. Fast access, automatically managed, limited size.
+    - Heap Memory: Stores objects, arrays, and complex data structures. Larger capacity, but requires garbage collection to manage.
+  */
+
+  // When you create an object in JavaScript:
+
+  const user = { name: 'Alex', role: 'developer' }; // Allocated in Heap
+  const count = 42; // Stored on Stack
+
+  /*
+  Core Garbage Collection Algorithms
+
+  Mark and Sweep (Modern Standard)
+    This is what V8 (Node.js/Chrome) primarily uses. It works in two phases:
+
+    - Mark Phase: Starting from "root" objects (global variables, currently executing functions), traverse all reachable objects and mark them as "alive."
+    - Sweep Phase: Go through all memory and free anything that wasn't marked.
+  */
+
+  // Root objects (reachable)
+  global.appConfig = { version: '1.0' };
+  const activeUsers = []; // Currently in scope
+
+  function processUser() {
+    const tempData = {
+      /* large object */
+    }; // Will be GC'd when function ends
+    // ... processing
+  }
+  // tempData becomes unreachable after function exits
+
+  // Real-World Warning Signs
+  // Watch out for these patterns that can cause GC issues:
+
+  // 1. Closures holding large objects:
+  function createHandler(largeData) {
+    return function (req, res) {
+      // largeData is captured even if not used!
+      res.json({ message: 'Hello' });
+    };
+  }
+
+  // 2. Event listeners not cleaned up:
+  document.addEventListener('scroll', heavyScrollHandler);
+  // Missing: document.removeEventListener('scroll', heavyScrollHandler);
+
+  // 3. Timers keeping references:
+  const users = [];
+  // setInterval(() => {
+  //   console.log(`Active users: ${users.length}`); // users never released
+  // }, 1000);
+
+  // The bottom line? Understanding garbage collection isn't just theoretical – it directly impacts your application's performance, scalability, and user experience. When you're building React frontend that handle large datasets or Node.js APIs that process thousands of requests, proper memory management becomes the difference between a snappy app and one that crashes under load.
+}
