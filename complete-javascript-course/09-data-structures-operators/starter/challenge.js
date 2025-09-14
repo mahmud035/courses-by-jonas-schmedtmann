@@ -297,11 +297,32 @@ Afterwards, test with your own test data!
 GOOD LUCK 😀
 */
 
-document.body.append(document.createElement('textarea'));
-document.body.append(document.createElement('button'));
+{
+  document.body.append(document.createElement('textarea'));
+  document.body.append(document.createElement('button'));
 
-document.querySelector('button').addEventListener('click', () => {
-  const textareaValue = document.querySelector('textarea').value;
-  const lines = textareaValue.split('\n');
-  console.log(lines);
-});
+  document.querySelector('button').addEventListener('click', () => {
+    const text = document.querySelector('textarea').value;
+
+    text.split('\n').forEach((words, index) => {
+      const [first, second] = words.toLowerCase().trim().split('_');
+      const output = `${first}${second
+        .at(0)
+        .toUpperCase()
+        .concat(second.slice(1))}`;
+
+      console.log(`${output.padEnd(20)}${'✅'.repeat(index + 1)}`);
+    });
+  });
+}
+
+// Logic Breakdown
+const words = 'Some_Variable'.toLowerCase().trim().split('_');
+const firstWord = words.at(0);
+const lastWord = words.at(1);
+const output = `${firstWord}${lastWord
+  .at(0)
+  .toUpperCase()
+  .concat(lastWord.slice(1))}`;
+
+console.log(output);
