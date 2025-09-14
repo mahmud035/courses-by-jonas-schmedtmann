@@ -20,7 +20,8 @@ TEST DATA FOR 6: Use players 'Davies', 'Muller', 'Lewandowski' and 'Kimmich'. Th
 GOOD LUCK 😀
 */
 
-/* const game = {
+/* 
+const game = {
   team1: 'Bayern Munich',
   team2: 'Borrussia Dortmund',
   players: [
@@ -227,7 +228,8 @@ Let's continue with our football betting app! This time, we have a map with a lo
 GOOD LUCK 😀
 */
 
-/* const gameEvents = new Map([
+/* 
+const gameEvents = new Map([
   [17, '⚽️ GOAL'],
   [36, '🔁 Substitution'],
   [47, '⚽️ GOAL'],
@@ -264,7 +266,7 @@ for (const [key, value] of gameEvents) {
     console.log(`[SECOND HALF] ${key}: ${value}`);
   }
 }
- */
+*/
 
 //* Coding Challenge #4
 
@@ -297,24 +299,23 @@ Afterwards, test with your own test data!
 GOOD LUCK 😀
 */
 
-{
-  document.body.append(document.createElement('textarea'));
-  document.body.append(document.createElement('button'));
+/* 
+document.body.append(document.createElement('textarea'));
+document.body.append(document.createElement('button'));
 
-  document.querySelector('button').addEventListener('click', () => {
-    const text = document.querySelector('textarea').value;
+document.querySelector('button').addEventListener('click', () => {
+  const text = document.querySelector('textarea').value;
 
-    text.split('\n').forEach((words, index) => {
-      const [first, second] = words.toLowerCase().trim().split('_');
-      const output = `${first}${second
-        .at(0)
-        .toUpperCase()
-        .concat(second.slice(1))}`;
+  text.split('\n').forEach((words, index) => {
+    const [first, second] = words.toLowerCase().trim().split('_');
+    const output = `${first}${second
+      .at(0)
+      .toUpperCase()
+      .concat(second.slice(1))}`;
 
-      console.log(`${output.padEnd(20)}${'✅'.repeat(index + 1)}`);
-    });
+    console.log(`${output.padEnd(20)}${'✅'.repeat(index + 1)}`);
   });
-}
+});
 
 // Logic Breakdown
 const words = 'Some_Variable'.toLowerCase().trim().split('_');
@@ -325,4 +326,5 @@ const output = `${firstWord}${lastWord
   .toUpperCase()
   .concat(lastWord.slice(1))}`;
 
-console.log(output);
+// console.log(output);
+ */
