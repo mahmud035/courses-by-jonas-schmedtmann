@@ -28,7 +28,7 @@
 
   HINT: Use many of the tools you learned about in this and the last section 😉
 
-  BONUS: Use the 'displayResults' method to display the 2 arrays in the test data. Use both the 'array' and the 'string' option. Do NOT put the arrays in the poll object! So what should the this keyword look like in this situation?
+  BONUS: Use the 'displayResults' method to display the 2 arrays in the test data. Use both the 'array' and the 'string' option. Do NOT put the arrays in the poll object! So what should the `this` keyword look like in this situation?
 
   BONUS TEST DATA 1: [5, 2, 3]
   BONUS TEST DATA 2: [1, 5, 3, 9, 6, 1]
@@ -36,16 +36,61 @@
   GOOD LUCK 😀
 */
 
+const poll = {
+  question: 'What is your favorite programming language?',
+  options: ['0: JavaScript', '1: Python', '2: Rust', '3: C++'],
+  answers: new Array(4).fill(0), // [0, 0, 0, 0]
+
+  registerNewAnswer() {
+    const message = `${this.question}\n${this.options.join(
+      '\n'
+    )}\n(Write option number)`;
+
+    const input = window.prompt(message);
+    const isInputValid =
+      Number(input) >= 0 &&
+      Number(input) <= 3 &&
+      Number.isInteger(+input) && // Floating number is NOT allowed
+      input !== '';
+
+    if (input === null) return console.log('Vote cancelled by user');
+    if (!isInputValid)
+      return window.alert('Invalid input: Input must be between 0 and 3');
+
+    this.answers[input] = this.answers[input] + 1; // update answers
+    this.displayResults('string');
+  },
+
+  displayResults(type = 'array') {
+    if (type === 'string')
+      return console.log(`Poll results are ${this.answers.join(', ')}`);
+    console.log(this.answers);
+  },
+};
+
+document
+  .querySelector('.poll')
+  .addEventListener('click', () => poll.registerNewAnswer()); // ✅ Modern Approach
+// .addEventListener('click', poll.registerNewAnswer.bind(poll)); // ✅ Using `bind`
+
+poll.displayResults.call({ answers: [5, 2, 3] }, 'string');
+poll.displayResults.call({ answers: [1, 5, 3, 9, 6, 1] }, 'string');
+
+poll.displayResults.call({ answers: [1, 5, 3, 9, 6, 1] });
+
+// [5, 2, 3]
+// [1, 5, 3, 9, 6, 1]
+
 //* Coding Challenge #2
 
 /* 
-This is more of a thinking challenge than a coding challenge 🤓
+  This is more of a thinking challenge than a coding challenge 🤓
 
-Take the IIFE below and at the end of the function, attach an event listener that changes the color of the selected h1 element ('header') to blue, each time the BODY element is clicked. Do NOT select the h1 element again!
+  Take the IIFE below and at the end of the function, attach an event listener that changes the color of the selected h1 element ('header') to blue, each time the BODY element is clicked. Do NOT select the h1 element again!
 
-And now explain to YOURSELF (or someone around you) WHY this worked! Take all the time you need. Think about WHEN exactly the callback function is executed, and what that means for the variables involved in this example.
+  And now explain to YOURSELF (or someone around you) WHY this worked! Take all the time you need. Think about WHEN exactly the callback function is executed, and what that means for the variables involved in this example.
 
-GOOD LUCK 😀
+  GOOD LUCK 😀
 */
 
 /* 

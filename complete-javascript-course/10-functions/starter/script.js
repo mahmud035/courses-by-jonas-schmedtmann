@@ -511,6 +511,8 @@
 //* Immediately Invoked Function Expressions (IIFE)
 
 {
+  // https://chatgpt.com/share/ea9b19a1-5b50-4825-97cd-28763fc05d33
+
   (function () {
     console.log(`This will never run again`);
   })();
@@ -520,45 +522,152 @@
 
 //* Closure
 
+// Claude
 {
+  // https://claude.ai/share/70347a95-d0dc-495f-8689-df9a1f269d44
+
+  // Closures are one of JavaScript's most powerful and fundamental concepts, yet they trip up many developers because they're both elegant and counterintuitive.
+
+  // What's a closure?
+  // A closure is created when an inner function has access to variables from its outer (enclosing) function's scope, even after the outer function has finished executing. The inner function "closes over" these variables, keeping them alive.
+
+  // Here's a classic example:
+
+  function outerFunction(x) {
+    // This is the outer function's scope
+
+    function innerFunction(y) {
+      // Inner function has access to 'x' from outer scope
+      return x + y;
+    }
+
+    return innerFunction; // Return the function, not call it
+  }
+
+  const addFive = outerFunction(5);
+  console.log(addFive(3)); // 8 - 'x' is still 5!
+
+  // The magic here? When `outerFunction` finishes executing, normally its variables would be garbage collected. But because `innerFunction` references `x`, JavaScript keeps that variable alive in a closure.
+
+  console.dir(addFive); // 👁️ See: [[Scopes]] -> Closure
+
+  // Practical applications you'll actually use:
+
+  // 1. Data Privacy (before classes were cool):
+  function createCounter() {
+    let count = 0; // Private variable
+
+    return {
+      increment: () => ++count,
+      decrement: () => --count,
+      getCount: () => count,
+    };
+  }
+
+  const counter = createCounter();
+  counter.increment(); // 1
+  // No way to directly access 'count' from outside
+
+  // 2. Event Handlers with State:
+  function attachListeners() {
+    let clickCount = 0;
+
+    document.addEventListener('click', () => {
+      clickCount++;
+      console.log(`Clicked ${clickCount} times`);
+    });
+  }
+
+  // 3. Function Factories (super useful for your React work):
+  function createValidator(rules) {
+    return function (data) {
+      // `rules` is captured in the closure
+      return rules.every((rule) => rule(data));
+    };
+  }
+
+  const userValidator = createValidator([
+    (user) => user.email.includes('@'),
+    (user) => user.age >= 18,
+  ]);
+
+  // ⁉️ INTERESTING: The gotcha that catches everyone:
+
+  // This doesn't work as expected
+  for (var i = 0; i < 3; i++) {
+    setTimeout(() => console.log(i), 100); // Prints 3, 3, 3
+  }
+
+  // Fix with closure
+  for (let i = 0; i < 3; i++) {
+    setTimeout(() => console.log(i), 100); // Prints 0, 1, 2
+  }
+
+  // With `var`, all callbacks share the same `i` variable. With `let`, each iteration creates a new lexical scope.
+
+  // Why closures matter for your stack:
+
+  // In React, you're using closures constantly without realizing it. Every time you use useState, useEffect, or create event handlers, you're leveraging closures. They're what make hooks work - the closure preserves state between renders.
+
+  // The key insight? Closures aren't just academic concepts - they're the foundation of modern JavaScript patterns, from module systems to React hooks. Master them, and you'll understand why JavaScript behaves the way it does.
+
+  // NOTE: Think of closures as JavaScript's way of giving functions a "memory" - they remember where they came from, even when they're called somewhere else entirely.
+}
+
+// ChatGPT
+{
+  // https://chatgpt.com/share/20399463-0f0d-4cae-81b9-21b54efff12a
+
+  // What is a Closure?
+  // A closure is created when a function is defined inside another function and the inner function references variables from the outer function's scope. The inner function retains access to those variables even after the outer function has finished executing.
+
   function outerFunction() {
     let outerVariable = `I am from the outer scope!`;
 
-    return function innerFunction() {
+    function innerFunction() {
       console.log(outerVariable);
-    };
+    }
+
+    return innerFunction;
   }
 
   const myClosure = outerFunction();
   myClosure(); // Output: I am from the outer scope!
 
+  /*
+  In this example:
+
+  `outerFunction` defines a variable `outerVariable` and an inner function `innerFunction` that references `outerVariable`.
+
+  `outerFunction` returns `innerFunction`.
+
+  Even after `outerFunction` has finished executing, `myClosure` (which is a reference to `innerFunction`) retains access to `outerVariable`.
+  */
+
+  console.dir(myClosure); // 👁️ See: [[Scopes]] -> Closure
+
   // Practical Uses of Closures
+
   // 1. Data Privacy: Closures can be used to create private variables that cannot be accessed directly from outside a function.
 
+  // This method was useful before JS Classes were introduced.
+
   function createCounter() {
-    let count = 0;
+    let count = 0; // Private variable
 
     return {
-      increment: function () {
-        count++;
-        return count;
-      },
-      decrement: function () {
-        count--;
-        return count;
-      },
-      getCount: function () {
-        return count;
-      },
+      increment: () => ++count,
+      decrement: () => --count,
+      getCount: () => count,
     };
   }
 
   const counter = createCounter();
-  console.log(counter.increment()); // Output: 1
-  console.log(counter.getCount()); // Output: 1
-  console.log(counter.decrement()); // Output: 0
+  counter.increment(); // 1
+  // No way to directly access 'count' from outside
 
   // 2. Function Factories: Closures can be used to create functions with preset arguments.
+
   function createGreeting(greeting) {
     return function (name) {
       console.log(`${greeting}, ${name}`);
@@ -572,34 +681,42 @@
   sayHi('Bob'); // Output: Hi, Bob
 
   // 3. Maintaining State: Closures can help maintain state in asynchronous code or loops.
+
   // for (let i = 1; i <= 5; i++) {
   //   setTimeout(() => {
   //     console.log(i); // Outputs: 1, 2, 3, 4, 5
   //   }, i * 1000);
   // }
-  // Without closures (or using var instead of let), all timeout functions would log the same final value.
 
-  const secureBooking = function () {
+  // Without closures (or using var instead of let), all timeout functions would log the same final value.
+}
+
+// Lecture Code
+
+{
+  function secureBooking() {
     let passengerCount = 0;
 
     return function () {
       passengerCount++;
       console.log(`${passengerCount} passengers`);
     };
-  };
+  }
 
   const booker = secureBooking();
-  booker(); // Output: 1 passengers
-  booker(); // Output: 2 passengers
-  booker(); // Output: 3 passengers
 
-  console.dir(booker);
+  booker(); // 1 passengers
+  booker(); // 2 passengers
+  booker(); // 3 passengers
+
+  console.dir(booker); // 👁️ See: [[Scopes]] -> Closure
 }
 
 //* More Closure Examples
 
+// Lecture Code
 {
-  // Example: 1
+  // Example 1
   let f;
 
   const g = function () {
@@ -618,14 +735,14 @@
 
   g();
   f();
-  console.dir(f);
+  console.dir(f); // 👁️ See: [[Scopes]] -> Closure
 
   // Re-assigning f function
   h();
   f();
-  console.dir(f);
+  console.dir(f); // 👁️ See: [[Scopes]] -> Closure
 
-  // Example: 2
+  // Example 2
   const boardPassengers = function (numOfPassengers, wait) {
     const perGroup = numOfPassengers / 3;
 
