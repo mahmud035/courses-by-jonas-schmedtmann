@@ -709,19 +709,49 @@
 }
  */
 
+// Lecture Code
+
+/* 
+{
+  const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+  const lastWithdrawal = movements.findLast((movement) => movement < 0);
+  console.log(lastWithdrawal);
+
+  const latestLargeMovementIndex = movements.findLastIndex(
+    (movement) => Math.abs(movement) > 1000
+  );
+  console.log(
+    `Your largest movement was ${
+      movements.length - latestLargeMovementIndex
+    } movements age`
+  );
+}
+ */
+
 //* `some` and `every` method
 
 /* 
-const array = [1, 2, 3, 4, 5];
+{
+  // https://chatgpt.com/share/209f4d9f-f981-4ef4-bca5-9b305292ea79
 
-const hasEvenNumber = array.some((element) => element % 2 === 0);
-console.log(hasEvenNumber); // Output: true
+  // The `some` method tests whether at least one element in the array passes the test implemented by the provided function. It returns a boolean value.
 
-const allLessThanTen = array.every((element) => element < 10);
-console.log(allLessThanTen); // Output: true
+  const array = [1, 2, 3, 4, 5];
 
-const allEvenNumbers = array.every((element) => element % 2 === 0);
-console.log(allEvenNumbers); // Output: false
+  const hasEvenNumber = array.some((element) => element % 2 === 0);
+  console.log(hasEvenNumber); // Output: true
+
+  // The `every` method tests whether all elements in the array pass the test implemented by the provided function. It returns a boolean value.
+
+  const allLessThanTen = array.every((element) => element < 10);
+  console.log(allLessThanTen); // Output: true
+
+  const allEvenNumbers = array.every((element) => element % 2 === 0);
+  console.log(allEvenNumbers); // Output: false
+
+  // In summary, use `some` when you want to check if at least one element meets a condition, and use `every` when you want to check if all elements meet a condition.
+}
  */
 
 /* 
@@ -735,74 +765,71 @@ const anyDeposits = movements.some((movement) => movement > 0);
 console.log(anyDeposits);
  */
 
-//* flat and flatMap method
+//* `flat` and `flatMap` method
 
 /* 
-let arr1 = [1, 2, [3, 4]];
-console.log(arr1.flat()); // [1, 2, 3, 4]
+{
+  // Basic Example
+  const arr1 = [1, 2, [3, 4]];
+  console.log(arr1.flat()); // [1, 2, 3, 4]
 
-let arr2 = [1, 2, [3, 4, [5, 6]]];
-console.log(arr2.flat()); // [1, 2, 3, 4, [5, 6]]
-console.log(arr2.flat(2)); // [1, 2, 3, 4, 5, 6]; 
-*/
+  const arr2 = [1, 2, [3, 4, [5, 6]]];
+  console.log(arr2.flat()); // [1, 2, 3, 4, [5, 6]]
+  console.log(arr2.flat(2)); // [1, 2, 3, 4, 5, 6];
 
-/* 
-// flat
-const arr = [[1, 2, 3], [4, 5, 6], 7, 8];
-console.log(arr.flat()); // [1, 2, 3, 4, 5, 6, 7, 8]
+  // `flat`
+  const arr = [[1, 2, 3], [4, 5, 6], 7, 8];
+  console.log(arr.flat()); // [1, 2, 3, 4, 5, 6, 7, 8]
 
-const arrDeep = [[[1, 2], 3], [4, [5, 6]], 7, 8];
+  const arrDeep = [[[1, 2], 3], [4, [5, 6]], 7, 8];
 
-console.log(arrDeep.flat()); // [[1, 2], 3, 4, [5, 6], 7, 8]
-console.log(arrDeep.flat(2)); // [1, 2, 3, 4, 5, 6, 7, 8]
+  console.log(arrDeep.flat()); // [[1, 2], 3, 4, [5, 6], 7, 8]
+  console.log(arrDeep.flat(2)); // [1, 2, 3, 4, 5, 6, 7, 8]
 
-const accounts2 = [
-  {
-    owner: 'Jonas Schmedtmann',
-    movements: [200, 450, -400, 3000, -650, -130, 70, 1300],
-    interestRate: 1.2, // %
-    pin: 1111,
-  },
-  {
-    owner: 'Jessica Davis',
-    movements: [5000, 3400, -150, -790, -3210, -1000, 8500, -30],
-    interestRate: 1.5,
-    pin: 2222,
-  },
-  {
-    owner: 'Steven Thomas Williams',
-    movements: [200, -200, 340, -300, -20, 50, 400, -460],
-    interestRate: 0.7,
-    pin: 3333,
-  },
-  {
-    owner: 'Sarah Smith',
-    movements: [430, 1000, 700, 50, 90],
-    interestRate: 1,
-    pin: 4444,
-  },
-];
+  const accounts = [
+    {
+      owner: 'Jonas Schmedtmann',
+      movements: [200, 450, -400, 3000, -650, -130, 70, 1300],
+      interestRate: 1.2, // %
+      pin: 1111,
+    },
+    {
+      owner: 'Jessica Davis',
+      movements: [5000, 3400, -150, -790, -3210, -1000, 8500, -30],
+      interestRate: 1.5,
+      pin: 2222,
+    },
+    {
+      owner: 'Steven Thomas Williams',
+      movements: [200, -200, 340, -300, -20, 50, 400, -460],
+      interestRate: 0.7,
+      pin: 3333,
+    },
+    {
+      owner: 'Sarah Smith',
+      movements: [430, 1000, 700, 50, 90],
+      interestRate: 1,
+      pin: 4444,
+    },
+  ];
 
-// Practical Example: Calculate the overallBalance of all the movements of all the accounts
+  // Practical Example: Calculate the overallBalance of all the movements of all the accounts
 
-// (flat)
-const overallBalance = accounts2
-  .map((account) => account.movements)
-  .flat()
-  .reduce((accumulator, currentValue) => {
-    return accumulator + currentValue;
-  }, 0);
+  // (flat)
+  const overallBalance = accounts
+    .map((account) => account.movements)
+    .flat()
+    .reduce((totalBalance, currentValue) => totalBalance + currentValue, 0);
 
-console.log(overallBalance); // 17840
+  console.log(overallBalance); // 17840
 
-// (flatMap)
-const overallBalance2 = accounts2
-  .flatMap((account) => account.movements)
-  .reduce((accumulator, currentValue) => {
-    return accumulator + currentValue;
-  }, 0);
+  // (flatMap)
+  const overallBalance2 = accounts
+    .flatMap((account) => account.movements)
+    .reduce((totalBalance, currentValue) => totalBalance + currentValue, 0);
 
-console.log(overallBalance2); // 17840
+  console.log(overallBalance2); // 17840
+}
  */
 
 //* Sorting Arrays
