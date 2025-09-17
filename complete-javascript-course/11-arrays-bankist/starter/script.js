@@ -33,7 +33,7 @@ const account4 = {
 
 const accounts = [account1, account2, account3, account4];
 
-// Elements
+// Selecting elements
 const labelWelcome = document.querySelector('.welcome');
 const labelDate = document.querySelector('.date');
 const labelBalance = document.querySelector('.balance__value');

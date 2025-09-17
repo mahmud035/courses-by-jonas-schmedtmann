@@ -2,50 +2,51 @@
 
 //* Simple Array Methods
 
-/* 
-const arr = ['a', 'b', 'c', 'd', 'e'];
+{
+  const arr = ['a', 'b', 'c', 'd', 'e'];
 
-// slice (keep the original array unchanged)
-console.log(arr.slice(2));
-console.log(arr.slice(2, 4));
-console.log(arr.slice(-2));
-console.log(arr.slice(-1));
-console.log(arr.slice(1, -2));
-console.log(arr.slice());
-console.log([...arr]);
+  // slice (keep the original array unchanged)
+  console.log(arr.slice(2)); // ['c', 'd', 'e']
+  console.log(arr.slice(2, 4)); // ['c', 'd']
+  console.log(arr.slice(-2)); // ['d', 'e']
+  console.log(arr.slice(-1)); // ['e']
+  console.log(arr.slice(1, -2)); // ['b', 'c']
+  console.log(arr.slice()); // ['a', 'b', 'c', 'd', 'e']
+  console.log([...arr]); // ['a', 'b', 'c', 'd', 'e']
 
-// splice (mutate original array)
-console.log(arr.splice(-1));
-console.log(arr);
+  // splice (mutate original array)
+  console.log(arr.splice(-1)); // ['e']
+  console.log(arr); // ['a', 'b', 'c', 'd']
 
-// toSpliced (keep the original array unchanged)
-const months = ['Jan', 'Feb', 'Mar', 'Apr'];
-console.log(months.toSpliced(0, 1));
-console.log(months);
+  // toSpliced (keep the original array unchanged)
+  const months = ['Jan', 'Feb', 'Mar', 'Apr'];
+  console.log(months.toSpliced(0, 1)); // ['Feb', 'Mar', 'Apr'];
+  console.log(months); // ['Jan', 'Feb', 'Mar', 'Apr']
 
-// reverse (mutate original array)
-const arr2 = ['j', 'i', 'h', 'g', 'f'];
-console.log(arr2.reverse());
-console.log(arr2);
+  // reverse (mutate original array)
+  const arr2 = ['j', 'i', 'h', 'g', 'f'];
+  console.log(arr2.reverse()); // ['f', 'g', 'h', 'i', 'j']
+  console.log(arr2); // ['f', 'g', 'h', 'i', 'j']
 
-// toReversed (keep the original array unchanged)
-const arr3 = ['j', 'i', 'h', 'g', 'f'];
-console.log(arr3.toReversed());
-console.log(arr3);
+  // toReversed (keep the original array unchanged)
+  const arr3 = ['j', 'i', 'h', 'g', 'f'];
+  console.log(arr3.toReversed()); // ['f', 'g', 'h', 'i', 'j']
+  console.log(arr3); // ['j', 'i', 'h', 'g', 'f']
 
-// concat (keep the original array unchanged)
-const myGirls = ['Cecilie', 'Lone'];
-const myBoys = ['Emil', 'Tobias', 'Linus'];
-const mySiblings = ['Alice', 'Bob'];
+  // concat (keep the original array unchanged)
+  const myGirls = ['Cecilie', 'Lone'];
+  const myBoys = ['Emil', 'Tobias', 'Linus'];
+  const mySiblings = ['Alice', 'Bob'];
 
-const myChildren = myGirls.concat(myBoys, mySiblings);
-console.log(myChildren);
-console.log([...myGirls, ...myBoys, ...mySiblings]); // Using Spread Operator
+  const myChildren = myGirls.concat(myBoys, mySiblings);
+  console.log(myChildren); // ['Cecilie', 'Lone', 'Emil', 'Tobias', 'Linus', 'Alice', 'Bob']
 
-// join (joins all array elements into a string)
-const fruits = ['Banana', 'Orange', 'Apple', 'Mango'];
-console.log(fruits.join(' - '));
- */
+  console.log([...myGirls, ...myBoys, ...mySiblings]); // ['Cecilie', 'Lone', 'Emil', 'Tobias', 'Linus', 'Alice', 'Bob']
+
+  // join (joins all array elements into a string)
+  const fruits = ['Banana', 'Orange', 'Apple', 'Mango'];
+  console.log(fruits.join(' - ')); // Banana - Orange - Apple - Mango
+}
 
 //* The new at Method
 
