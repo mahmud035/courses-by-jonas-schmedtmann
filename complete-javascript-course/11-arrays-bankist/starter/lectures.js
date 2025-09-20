@@ -835,82 +835,248 @@ console.log(anyDeposits);
 //* Sorting Arrays
 
 /* 
-// 1. Sorting Numbers using Compare function
-const numbers = [4, 2, 5, 1, 3];
+{
+  // https://chatgpt.com/share/931754ed-e1b8-4a6d-9aef-79327258d0a6
 
-// Ascending order
-numbers.sort((a, b) => a - b);
-console.log(numbers); // Output: [1, 2, 3, 4, 5]
+  // 1. Sorting Numbers using Compare function
+  const numbers = [4, 2, 5, 1, 3];
 
-// Descending order
-numbers.sort((a, b) => b - a);
-console.log(numbers); // Output: [5, 4, 3, 2, 1]
+  // Ascending order
+  numbers.sort((a, b) => a - b);
+  console.log(numbers); // Output: [1, 2, 3, 4, 5]
 
-// 2. Sorting Strings
-const fruits = ['banana', 'apple', 'cherry', 'date'];
+  // Descending order
+  numbers.sort((a, b) => b - a);
+  console.log(numbers); // Output: [5, 4, 3, 2, 1]
 
-// Ascending order
-fruits.sort();
-console.log(fruits); // Output: ['apple', 'banana', 'cherry', 'date']
+  // 2. Sorting Strings
+  const fruits = ['banana', 'apple', 'cherry', 'date'];
 
-// Descending order
-// fruits.sort((a, b) => b.localeCompare(a));
-fruits.sort().reverse();
-console.log(fruits); // Output: ['date', 'cherry', 'banana', 'apple']
+  // Ascending order
+  fruits.sort();
+  console.log(fruits); // Output: ['apple', 'banana', 'cherry', 'date']
 
-// 3. Custom Sorting
-const items = [
-  { name: 'apple', quantity: 2 },
-  { name: 'banana', quantity: 5 },
-  { name: 'cherry', quantity: 3 },
-];
+  // Descending order
+  // fruits.sort((a, b) => b.localeCompare(a));
+  fruits.sort().reverse();
+  console.log(fruits); // Output: ['date', 'cherry', 'banana', 'apple']
 
-// Sort by quantity in ascending order
-items.sort((a, b) => a.quantity - b.quantity);
-console.log(items);
+  // 3. Custom Sorting
+  // For more complex sorting scenarios, you can create custom comparison functions. For example, sorting objects by a property:
+  const items = [
+    { name: 'apple', quantity: 2 },
+    { name: 'banana', quantity: 5 },
+    { name: 'cherry', quantity: 3 },
+  ];
 
-// Output:
-// [
-//   { name: 'apple', quantity: 2 },
-//   { name: 'cherry', quantity: 3 },
-//   { name: 'banana', quantity: 5 }
-// ]
+  // Sort by quantity in ascending order
+  items.sort((a, b) => a.quantity - b.quantity);
+  console.log(items);
 
-// Sort by name in alphabetical order
-items.sort((a, b) => a.name.localeCompare(b.name));
-console.log(items);
+  // Output:
+  // [
+  //   { name: 'apple', quantity: 2 },
+  //   { name: 'cherry', quantity: 3 },
+  //   { name: 'banana', quantity: 5 }
+  // ]
 
-// Output:
-// [
-//   { name: 'apple', quantity: 2 },
-//   { name: 'banana', quantity: 5 },
-//   { name: 'cherry', quantity: 3 }
-// ]
+  // Sort by name in alphabetical order
+  items.sort((a, b) => a.name.localeCompare(b.name));
+  console.log(items);
+
+  // Output:
+  // [
+  //   { name: 'apple', quantity: 2 },
+  //   { name: 'banana', quantity: 5 },
+  //   { name: 'cherry', quantity: 3 }
+  // ]
+}
  */
 
+// Lecture Code
+
 /* 
-// 1. Sorting Numbers
-const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+{
+  // 1. Sorting Numbers
+  const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
-// Ascending order
-movements.sort((a, b) => a - b);
-console.log(movements); // [-650, -400, -130, 70, 200, 450, 1300, 3000]
+  // Ascending order
+  movements.sort((a, b) => a - b);
+  console.log(movements); // [-650, -400, -130, 70, 200, 450, 1300, 3000]
 
-// Descending order
-movements.sort((a, b) => b - a);
-console.log(movements); // [3000, 1300, 450, 200, 70, -130, -400, -650]
+  // Descending order
+  movements.sort((a, b) => b - a);
+  console.log(movements); // [3000, 1300, 450, 200, 70, -130, -400, -650]
 
-// 2. Sorting Strings
-const owners = ['Jonas', 'Zach', 'Adam', 'Martha'];
+  // 2. Sorting Strings
+  const owners = ['Jonas', 'Zach', 'Adam', 'Martha'];
 
-// Ascending order
-owners.sort();
-console.log(owners); // ['Adam', 'Jonas', 'Martha', 'Zach']
+  // Ascending order
+  owners.sort();
+  console.log(owners); // ['Adam', 'Jonas', 'Martha', 'Zach']
 
-// Descending order
-owners.sort().reverse();
-console.log(owners); // ['Zach', 'Martha', 'Jonas', 'Adam']
-*/
+  // Descending order
+  // owners.sort((a, b) => b.localeCompare(a));
+  owners.sort().reverse();
+  console.log(owners); // ['Zach', 'Martha', 'Jonas', 'Adam']
+}
+ */
+
+//* Array Grouping
+
+// MDN
+
+{
+  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/groupBy
+
+  // Syntax: Object.groupBy(items, callbackFn)
+
+  const inventory = [
+    { name: 'asparagus', type: 'vegetables', quantity: 5 },
+    { name: 'bananas', type: 'fruit', quantity: 0 },
+    { name: 'goat', type: 'meat', quantity: 23 },
+    { name: 'cherries', type: 'fruit', quantity: 5 },
+    { name: 'fish', type: 'meat', quantity: 22 },
+  ];
+
+  const groupByType = Object.groupBy(inventory, (item) => item.type);
+
+  console.log('Group by type:', groupByType);
+
+  // Output:
+  // {
+  //   vegetables: [
+  //     { name: 'asparagus', type: 'vegetables', quantity: 5 },
+  //   ],
+  //   fruit: [
+  //     { name: "bananas", type: "fruit", quantity: 0 },
+  //     { name: "cherries", type: "fruit", quantity: 5 }
+  //   ],
+  //   meat: [
+  //     { name: "goat", type: "meat", quantity: 23 },
+  //     { name: "fish", type: "meat", quantity: 22 }
+  //   ]
+  // }
+
+  // We can also create groups inferred from values in one or more properties of the elements. Below is a very similar example that puts the items into ok or restock groups based on the value of the quantity field.
+
+  const myCallback = (item) => {
+    return item.quantity > 5 ? 'ok' : 'restock';
+  };
+
+  const groupByQuantity = Object.groupBy(inventory, myCallback);
+
+  console.log('Group by quantity:', groupByQuantity);
+
+  // Output:
+  //   {
+  //   restock: [
+  //     { name: "asparagus", type: "vegetables", quantity: 5 },
+  //     { name: "bananas", type: "fruit", quantity: 0 },
+  //     { name: "cherries", type: "fruit", quantity: 5 }
+  //   ],
+  //   ok: [
+  //     { name: "goat", type: "meat", quantity: 23 },
+  //     { name: "fish", type: "meat", quantity: 22 }
+  //   ]
+  // }
+}
+
+// Claude AI
+
+{
+  // 🧠 MUST READ https://claude.ai/share/13c9a1ee-7a35-4d9b-9121-98d22e976261
+  // 👁️ Array Grouping Examples
+
+  // Syntax: Object.groupBy(items, callbackFn)
+
+  // Basic Object.groupBy() example
+  const users = [
+    { name: 'Alice', role: 'admin', active: true },
+    { name: 'Bob', role: 'user', active: false },
+    { name: 'Charlie', role: 'admin', active: true },
+    { name: 'Diana', role: 'user', active: true },
+  ];
+
+  // Group by role
+  const usersByRole = Object.groupBy(users, (user) => user.role);
+
+  console.log('User grouped by their role:', usersByRole);
+
+  // Output:
+  // {
+  //   admin: [
+  //     { name: 'Alice', role: 'admin', active: true },
+  //     { name: 'Charlie', role: 'admin', active: true }
+  //   ],
+  //   user: [
+  //     { name: 'Bob', role: 'user', active: false },
+  //     { name: 'Diana', role: 'user', active: true }
+  //   ]
+  // }
+
+  // Group by active status
+  const usersByStatus = Object.groupBy(users, (user) =>
+    user.active ? 'active' : 'inactive'
+  );
+  console.log('User grouped by their active status:', usersByStatus);
+
+  // More complex grouping - by role and status combined
+  const complexGrouping = Object.groupBy(
+    users,
+    (user) => `${user.role}_${user.active}`
+  );
+  console.log('User grouped by role and status:', complexGrouping);
+
+  //* Practical example: Grouping API responses
+
+  const orders = [
+    { id: 1, status: 'pending', customer: 'Alice', amount: 100 },
+    { id: 2, status: 'completed', customer: 'Bob', amount: 200 },
+    { id: 3, status: 'pending', customer: 'Charlie', amount: 150 },
+    { id: 4, status: 'cancelled', customer: 'Diana', amount: 75 },
+    { id: 5, status: 'completed', customer: 'Alice', amount: 300 },
+  ];
+
+  // Group orders by status for dashboard display
+  const ordersByStatus = Object.groupBy(orders, (order) => order.status);
+
+  // Group orders by customer
+  const ordersByCustomer = Object.groupBy(orders, (order) => order.customer);
+
+  // Calculate totals per group
+  const statusTotals = Object.entries(ordersByStatus).map(
+    ([status, orders]) => ({
+      status,
+      orderCount: orders.length,
+      totalAmount: orders.reduce((sum, order) => sum + order.amount, 0),
+    })
+  );
+
+  console.log('Orders grouped by status:', ordersByStatus);
+  console.log('Orders grouped by customer:', ordersByCustomer);
+  console.log('Orders totals by status:', statusTotals);
+
+  // Advanced example: Multi-level grouping
+  const transactions = [
+    { date: '2024-01-15', category: 'food', amount: 25, type: 'expense' },
+    { date: '2024-01-15', category: 'transport', amount: 15, type: 'expense' },
+    { date: '2024-01-16', category: 'food', amount: 30, type: 'expense' },
+    { date: '2024-01-16', category: 'salary', amount: 3000, type: 'income' },
+    { date: '2024-01-17', category: 'food', amount: 20, type: 'expense' },
+  ];
+
+  // Group by date, then by type
+  const transactionsByDate = Object.groupBy(transactions, (t) => t.date);
+  const nestedGrouping = Object.fromEntries(
+    Object.entries(transactionsByDate).map(([date, trans]) => [
+      date,
+      Object.groupBy(trans, (t) => t.type),
+    ])
+  );
+
+  console.log('Nested grouping:', JSON.stringify(nestedGrouping, null, 2));
+}
 
 //* Dynamically Creating and Filling Arrays
 
