@@ -1287,6 +1287,7 @@ console.log(anyDeposits);
 
 // Lecture Code
 
+/* 
 {
   // 👁️ https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/24606838#lecture-article
 
@@ -1347,10 +1348,12 @@ console.log(anyDeposits);
     .reduce(
       (sums, current) => {
         // console.log(sums);
-        current > 0
-          ? (sums.deposits += current)
-          : (sums.withdrawals += current);
 
+        // current > 0
+        //   ? (sums.deposits += current)
+        //   : (sums.withdrawals += current);
+
+        sums[current > 0 ? 'deposits' : 'withdrawals'] += current;
         return sums;
       },
       // NOTE: Initial `sums` object which will be used as sums's initial value
@@ -1393,3 +1396,4 @@ console.log(anyDeposits);
   console.log(convertTitleCase('this is a LONG title but not too long')); // This Is a Long Title but Not Too Long
   console.log(convertTitleCase('and here is another title with an EXAMPLE')); // And Here Is Another Title with an Example
 }
+ */
