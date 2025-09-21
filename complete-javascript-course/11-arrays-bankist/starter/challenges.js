@@ -176,6 +176,7 @@ const breeds = [
 
 // Solutions:
 
+/* 
 // Task 1: Average Weight of Huskies
 const huskyWeight = breeds.find(
   (breed) => breed.breed === 'Husky'
@@ -227,6 +228,7 @@ const fetchWeights = fetchBreeds.map((breed) => breed.averageWeight);
 const heaviestFetchBreedWeight = Math.max(...fetchWeights);
 
 console.log(heaviestFetchBreedWeight); // 32
+ */
 
 //* Coding Challenge #5
 
