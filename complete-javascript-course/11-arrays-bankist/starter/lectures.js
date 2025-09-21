@@ -1,5 +1,7 @@
 'use strict';
 
+import { accounts } from './script.js';
+
 //* Simple Array Methods
 
 /* 
@@ -1076,6 +1078,40 @@ console.log(anyDeposits);
   );
 
   console.log('Nested grouping:', JSON.stringify(nestedGrouping, null, 2));
+}
+
+// Lecture Code (From Lecture Article Tab)
+
+{
+  // 👁️ https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/47394707#lecture-article
+
+  // Example 1: Grouping Movements by Deposit or Withdrawal
+  const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+  const groupedMovements = Object.groupBy(movements, (movement) =>
+    movement > 0 ? 'deposits' : 'withdrawals'
+  );
+  console.log(groupedMovements);
+
+  // Example 2
+  // Grouping Accounts by Activity Level
+  const groupedByActivity = Object.groupBy(accounts, (account) => {
+    const movementCount = account.movements.length;
+    if (movementCount >= 8) return 'very active';
+    if (movementCount >= 4) return 'active';
+    if (movementCount === 1) return 'moderate';
+    return 'inactive';
+  });
+  console.log(groupedByActivity);
+
+  // Note that if no elements belong to a particular group, that group will not appear in the resulting object. For example, if no accounts are "inactive", that key will be absent.
+
+  // This example demonstrates how to manually create multiple groups and assign elements to them based on custom logic.
+
+  // Grouping Accounts by Object Property
+  // const groupedAccounts = Object.groupBy(accounts, (account) => account.type);
+  const groupedAccounts = Object.groupBy(accounts, ({ type }) => type);
+  console.log(groupedAccounts);
 }
 
 //* Dynamically Creating and Filling Arrays
