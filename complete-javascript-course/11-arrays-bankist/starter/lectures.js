@@ -1124,6 +1124,7 @@ console.log(anyDeposits);
 
 // ChatGPT
 
+/* 
 {
   // 🧠 MUST READ https://chatgpt.com/share/dc6d9ddf-c1ee-4694-86b5-1df176f1b3af
 
@@ -1149,9 +1150,11 @@ console.log(anyDeposits);
   const array5 = [...Array(10).keys()];
   console.log(array5); // Output: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 }
+ */
 
 // Lecture Code
 
+/* 
 {
   // Empty arrays + fill method
   const array = new Array(7).fill(0);
@@ -1168,6 +1171,111 @@ console.log(anyDeposits);
   );
   console.log(diceRolls);
 }
+ */
+
+//* Non-Destructive Alternatives: toReversed, toSorted, toSpliced, with
+
+// Claude AI
+
+/* 
+{
+  // 🧠 MUST READ https://claude.ai/share/4741a63a-6706-4829-9358-a2c75359005a
+
+  // These are JavaScript's newer immutable array methods introduced to provide non-destructive alternatives to traditional mutating methods. Let me break down why they're game-changers and how to use them effectively.
+
+  // The Problem with Traditional Methods
+  // The original array methods modify the existing array:
+
+  const numbers = [3, 1, 4, 1, 5];
+  numbers.sort(); // [1, 1, 3, 4, 5] - original array is mutated!
+  console.log(numbers); // [1, 1, 3, 4, 5] - oops, lost the original
+
+  // The Non-Destructive Solutions
+
+  {
+    // `toSorted()` - Immutable Sorting
+
+    const numbers = [3, 1, 4, 1, 5];
+    const sorted = numbers.toSorted(); // [1, 1, 3, 4, 5]
+    console.log(numbers); // [3, 1, 4, 1, 5] - original unchanged!
+
+    // With custom comparator
+    const users = [
+      { name: 'Alice', age: 30 },
+      { name: 'Bob', age: 25 },
+    ];
+    const sortedByAge = users.toSorted((a, b) => a.age - b.age);
+  }
+
+  {
+    // `toReversed()` - Immutable Reversal
+
+    const fruits = ['apple', 'banana', 'cherry'];
+    const reversed = fruits.toReversed(); // ['cherry', 'banana', 'apple']
+    console.log(fruits); // ['apple', 'banana', 'cherry'] - untouched
+  }
+
+  {
+    // `toSpliced()` - Immutable Splicing
+
+    const colors = ['red', 'green', 'blue'];
+
+    // Remove 1 element at index 1, add 'yellow', 'orange'
+    const newColors = colors.toSpliced(1, 1, 'yellow', 'orange');
+    // Result:
+
+    console.log(colors); // ['red', 'green', 'blue'] - original intact
+  }
+
+  {
+    // `with()` - Immutable Element Replacement
+
+    const letters = ['a', 'b', 'c', 'd'];
+    const updated = letters.with(2, 'X'); // ['a', 'b', 'X', 'd']
+    console.log(letters); // ['a', 'b', 'c', 'd'] - original preserved
+  }
+
+  // Why This Matters in Modern Development
+  // React State Management: These methods are perfect for React state updates:
+
+  // Instead of mutating state
+  const handleSort = () => {
+    const sorted = [...items].sort();
+    setItems(sorted);
+  };
+
+  // ✅ Clean and direct
+  const handleSortClean = () => {
+    setItems(items.toSorted());
+  };
+}
+ */
+
+// Lecture Code (From Lecture Article Tab)
+
+/* 
+{
+  // 👁️ https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/47394719#lecture-article
+
+  const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+  // NOTE: These methods do NOT mutate the original array, instead they return a new array.
+  const reversedMov = movements.toReversed();
+  const sortedMov = movements.toSorted((a, b) => a - b);
+  const splicedMov = movements.toSpliced(2, 1);
+
+  console.log(reversedMov); // [1300, 70, -130, -650, 3000, -400, 450, 200]
+  console.log(sortedMov); // [-650, -400, -130, 70, 200, 450, 1300, 3000]
+  console.log(splicedMov); // [200, 450, 3000, -650, -130, 70, 1300]
+
+  // Updating an array element without mutating the original array
+  const newMovements = movements.with(1, 2000);
+  console.log(newMovements); // [200, 2000, -400, 3000, -650, -130, 70, 1300]
+  console.log(movements); // [200, 450, -400, 3000, -650, -130, 70, 1300]
+
+  // This reads like: we want the movements array, but with position number one updated to 2000. Logging this to the console, newMovements will now have the new value of 2000 at position one, but the original stays intact. It has not been updated at this position; it is still 450.
+}
+ */
 
 //* Array Methods Practice
 
