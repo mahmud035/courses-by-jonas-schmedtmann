@@ -1,7 +1,5 @@
 'use strict';
 
-import { accounts } from './script.js';
-
 //* Simple Array Methods
 
 /* 
@@ -928,8 +926,9 @@ console.log(anyDeposits);
 
 // MDN
 
+/* 
 {
-  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/groupBy
+  // 🧠 MUST READ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/groupBy
 
   // Syntax: Object.groupBy(items, callbackFn)
 
@@ -983,9 +982,11 @@ console.log(anyDeposits);
   //   ]
   // }
 }
+ */
 
 // Claude AI
 
+/* 
 {
   // 🧠 MUST READ https://claude.ai/share/13c9a1ee-7a35-4d9b-9121-98d22e976261
   // 👁️ Array Grouping Examples
@@ -1079,11 +1080,14 @@ console.log(anyDeposits);
 
   console.log('Nested grouping:', JSON.stringify(nestedGrouping, null, 2));
 }
+ */
 
 // Lecture Code (From Lecture Article Tab)
 
+/* 
 {
-  // 👁️ https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/47394707#lecture-article
+  // 🧠 MUST READ https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/47394707#lecture-article
+  // 👁️ Lecture Article Tab
 
   // Example 1: Grouping Movements by Deposit or Withdrawal
   const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
@@ -1097,6 +1101,7 @@ console.log(anyDeposits);
   // Grouping Accounts by Activity Level
   const groupedByActivity = Object.groupBy(accounts, (account) => {
     const movementCount = account.movements.length;
+
     if (movementCount >= 8) return 'very active';
     if (movementCount >= 4) return 'active';
     if (movementCount === 1) return 'moderate';
@@ -1104,7 +1109,7 @@ console.log(anyDeposits);
   });
   console.log(groupedByActivity);
 
-  // Note that if no elements belong to a particular group, that group will not appear in the resulting object. For example, if no accounts are "inactive", that key will be absent.
+  // NOTE: If no elements belong to a particular group, that group will not appear in the resulting object. For example, if no accounts are "inactive", that key will be absent.
 
   // This example demonstrates how to manually create multiple groups and assign elements to them based on custom logic.
 
@@ -1113,69 +1118,56 @@ console.log(anyDeposits);
   const groupedAccounts = Object.groupBy(accounts, ({ type }) => type);
   console.log(groupedAccounts);
 }
+ */
 
 //* Dynamically Creating and Filling Arrays
 
-// https://chatgpt.com/share/dc6d9ddf-c1ee-4694-86b5-1df176f1b3af
+// ChatGPT
 
-// In JavaScript, you can dynamically create and fill arrays using a variety of methods. Here are a few common techniques:
+{
+  // 🧠 MUST READ https://chatgpt.com/share/dc6d9ddf-c1ee-4694-86b5-1df176f1b3af
 
-/* 
-// 1. Using a Loop: You can use a for loop to fill an array with values dynamically.
-let array = [];
-for (let i = 0; i < 10; i++) {
-  array.push(i);
+  // In JavaScript, you can dynamically create and fill arrays using a variety of methods. Here are a few common techniques:
+
+  // 1. Using `Array.from()`: Array.from() can create an array from any iterable object, including array-like objects. It can also take a mapping function as a second argument.
+
+  const array2 = Array.from({ length: 10 }, (_, i) => i);
+  console.log(array2); // Output: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+  // 2. Using `Array.fill()`: You can create an array and fill it with the same value using fill.
+
+  const array4 = new Array(10).fill(0);
+  console.log(array4); // Output: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+
+  // 3. Using `Array.map()`: You can create an array with a certain length and then use map to fill it.
+
+  const array3 = new Array(10).fill(null).map((_, i) => i);
+  console.log(array3); // Output: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+  // 4. Using `Spread Operator with Array.keys()`: The spread operator can be used in combination with Array.keys() to create arrays with dynamic values.
+
+  const array5 = [...Array(10).keys()];
+  console.log(array5); // Output: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 }
-console.log(array); // Output: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 
-// 2. Using Array.from(): Array.from() can create an array from any iterable object, including array-like objects. It can also take a mapping function as a second argument.
+// Lecture Code
 
-const array2 = Array.from({ length: 10 }, (_, i) => i);
-console.log(array2); // Output: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+{
+  // Empty arrays + fill method
+  const array = new Array(7).fill(0);
+  console.log(array); // Output: [0, 0, 0, 0, 0, 0, 0]
 
-// 3. Using Array.map(): You can create an array with a certain length and then use map to fill it.
+  // Array.from
+  const array2 = Array.from({ length: 7 }, (_, i) => i + 1);
+  console.log(array2); // Output: [1, 2, 3, 4, 5, 6, 7]
 
-const array3 = new Array(10).fill(null).map((_, i) => i);
-console.log(array3); // Output: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-
-// 4. Using Array.fill(): You can create an array and fill it with the same value using fill.
-
-const array4 = new Array(10).fill(0);
-console.log(array4); // Output: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-
-// 5. Using Spread Operator with Array.keys(): The spread operator can be used in combination with Array.keys() to create arrays with dynamic values.
-
-const array5 = [...Array(10).keys()];
-console.log(array5); // Output: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-
-// 6. Using reduce(): You can also use reduce to build an array.
-
-const array6 = Array(10)
-  .fill()
-  .reduce((acc, _, i) => {
-    acc.push(i);
-    return acc;
-  }, []);
-
-console.log(array6); // Output: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
- */
-
-/* 
-// Empty arrays + fill method
-const array = new Array(7).fill(0);
-console.log(array); // Output: [0, 0, 0, 0, 0, 0, 0]
-
-// Array.from
-const array2 = Array.from({ length: 7 }, (_, i) => i + 1);
-console.log(array2); // Output: [1, 2, 3, 4, 5, 6, 7]
-
-// Task: Create an array with 100 random dice rolls.
-const diceRolls = Array.from(
-  { length: 100 },
-  (_, i) => Math.floor(Math.random() * 6) + 1
-);
-console.log(diceRolls);
- */
+  // Task: Create an array with 100 random dice rolls.
+  const diceRolls = Array.from(
+    { length: 100 },
+    (_, i) => Math.floor(Math.random() * 6) + 1
+  );
+  console.log(diceRolls);
+}
 
 //* Array Methods Practice
 
