@@ -1277,124 +1277,119 @@ console.log(anyDeposits);
 }
  */
 
+//* Summary: Which Array Method to Use?
+
+{
+  // 🧠 MUST READ: See the Slides Screenshot
+}
+
 //* Array Methods Practice
 
-/* 
-const accounts2 = [
-  {
-    owner: 'Jonas Schmedtmann',
-    movements: [200, 450, -400, 3000, -650, -130, 70, 1300],
-    interestRate: 1.2, // %
-    pin: 1111,
-  },
-  {
-    owner: 'Jessica Davis',
-    movements: [5000, 3400, -150, -790, -3210, -1000, 8500, -30],
-    interestRate: 1.5,
-    pin: 2222,
-  },
-  {
-    owner: 'Steven Thomas Williams',
-    movements: [200, -200, 340, -300, -20, 50, 400, -460],
-    interestRate: 0.7,
-    pin: 3333,
-  },
-  {
-    owner: 'Sarah Smith',
-    movements: [430, 1000, 700, 50, 90],
-    interestRate: 1,
-    pin: 4444,
-  },
-];
+// Lecture Code
 
-// Task 1: Calculate how much has been deposited in total in the bank.
-const bankDepositSum = accounts2
-  .map((account) => account.movements)
-  .flat(1)
-  .filter((movement) => movement > 0)
-  .reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+{
+  // 👁️ https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/24606838#lecture-article
 
-console.log(bankDepositSum); // 25180
-
-// Task 2: Count how many deposits there have been in the bank with at least $1000.
-const numDeposits1000 = accounts2
-  .flatMap((account) => account.movements)
-  .filter((movement) => movement >= 1000).length;
-
-console.log(numDeposits1000); // 6
-
-// Using reduce method
-const numDeposits1000Reduce = accounts2
-  .flatMap((account) => account.movements)
-  .reduce((accumulator, currentMovement, currentIndex, array) => {
-    // console.log(array);
-    return currentMovement >= 1000 ? accumulator + 1 : accumulator;
-  }, 0);
-
-console.log(numDeposits1000Reduce); // 6
-
-// Task 3: Create an object which contains the sum of deposits and sum of the withdrawals.
-const sums = accounts2
-  .flatMap((account) => account.movements)
-  .reduce(
-    (accumulator, currentMovement) => {
-      // console.log(accumulator);
-      currentMovement > 0
-        ? (accumulator.deposits += currentMovement)
-        : (accumulator.withdrawals += Math.abs(currentMovement));
-
-      return accumulator;
-    },
-    // NOTE: Initial sums object which will be used as accumulator's initial value
+  // Data
+  const accounts = [
     {
-      deposits: 0,
-      withdrawals: 0,
-    }
-  );
-
-console.log(sums); // {deposits: 25180, withdrawals: 7340}
-
-// Task 4: Create a simple function to convert any string to a title case. (title case basically means that all the words in a sentence are capitalized except some exceptions => the word that should NOT be capitalized 👇)
-
-// Sample: this is a nice title => This Is a Nice Title
-
-const convertTitleCase = (title) => {
-  const capitalize = (str) => str.at(0).toUpperCase() + str.slice(1);
-
-  const exceptionList = [
-    'a',
-    'an',
-    'the',
-    'and',
-    'but',
-    'or',
-    'nor',
-    'for',
-    'yet',
-    'so',
-    'at',
-    'by',
-    'for',
-    'in',
-    'of',
-    'off',
-    'on',
-    'out',
-    'to',
-    'up',
-    'with',
+      owner: 'Jonas Schmedtmann',
+      movements: [200, 450, -400, 3000, -650, -130, 70, 1300],
+      interestRate: 1.2, // %
+      pin: 1111,
+    },
+    {
+      owner: 'Jessica Davis',
+      movements: [5000, 3400, -150, -790, -3210, -1000, 8500, -30],
+      interestRate: 1.5,
+      pin: 2222,
+    },
+    {
+      owner: 'Steven Thomas Williams',
+      movements: [200, -200, 340, -300, -20, 50, 400, -460],
+      interestRate: 0.7,
+      pin: 3333,
+    },
+    {
+      owner: 'Sarah Smith',
+      movements: [430, 1000, 700, 50, 90],
+      interestRate: 1,
+      pin: 4444,
+    },
   ];
 
-  const titleCase = title
-    .toLowerCase()
-    .split(' ')
-    .map((word) => (exceptionList.includes(word) ? word : capitalize(word)))
-    .join(' ');
+  // Exercise 1: Calculating Total Deposits
+  const bankDepositSum = accounts
+    .map((account) => account.movements)
+    .flat(1)
+    .filter((movement) => movement > 0)
+    .reduce((sum, current) => sum + current, 0);
 
-  return capitalize(titleCase);
-};
+  console.log(bankDepositSum); // 25180
 
-console.log(convertTitleCase('this is a nice title')); // This Is a Nice Title
-console.log(convertTitleCase('this is a LONG title but not too long')); // This Is a Long Title but Not Too Long
-console.log(convertTitleCase('and here is another title with an EXAMPLE')); // And Here Is Another Title with an Example
- */
+  // Exercise 2: Counting Deposits Over 1,000
+  const numDeposits1000 = accounts
+    .flatMap((account) => account.movements)
+    .filter((movement) => movement >= 1000).length;
+
+  console.log(numDeposits1000); // 6
+
+  // Using reduce method
+  const numDeposits1000Reduce = accounts
+    .flatMap((account) => account.movements)
+    .reduce((count, current) => (current >= 1000 ? count + 1 : count), 0);
+
+  console.log(numDeposits1000Reduce); // 6
+
+  // Exercise 3: Using Reduce to Create an Object
+  const sums = accounts
+    .flatMap((account) => account.movements)
+    .reduce(
+      (sums, current) => {
+        // console.log(sums);
+        current > 0
+          ? (sums.deposits += current)
+          : (sums.withdrawals += current);
+
+        return sums;
+      },
+      // NOTE: Initial `sums` object which will be used as sums's initial value
+      {
+        deposits: 0,
+        withdrawals: 0,
+      }
+    );
+
+  console.log(sums); // {deposits: 25180, withdrawals: -7340}
+
+  // Exercise 4: Converting Strings to Title Case (title case basically means that all the words in a sentence are capitalized except some exceptions => the word that should NOT be capitalized 👇)
+
+  // Sample: this is a nice title => This Is a Nice Title
+
+  const convertTitleCase = (title) => {
+    const exceptions = [
+      'a',
+      'an',
+      'the',
+      'but',
+      'or',
+      'on',
+      'in',
+      'with',
+      'and',
+    ];
+    const capitalize = (str) => str.at(0).toUpperCase() + str.slice(1);
+
+    const titleCase = title
+      .toLowerCase()
+      .split(' ')
+      .map((word) => (exceptions.includes(word) ? word : capitalize(word)))
+      .join(' ');
+
+    return capitalize(titleCase);
+  };
+
+  console.log(convertTitleCase('this is a nice title')); // This Is a Nice Title
+  console.log(convertTitleCase('this is a LONG title but not too long')); // This Is a Long Title but Not Too Long
+  console.log(convertTitleCase('and here is another title with an EXAMPLE')); // And Here Is Another Title with an Example
+}
