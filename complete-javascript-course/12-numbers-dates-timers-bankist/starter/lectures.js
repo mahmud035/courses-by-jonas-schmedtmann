@@ -114,6 +114,7 @@
 
 //* Working with BigInt
 
+/* 
 {
   // 🧠 MUST READ https://claude.ai/share/ad9f7cca-ff8f-4025-897a-fed20b15758a
 
@@ -168,37 +169,98 @@
 
   // The bottom line: BigInt solves real precision problems in JavaScript, but it requires disciplined type management. When you're dealing with large integers from APIs, databases, or crypto operations, it's often your only reliable option. Just remember to handle the type conversions explicitly and be aware of the performance implications.
 }
+ */
 
 //* Creating Dates
 
 /* 
-// Create a date
-// const now = new Date();
-// console.log(now);
+{
+  // 🧠 MUST READ https://claude.ai/share/3cf4d6f1-af07-4ebe-bb97-0b2d1ef88f59
 
-// console.log(new Date('Jul 13 2024 14:37:52'));
-// console.log(new Date('2019-11-18T21:31:17.178Z'));
+  // JavaScript's Date handling is both powerful and notoriously quirky - let me break down the main ways to create dates and the gotchas you need to watch out for.
 
-// console.log(new Date(0)); // milliseconds
-// console.log(new Date(3 * 24 * 60 * 60 * 1000)); // milliseconds
+  // The Date Constructor
+  // Basic syntax:
+  // new Date()                    // Current date/time
+  // new Date(milliseconds)        // From Unix timestamp
+  // new Date(dateString)         // From string parsing
+  // new Date(year, month, day)   // From components
+  // new Date(year, month, day, hour, minute, second, millisecond)
 
-// Working with dates
-const future = new Date(2037, 10, 19, 8, 23);
-console.log(future);
-console.log(future.getFullYear());
-console.log(future.getMonth());
-console.log(future.getDate());
-console.log(future.getDay());
-console.log(future.getHours());
-console.log(future.getMinutes());
-console.log(future.getSeconds());
-console.log(future.toISOString());
-console.log(future.getTime()); // milliseconds
+  // Current Date
+  const now = new Date(); // Right now
 
-console.log(new Date(2142210180000));
+  // Simple enough. This gives you the current moment in your local timezone.
 
-console.log(Date.now()); 
-*/
+  // From Timestamps
+  const date = new Date(1640995200000); // Unix timestamp in milliseconds
+  const dateFromSeconds = new Date(1640995200 * 1000); // If you have seconds
+
+  // From Date Strings (Here's where it gets spicy)
+
+  // ISO format - this is your friend
+  const iso = new Date('2023-12-31T23:59:59.999Z'); // UTC time
+
+  // Pro tip: Stick to ISO 8601 format (`YYYY-MM-DDTHH:mm:ss.sssZ`) for consistency. Trust me on this one.
+
+  console.log(now);
+  console.log(date);
+  console.log(dateFromSeconds);
+  console.log(iso);
+
+  // From Components (The Month Trap!)
+
+  // WARNING: Months are 0-indexed! December is 11, not 12!
+  const newYear = new Date(2024, 0, 1); // January 1, 2024
+  const christmas = new Date(2024, 11, 25); // December 25, 2024
+
+  // With time components
+  const specific = new Date(2024, 0, 1, 15, 30, 0, 0); // Jan 1, 2024 at 3:30 PM
+
+  // This zero-indexed month thing has burned countless developers. It's JavaScript's most infamous design decision.
+
+  // IMPORTANT: Modern Alternatives (The Better Way)
+  // Honestly? For anything beyond basic date creation, consider using a library: such as date-fns, moment.js. They handle all the quirks and edge cases for you, making your life a lot easier.
+
+  // But if you must use native Date, just remember:
+  // - Use ISO strings for parsing
+  // - Watch out for the month index
+  // - Always test your date logic thoroughly
+}
+ */
+
+// Lecture Code
+
+/* 
+{
+  // Create a date
+  // const now = new Date();
+  // console.log(now);
+
+  // console.log(new Date('Jul 13 2024 14:37:52'));
+  // console.log(new Date('2019-11-18T21:31:17.178Z'));
+
+  // console.log(new Date(0)); // milliseconds
+  // console.log(new Date(3 * 24 * 60 * 60 * 1000)); // milliseconds
+
+  // Working with dates
+  const future = new Date(2037, 10, 19, 8, 23);
+  console.log('Future Date:', future);
+
+  console.log(future.getFullYear());
+  console.log(future.getMonth());
+  console.log(future.getDate());
+  console.log(future.getDay());
+  console.log(future.getHours());
+  console.log(future.getMinutes());
+  console.log(future.getSeconds());
+  console.log(future.toISOString());
+  console.log(future.getTime()); // milliseconds
+
+  console.log(new Date(2142210180000));
+  console.log(Date.now());
+}
+ */
 
 //* Operations With Dates
 
