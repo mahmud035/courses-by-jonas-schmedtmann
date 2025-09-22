@@ -65,7 +65,7 @@ const accounts = [
   },
 ];
 
-// Elements
+// Selecting elements
 const labelWelcome = document.querySelector('.welcome');
 const labelDate = document.querySelector('.date');
 const labelBalance = document.querySelector('.balance__value');
