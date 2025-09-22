@@ -116,11 +116,21 @@ createUserNames(accounts);
 const displayMovements = (currentAccount, sort = false) => {
   containerMovements.innerHTML = '';
 
-  const movs = sort
-    ? currentAccount.movements.slice().sort((a, b) => a - b)
-    : currentAccount.movements;
+  // Create an array of objects where each object contains a movement and its corresponding date
+  const combinedMovementsDates = currentAccount.movements.map(
+    (movement, index) => ({
+      movement,
+      date: currentAccount.movementsDates.at(index),
+    })
+  );
 
-  movs.forEach((movement, index) => {
+  // Now sort this array of objects by the movement value, and the dates will be sorted accordingly in the same order
+  const sortedCombined = sort
+    ? combinedMovementsDates.sort((a, b) => a.movement - b.movement)
+    : combinedMovementsDates;
+
+  sortedCombined.forEach((movementAndDate, index) => {
+    const { movement, date } = movementAndDate;
     const type = movement > 0 ? 'deposit' : 'withdrawal';
 
     const html = `
@@ -129,7 +139,7 @@ const displayMovements = (currentAccount, sort = false) => {
              ${index + 1} ${type}
           </div>
           <div class="movements__date">
-             ${getDateAndTimeInfo(currentAccount.movementsDates[index], false)}
+             ${getDateAndTimeInfo(date, false)}
           </div>
           <div class="movements__value">
              ${formatCurrency(
@@ -151,9 +161,7 @@ const calcDisplayBalance = (currentAccount) => {
 
   // NOTE: Calculate balance and store it into currentAccount object
   currentAccount.balance = currentAccount?.movements.reduce(
-    (accumulator, currentMovement) => {
-      return accumulator + currentMovement;
-    },
+    (sum, current) => sum + current,
     initialValue
   );
 
@@ -168,9 +176,7 @@ const calcDisplayBalance = (currentAccount) => {
 const calcDisplaySummary = (currentAccount) => {
   const income = currentAccount?.movements
     .filter((movement) => movement > 0) // take all deposit
-    .reduce((accumulator, currentDeposit) => {
-      return accumulator + currentDeposit;
-    }, 0);
+    .reduce((sum, current) => sum + current, 0);
 
   labelSumIn.textContent = formatCurrency(
     income,
@@ -180,9 +186,7 @@ const calcDisplaySummary = (currentAccount) => {
 
   const out = currentAccount?.movements
     .filter((movement) => movement < 0) // take all withdrawal
-    .reduce((accumulator, currentWithdrawal) => {
-      return accumulator + currentWithdrawal;
-    }, 0);
+    .reduce((sum, current) => sum + current, 0);
 
   labelSumOut.textContent = formatCurrency(
     out,
@@ -198,9 +202,7 @@ const calcDisplaySummary = (currentAccount) => {
       // console.log(array);
       return interest >= 1;
     })
-    .reduce((accumulator, currentInterest) => {
-      return accumulator + currentInterest;
-    }, 0);
+    .reduce((sum, current) => sum + current, 0);
 
   labelSumInterest.textContent = formatCurrency(
     interest,

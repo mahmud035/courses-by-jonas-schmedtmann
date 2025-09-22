@@ -262,18 +262,37 @@
 }
  */
 
+//* Adding Dates to "Bankist" App
+
+/* 
+{
+  const date = new Date();
+
+  const day = String(date.getDate()).padStart(2, '0');
+  const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+  const year = date.getFullYear();
+  const hour = String(date.getHours()).padStart(2, '0');
+  const min = String(date.getMinutes()).padStart(2, '0');
+
+  const displayDate = `${day}/${month}/${year}, ${hour}:${min}`;
+  console.log(displayDate);
+}
+ */
+
 //* Operations With Dates
 
 /* 
-const future = new Date(2037, 10, 19, 8, 23);
-console.log(future.getTime()); // milliseconds
-console.log(+future);
+{
+  const future = new Date(2037, 10, 19, 8, 23);
+  console.log(future.getTime()); // milliseconds
+  console.log(+future);
 
-const calcDaysPassed = (date1, date2) =>
-  Math.abs(date2 - date1) / (1000 * 60 * 60 * 24);
+  const calcDaysPassed = (date1, date2) =>
+    Math.abs(date2 - date1) / (1000 * 60 * 60 * 24);
 
-const days1 = calcDaysPassed(new Date(2037, 3, 14), new Date(2037, 3, 24));
-console.log(days1); // 10 days
+  const days1 = calcDaysPassed(new Date(2037, 3, 14), new Date(2037, 3, 24));
+  console.log(days1); // 10 days
+}
  */
 
 //* Internationalizing Numbers (Intl)
