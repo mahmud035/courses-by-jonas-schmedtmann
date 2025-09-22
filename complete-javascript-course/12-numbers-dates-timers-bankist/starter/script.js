@@ -117,20 +117,18 @@ const displayMovements = (currentAccount, sort = false) => {
   containerMovements.innerHTML = '';
 
   // Create an array of objects where each object contains a movement and its corresponding date
-  const combinedMovementsDates = currentAccount.movements.map(
+  const combinedMovementAndDate = currentAccount.movements.map(
     (movement, index) => ({
       movement,
-      date: currentAccount.movementsDates.at(index),
+      movementDate: currentAccount.movementsDates.at(index),
     })
   );
 
-  // Now sort this array of objects by the movement value, and the dates will be sorted accordingly in the same order
-  const sortedCombined = sort
-    ? combinedMovementsDates.sort((a, b) => a.movement - b.movement)
-    : combinedMovementsDates;
+  // Now sort this array of objects by the movement value, and the movementDate will be sorted accordingly in the same order
+  if (sort) combinedMovementAndDate.sort((a, b) => a.movement - b.movement);
 
-  sortedCombined.forEach((movementAndDate, index) => {
-    const { movement, date } = movementAndDate;
+  combinedMovementAndDate.forEach((obj, index) => {
+    const { movement, movementDate } = obj;
     const type = movement > 0 ? 'deposit' : 'withdrawal';
 
     const html = `
@@ -139,7 +137,7 @@ const displayMovements = (currentAccount, sort = false) => {
              ${index + 1} ${type}
           </div>
           <div class="movements__date">
-             ${getDateAndTimeInfo(date, false)}
+             ${getDateAndTimeInfo(movementDate, false)}
           </div>
           <div class="movements__value">
              ${formatCurrency(
