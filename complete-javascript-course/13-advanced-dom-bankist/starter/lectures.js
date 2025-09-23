@@ -25,8 +25,8 @@
   // The NodeList returned by querySelectorAll is static, meaning it does not automatically update when the document changes.
 
   // 2. Creating and Inserting elements
-  // .insertAdjacentHTML(position, text) -> option-1
-  // .createElement -> option-2
+  // option-1 -> .insertAdjacentHTML(position, text)
+  // option-2 -> .createElement (better to use this one))
 
   const message = document.createElement('div');
   message.classList.add('cookie-message');
@@ -69,15 +69,15 @@
   // 5. Attributes
   const logo = document.querySelector('.nav__logo');
 
-  // Get attribute value
+  // Get attribute value. Syntax: element.getAttribute(attributeName)
   console.log(logo.src); // http://127.0.0.1:5500/images/logo.png
   console.log(logo.getAttribute('src')); // images/logo.png
 
-  // Change attribute value. Syntax: element.attribute = new value
-  logo.alt = 'Beautiful logo';
-
-  // Set new attribute and it's value. Syntax: element.setAttribute(attributeName, value);
+  // Set new attribute. Syntax: element.setAttribute(attributeName, attributeValue);
   logo.setAttribute('company', 'Bankist');
+
+  // Change attribute value. Syntax: element.attributeName = new value
+  logo.alt = 'Beautiful logo';
 
   // IMPORTANT: Data attributes
   console.log(logo.dataset.versionNumber); // 3.0
@@ -89,6 +89,15 @@
   logo.classList.contains('class4');
 }
  */
+
+//* Event Propagation: Bubbling and Capturing
+
+{
+  // 🧠 MUST READ: https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22648965#
+  // Bubbling: Bottom to Top
+  // Capturing: Top to Bottom
+  // NOTE: By default, event listener works in bubbling phase. But we can make it work in capturing phase by passing a third argument as `true` in the addEventListener function.
+}
 
 //* Event Propagation in Practice (Bubbling)
 
@@ -152,10 +161,10 @@
   console.log(h1.parentElement);
 
   // IMPORTANT: & Need To Remember & Will Use It a Lot:
-  // The element.closest() method in JavaScript is used to find the closest ancestor of the current element (or the element itself) that matches a specified CSS selector. It traverses the element and its ancestors (up the DOM tree) until it finds a match. If no matching element is found, it returns null.
+  // The element.closest() method in JavaScript is used to find the closest ancestor of the current element (or the element itself) that matches a specified CSS selector. It traverses the element and its ancestors (up the DOM tree) until it finds a match. If no matching element is found, it returns `null`.
 
   h1.closest('.header').style.background = 'var(--gradient-secondary)';
-  h1.closest('h1').style.background = 'var(--gradient-primary)';
+  h1.closest('h1').style.background = 'var(--gradient-primary)'; // itself
 
   // Going Sideways: siblings
   console.log(h1.previousElementSibling);
@@ -170,6 +179,13 @@
   });
 }
  */
+
+//* The Intersection Observer API
+
+{
+  // 🧠 Must Visit This Link: https://chatgpt.com/share/a4c4335e-1b67-463b-b613-091e4cf92af7
+  // 👁️ https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22648993?start=197#notes
+}
 
 //* Lifecycle DOM Events
 

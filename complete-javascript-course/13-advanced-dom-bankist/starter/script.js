@@ -86,6 +86,7 @@ navLinksContainer.addEventListener('click', (e) => {
 //* Tabbed Component (using Event Delegation)
 tabsContainer.addEventListener('click', (e) => {
   // Get clicked tab
+  // What happens here: When we click on the button element with a class of ".operations__tab", the closest method select that button element itself. But when we click on the span element inside that button, the closest method will traverse up the DOM tree and select the parent button element with the class of ".operations__tab".
   const clicked = e.target.closest('.operations__tab');
 
   // Guard clause
@@ -125,13 +126,13 @@ const handleHover = (e, opacity) => {
     logo.style.opacity = opacity;
   }
 };
+
 nav.addEventListener('mouseover', (e) => handleHover(e, 0.5));
 nav.addEventListener('mouseout', (e) => handleHover(e, 1));
 
 //* Sticky Navigation (using Intersection Observer API)
 const navHeight = nav.getBoundingClientRect().height;
 
-// Callback
 const stickyNav = (entries) => {
   const [entry] = entries;
 
@@ -145,6 +146,7 @@ const headerObserver = new IntersectionObserver(stickyNav, {
   rootMargin: `-${navHeight}px`, // Need to provide negative value in this case
   threshold: 0,
 });
+
 headerObserver.observe(header);
 /* 
   NOTE: threshold
@@ -159,13 +161,12 @@ headerObserver.observe(header);
 */
 
 //* Revealing Sections on Scroll (using Intersection Observer API)
-// Callback
 const revealSection = (entries, observer) => {
   entries.forEach((entry) => {
     if (entry.isIntersecting) {
       const section = entry.target;
-      section.classList.remove('section--hidden');
-      observer.unobserve(entry.target);
+      section.classList.remove('section--hidden'); // Reveal the section
+      observer.unobserve(entry.target); // Stop observing the section after revealing it
     }
   });
 };
@@ -173,31 +174,37 @@ const revealSection = (entries, observer) => {
 const sectionObserver = new IntersectionObserver(revealSection, {
   threshold: 0.1, // যখন section এর 10% অংশ viewport এর মধ্যে আসবে, তখন revealSection callback function টা execute হবে।
 });
+
 allSections.forEach((section) => {
   sectionObserver.observe(section);
-  section.classList.add('section--hidden');
+  section.classList.add('section--hidden'); // Initially hide all sections
 });
 
 //* Lazy Loading Images (using Intersection Observer API)
 // NOTE: Lazy loading images means loading them only when they are about to enter the viewport, which can improve page load time.
 
-// Callback
 const loadImage = (entries, observer) => {
-  entries.forEach((entry) => {
-    if (entry.isIntersecting) {
-      const img = entry.target;
-      img.src = img.dataset.src; // Replace src with data-src
-      img.classList.remove('lazy-img');
-      observer.unobserve(img);
-    }
+  const [entry] = entries;
+
+  if (!entry.isIntersecting) return;
+
+  const image = entry.target;
+  image.src = image.dataset.src; // Replace src with data-src
+
+  image.addEventListener('load', () => {
+    image.classList.remove('lazy-img'); // Remove blur effect after image is loaded
   });
+
+  observer.unobserve(image); // Stop observing the image after loading it
 };
 
 const lazyImageObserver = new IntersectionObserver(loadImage, {
   root: null,
-  threshold: 0, // NOTE: The callback is triggered as soon as any part of the img is visible.
+  threshold: 0,
+  rootMargin: '200px', // Image টা viewport এ আসার 200px আগে ই load হয়ে যাবে।
 });
-lazyImages.forEach((img) => lazyImageObserver.observe(img));
+
+lazyImages.forEach((image) => lazyImageObserver.observe(image));
 
 //* Slider Component
 const slider = () => {
