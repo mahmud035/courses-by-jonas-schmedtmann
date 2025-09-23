@@ -198,5 +198,14 @@
   window.addEventListener('load', (e) => {
     console.log('Page fully loaded, including images!', e);
   });
+
+  // This event fires when the user is trying to leave the page (e.g., closing the tab, refreshing the page, or navigating to a different URL). It allows you to display a confirmation dialog to the user, asking if they really want to leave the page. This can be useful for preventing accidental navigation away from a page where the user has unsaved changes.
+  // Most modern browsers do not allow custom messages in the confirmation dialog for security reasons. Instead, they display a generic message.
+
+  // window.addEventListener('beforeunload', (e) => {
+  //   e.preventDefault();
+  //   e.returnValue = ''; // This line is required for some browsers to show the confirmation dialog
+  //   console.log(e);
+  // });
 }
  */
