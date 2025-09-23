@@ -1,6 +1,6 @@
 'use strict';
 
-// Select Elements
+// Selecting Elements
 const modal = document.querySelector('.modal');
 const overlay = document.querySelector('.overlay');
 
@@ -30,6 +30,7 @@ const dotContainer = document.querySelector('.dots');
 // Open Modal
 const openModal = function (e) {
   e.preventDefault();
+  e.stopPropagation();
   modal.classList.remove('hidden');
   overlay.classList.remove('hidden');
 };
@@ -170,8 +171,7 @@ const revealSection = (entries, observer) => {
 };
 
 const sectionObserver = new IntersectionObserver(revealSection, {
-  threshold: 0.1,
-  // NOTE: যখন section এর 10% অংশ viewport এর মধ্যে আসবে, তখন revealSection callback function টা execute হবে।
+  threshold: 0.1, // যখন section এর 10% অংশ viewport এর মধ্যে আসবে, তখন revealSection callback function টা execute হবে।
 });
 allSections.forEach((section) => {
   sectionObserver.observe(section);
@@ -186,8 +186,7 @@ const loadImage = (entries, observer) => {
   entries.forEach((entry) => {
     if (entry.isIntersecting) {
       const img = entry.target;
-      // Replace src with data-src
-      img.src = img.dataset.src;
+      img.src = img.dataset.src; // Replace src with data-src
       img.classList.remove('lazy-img');
       observer.unobserve(img);
     }
@@ -196,8 +195,7 @@ const loadImage = (entries, observer) => {
 
 const lazyImageObserver = new IntersectionObserver(loadImage, {
   root: null,
-  threshold: 0,
-  // NOTE: The callback is triggered as soon as any part of the img is visible.
+  threshold: 0, // NOTE: The callback is triggered as soon as any part of the img is visible.
 });
 lazyImages.forEach((img) => lazyImageObserver.observe(img));
 
@@ -245,11 +243,8 @@ const slider = () => {
 
   // Next Slide
   const nextSlide = () => {
-    if (currentSlide === maxSlide - 1) {
-      currentSlide = 0;
-    } else {
-      currentSlide++;
-    }
+    if (currentSlide === maxSlide - 1) currentSlide = 0;
+    else currentSlide++;
 
     // NOTE: If currentSlide = 1, then goToSlide will return "-100%, 0%, 100%, 200%"
     goToSlide(currentSlide);
@@ -258,11 +253,8 @@ const slider = () => {
 
   // Previous Slide
   const prevSlide = () => {
-    if (currentSlide === 0) {
-      currentSlide = maxSlide - 1;
-    } else {
-      currentSlide--;
-    }
+    if (currentSlide === 0) currentSlide = maxSlide - 1;
+    else currentSlide--;
 
     // NOTE: If currentSlide = -3, then goToSlide will return "-300%, -200%, -100%, 0%"
     goToSlide(currentSlide);
