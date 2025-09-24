@@ -402,6 +402,7 @@
 
 // Lecture Code
 
+/* 
 {
   class PersonCl {
     constructor(firstName, birthYear) {
@@ -422,7 +423,7 @@
   // Creating an instance of the PersonCl class
   const jessica = new PersonCl('Jessica', 1996);
   jessica.calcAge(); // 41
-  jessica.greet();
+  jessica.greet(); // Hey, Jessica;
   console.log(jessica);
 
   console.log(jessica.__proto__ === PersonCl.prototype); // true (1 level deep)
@@ -435,13 +436,13 @@
   // PersonCl.prototype.greet = function () {
   //   console.log(`Hey, ${this.firstName}`);
   // };
-  jessica.greet(); // Hey, Jessica;
 
   // NOTE:
   // 1. Classes are NOT hoisted
   // 2. Class are first-class citizen
   // 3. Class are executed in strict mode
 }
+ */
 
 //* Setters and Getters
 
@@ -450,7 +451,7 @@
   //? Why Using Getters and Setters?
   // 1. It gives simpler syntax
   // 2. It allows equal syntax for properties and methods
-  // 3. 👉It can secure better data quality👈
+  // 3. 👉 It can secure better data quality 👈
   // 4. It is useful for doing things behind-the-scenes
 
   // Basic: Setters and Getters in regular object
@@ -459,7 +460,7 @@
     movements: [200, 530, 120, 300],
 
     get latest() {
-      return this._movements.slice(-1).pop();
+      return this.movements.slice(-1).pop();
     },
 
     set latest(movement) {
@@ -476,13 +477,14 @@
 
   // ================   =================
   //* Setters and Getters in ES6 Classes
+
   class PersonCl {
     constructor(fullName, birthYear) {
       this.fullName = fullName;
       this.birthYear = birthYear;
     }
 
-    //* Method will be added to .prototype property
+    // Method will be added to `.prototype` property
     calcAge() {
       console.log(2037 - this.birthYear);
     }
@@ -512,6 +514,10 @@
   console.log(jessica.fullName); // Jessica Davis
 
   console.log(jessica);
+
+  console.log(jessica.__proto__ === PersonCl.prototype); // true
+  console.log(jessica.__proto__.__proto__ === Object.prototype); // true
+  console.log(jessica.__proto__.__proto__.__proto__); // null
 }
  */
 
