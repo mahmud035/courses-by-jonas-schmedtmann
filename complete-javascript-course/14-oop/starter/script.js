@@ -4,7 +4,13 @@
 
 /* 
 {
-  // 👉Abstraction
+  // 📖 Read Lecture Notes Carefully: https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22649033#notes
+
+  // An instance is a real object that we can use which was created from a class.
+
+  // The 4 Fundamental OOP Principles:
+
+  // 👉 Abstraction
   // Abstraction involves hiding complex implementation details and showing only the essential features of an object.It allows us to focus on what an object does rather than how it does it.
 
   class Car {
@@ -26,11 +32,9 @@
   myCar.startEngine(); // Toyota Corolla's engine started.
   myCar.drive(); // Toyota Corolla is driving.
 
-  // In this example, the Car class abstracts the details of how the engine starts and how the car drives. Users of the class don't need to understand the internal workings; they only need to know how to start the engine and drive the car.
-}
+  // In this example, the `Car` class abstracts the details of how the engine starts and how the car drives. Users of the class don't need to understand the internal workings; they only need to know how to start the engine and drive the car.
 
-{
-  // 👉Encapsulation
+  // 👉 Encapsulation
   // Keeping properties and methods private inside the class, so they are not accessible from outside the class.
 
   class Person {
@@ -61,11 +65,9 @@
   john.greet(); // Hello, my name is John and I am 31 years old.
   john.setAge(-5); // Age must be a positive number.
 
-  // Here, the Person class encapsulates the name and _age variables. The _age variable is private and can only be accessed or modified through the getAge and setAge methods, ensuring controlled access.
-}
+  // Here, the `Person` class encapsulates the name and _age variables. The _age variable is private and can only be accessed or modified through the getAge and setAge methods, ensuring controlled access.
 
-{
-  // 👉Inheritance
+  // 👉 Inheritance
   // Inheritance allows a class (called a subclass) to inherit properties and methods from another class (called a superclass). This helps to create a hierarchical relationship and reuse code.
 
   class Animal {
@@ -93,11 +95,9 @@
   const myDog = new Dog('Rex', 'German Shepherd');
   myDog.speak(); // Rex barks.
 
-  // In this example, the Dog class inherits from the Animal class. The Dog class can use the name property and speak method from Animal, but it also overrides the speak method to provide its own implementation.
-}
+  // In this example, the `Dog` class inherits from the `Animal` class. The `Dog` class can use the name property and speak method from `Animal`, but it also overrides the speak method to provide its own implementation.
 
-{
-  // 👉Polymorphism
+  // 👉 Polymorphism
   // Polymorphism: A child class can overwrite a method it inherited from a parent class. It allows the same method to have different implementations in different child classes.
 
   class Bird {
@@ -132,12 +132,14 @@
 
   // Here, makeFly can accept any object that is a Bird or a subclass of Bird, demonstrating polymorphism by allowing different implementations of the fly method.
 }
-*/
+ */
 
-//* Constructor Functions and the new Operator
+//* Constructor Functions and the `new` Operator
 
 /* 
 {
+  // 📖 Read This Notes Carefully: https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22649039#notes
+
   function Person(firstName, birthYear) {
     // Instance properties
     this.firstName = firstName;
@@ -149,87 +151,102 @@
     // };
   }
 
-  //? IMPORTANT: How The "new" Operator Works:
-  // যখন constructor function কে "new" operator দিয়ে call করা হয়, তখন নিচের ঘটনা গুলো ঘটে 👇
+  // IMPORTANT: What Happens When We Use `new`?
+  // When we call a function with the `new` operator, four steps happen behind the scenes:
 
-  // 1. A new empty object {} is created
-  // 2. function is called, this = {}
-  // 3. {} linked to prototype
-  // 4. function automatically return the new object
+  // 1. A new empty object is created
+  // 2. The function is called, and in this function call, the `this` keyword is set to the newly created object i.e, `this = {}`
+  // 3. The newly created object is linked to the constructor function's `prototype` property
+  // 4. The new object is returned implicitly
 
-  // Create instance from constructor function
+  // Create instance from Constructor Function
   const jonas = new Person('Jonas', 1991);
   const matilda = new Person('Matilda', 2000);
 
-  console.log(jonas);
-  console.log(matilda);
+  console.log(jonas); // Person {firstName: 'Jonas', birthYear: 1991}
+  console.log(matilda); // Person {firstName: 'Matilda', birthYear: 2000}
 
   console.log(jonas instanceof Person); // true
   console.log(matilda instanceof Person); // true
+
+  // Adding Methods to the Prototype
+  // Instead of defining methods inside the constructor function, you can add them to the `prototype` to ensure they are shared among all instances:
+
+  Person.prototype.sayHello = function () {
+    console.log(
+      `Hello, my name is ${this.firstName} and my birth year is ${this.birthYear}.`
+    );
+  };
+
+  const bob = new Person('Bob', 1998);
+  bob.sayHello(); // Hello, my name is Bob and my birth year is 1998.
+
+  // Constructor functions are not a feature of the JavaScript language itself, but a pattern developed by developers. The real magic is in the `new` operator and the four steps it performs. Make sure you understand these steps, as they are fundamental to working with objects in JavaScript.
 }
  */
 
 //* Prototypes
 
-/* 
 {
+  // 🔗 Visit This Link First: https://chatgpt.com/share/393ee765-d71d-4064-ab93-a8f1049978d4
+  // 📖 Read This Notes Carefully: https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22649045#notes
+
   function Person(firstName, birthYear) {
-    // Instance properties
     this.firstName = firstName;
     this.birthYear = birthYear;
   }
 
-  //? IMPORTANT: How The "new" Operator Works:
-  // যখন constructor function কে "new" operator দিয়ে call করা হয়, তখন নিচের ঘটনা গুলো ঘটে 👇
+  // What Are Prototypes?
+  // In JavaScript, every object and function has a hidden internal property called `[[Prototype]]`. This property can be another object or null, and it forms the basis of JavaScript's prototype chain.
 
-  // 1. A new empty object {} is created
-  // 2. function is called, this = {}
-  // 3. {} linked to prototype
-  // 4. function automatically return the new object
+  // IMPORTANT: How Prototypal Inheritance Works:
+  //* Constructor Function এর `prototype` property এর মধ্যে আমরা যতগুলো Method Add করবো, সেই Methods গুলোকে ঐ Constructor Function ব্যবহার করে তৈরি করা প্রতিটা instance access করতে পারবে।
+
+  //* For example: নিচে, `Person` Constructor Function এর `prototype` property এর মধ্যে `calcAge` নামে একটা Method Add করেছি। এখন এই `calcAge` Method কে `Person` Constructor Function ব্যবহার করে তৈরি করা ২ টা instance (`jonas` & `matilda`) access করতে পারবে। এভাবে, `prototype` property এর মধ্যে যতগুলো Method Add করবো, সেই সবগুলো Method কে ঐ Constructor Function ব্যবহার করে তৈরি করা প্রতিটা instance access করতে পারবে। এটাকেই "Prototypal Inheritance" বলে।
+
+  // Adding a Method to the Constructor
+  Person.prototype.calcAge = function () {
+    console.log(2037 - this.birthYear);
+  };
 
   // Create instance from constructor function
   const jonas = new Person('Jonas', 1991);
   const matilda = new Person('Matilda', 2000);
 
-  console.log(jonas);
-  console.log(matilda);
+  console.log(jonas); // Person {firstName: 'Jonas', birthYear: 1991}
+  console.log(matilda); // Person {firstName: 'Matilda', birthYear: 2000}
 
-  console.log(jonas instanceof Person); // true
-  console.log(matilda instanceof Person); // true
-
-  //* Prototypes
-  // In JavaScript, every object and function has a hidden internal property called [[Prototype]]. This property can be another object or null, and it forms the basis of JavaScript's prototype chain.
-
-  //? IMPORTANT: How Prototypal Inheritance Works:
-  //* Constructor function এর "prototype" property এর মধ্যে আমরা যতগুলো Method Add করবো, সেই Methods গুলোকে ঐ Constructor function ব্যবহার করে তৈরি করা প্রতিটা instance access করতে পারবে।
-
-  //* For example: নিচে, Person constructor function এর "prototype" property এর মধ্যে calcAge নামে একটা Method Add করেছি। এখন এই calcAge Method কে Person constructor function ব্যবহার করে তৈরি করা ২ টা instance (jonas & matilda) access করতে পারবে। এভাবে, "prototype" property এর মধ্যে যতগুলো Method Add করবো, সেই সবগুলো Method কে ঐ Constructor function ব্যবহার করে তৈরি করা প্রতিটা instance access করতে পারবে। এটাকেই Prototypal Inheritance বলে।
-
-  // Adding a Method to a Constructor
-  Person.prototype.calcAge = function () {
-    console.log(2037 - this.birthYear);
-  };
-
-  jonas.calcAge(); // 46   NOTE: (Access calcAge method using Prototypal Inheritance)
-  matilda.calcAge(); // 37 NOTE: (Access calcAge method using Prototypal Inheritance)
+  jonas.calcAge(); // 46    NOTE: (Access `calcAge` method using Prototypal Inheritance)
+  matilda.calcAge(); // 37  NOTE: (Access `calcAge` method using Prototypal Inheritance)
 
   console.log(jonas.__proto__);
   console.log(Person.prototype);
-
   console.log(jonas.__proto__ === Person.prototype); // true
 
   console.log(Person.prototype.isPrototypeOf(jonas)); // true
   console.log(Person.prototype.isPrototypeOf(matilda)); // true
   console.log(Person.prototype.isPrototypeOf(Person)); // false
 
-  // Adding a Property to a Constructor
+  // Adding a Property to the Constructor
   Person.prototype.species = 'Home Sapiens';
-  // console.log(jonas.species, matilda.species);
 
+  console.log(jonas.species, matilda.species);
   console.log(jonas.hasOwnProperty('firstName')); // true
-  console.log(jonas.hasOwnProperty('species')); // false => because (species is on the prototype)
+  console.log(jonas.hasOwnProperty('species')); // false => because (species is on the `prototype`)
+
+  // NOTE: Key Takeaways
+  // Every function in JavaScript automatically has a `prototype` property, including constructor functions.
+
+  // Objects created by a constructor function inherit methods and properties defined on the constructor's `prototype` property.
+
+  // The `__proto__` property of an object points to the `prototype` from which it inherits.
+
+  // Prototypal inheritance allows sharing methods and properties efficiently without duplicating them on each object.
+
+  // Properties can also be added to the `prototype`, and objects will inherit access to these properties.
+
+  // The `hasOwnProperty` method can be used to distinguish between own properties and inherited properties.
 }
- */
 
 //* Prototypal Inheritance and The Prototype Chain
 //* Prototypal Inheritance on Built-In Objects
@@ -254,9 +271,9 @@
   //* Prototypal Inheritance
 
   //? IMPORTANT: How Prototypal Inheritance Works:
-  //* Constructor function এর "prototype" property এর মধ্যে আমরা যতগুলো Method Add করবো, সেই Methods গুলোকে ঐ Constructor function ব্যবহার করে তৈরি করা প্রতিটা instance access করতে পারবে।
+  //* Constructor Function এর "prototype" property এর মধ্যে আমরা যতগুলো Method Add করবো, সেই Methods গুলোকে ঐ Constructor Function ব্যবহার করে তৈরি করা প্রতিটা instance access করতে পারবে।
 
-  //* For example: নিচে, Person constructor function এর "prototype" property এর মধ্যে calcAge নামে একটা Method Add করেছি। এখন এই calcAge Method কে Person constructor function ব্যবহার করে তৈরি করা ২ টা instance (jonas & matilda) access করতে পারবে। এভাবে, "prototype" property এর মধ্যে যতগুলো Method Add করবো, সেই সবগুলো Method কে ঐ Constructor function ব্যবহার করে তৈরি করা প্রতিটা instance access করতে পারবে। এটাকেই Prototypal Inheritance বলে।
+  //* For example: নিচে, Person Constructor Function এর "prototype" property এর মধ্যে calcAge নামে একটা Method Add করেছি। এখন এই calcAge Method কে Person Constructor Function ব্যবহার করে তৈরি করা ২ টা instance (jonas & matilda) access করতে পারবে। এভাবে, "prototype" property এর মধ্যে যতগুলো Method Add করবো, সেই সবগুলো Method কে ঐ Constructor function ব্যবহার করে তৈরি করা প্রতিটা instance access করতে পারবে। এটাকেই Prototypal Inheritance বলে।
 
   // Adding a Method to a Constructor
   Person.prototype.calcAge = function () {
