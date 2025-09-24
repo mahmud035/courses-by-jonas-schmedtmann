@@ -253,6 +253,7 @@
 //* Prototypal Inheritance and The Prototype Chain
 //* Prototypal Inheritance on Built-In Objects
 
+/* 
 {
   // 🔗 Visit This Link First: https://chatgpt.com/share/393ee765-d71d-4064-ab93-a8f1049978d4
   // 📖 Read Previous Lecture Notes Carefully
@@ -319,7 +320,7 @@
   console.log(jonas.__proto__.__proto__ === Object.prototype); // true
 
   // 3 level deep
-  console.log(jonas.__proto__.__proto__.__proto__ === null); // true
+  console.log(jonas.__proto__.__proto__.__proto__); // null
 
   // NOTE: The chain here looks like: `jonas` -> `Person.prototype` -> `Object.prototype` -> `null`
 
@@ -328,6 +329,7 @@
 
   // Ex:2 Prototype Chain with built in Constructor Array
   const array = [1, 2, 3, 4, 5]; // [] === new Array()
+  console.log(array);
 
   // 1 level deep
   console.log(array.__proto__);
@@ -340,14 +342,15 @@
   console.log(array.__proto__.__proto__ === Object.prototype); // true
 
   // 3 level deep
-  console.log(array.__proto__.__proto__.__proto__ === null); // true
+  console.log(array.__proto__.__proto__.__proto__); // null
 }
+ */
 
 //* ES6 Classes
 
 /* 
 {
-  // ES6 (ECMAScript 2015) introduced classes to JavaScript, which provide a much cleaner and more intuitive syntax for creating objects and dealing with inheritance. Although JavaScript has always been a prototype-based language, classes allow for a more familiar, class-based approach to object-oriented programming.
+  // ES6 introduced classes to JavaScript, which provide a much cleaner and more intuitive syntax for creating objects and dealing with inheritance. Although JavaScript has always been a prototype-based language, classes allow for a more familiar, class-based approach to object-oriented programming.
 
   // Basic Syntax
   class Person {
@@ -356,8 +359,7 @@
       this.age = age;
     }
 
-    // Method inside a class
-    //* Method will be added to .prototype property
+    // Method will be added to `.prototype` property automatically
     greet() {
       console.log(`My name is ${this.name} and I am ${this.age} years old.`);
     }
@@ -365,14 +367,13 @@
 
   // Creating an instance of the Person class
   const person1 = new Person('Mahmud', 25);
-  person1.greet(); // My name is Mahmud and I am 25 years old.
+  person1.greet(); // Inherited method from Person class
 
-  // 👉Inheritance: Classes in ES6 also support inheritance, allowing you to create a hierarchy of classes that inherit from each other.
+  // 👉 Inheritance: Classes in ES6 also support inheritance, allowing you to create a hierarchy of classes that inherit from each other.
 
   class Student extends Person {
     constructor(name, age, studentId) {
-      // Call the parent class constructor
-      super(name, age);
+      super(name, age); // Call the parent class constructor
       this.studentId = studentId;
     }
 
@@ -384,8 +385,9 @@
 
   // Creating an instance of the Student class
   const student1 = new Student('Ayesha', 22, 'S12345');
-  student1.greet(); // My name is Ayesha and I am 22 years old.
-  student1.study(); // Ayesha is studying.
+  student1.greet(); // Inherited method from Person class
+  student1.study(); // Inherited method from Student class
+  console.log(student1);
 
   // Static Methods: Methods that belong to the class itself rather than any object instantiated from the class.
   class MathUtil {
@@ -400,7 +402,6 @@
 
 // Lecture Code
 
-/* 
 {
   class PersonCl {
     constructor(firstName, birthYear) {
@@ -408,7 +409,7 @@
       this.birthYear = birthYear;
     }
 
-    //* Method will be added to .prototype property
+    // Methods will be added to `.prototype` property automatically
     calcAge() {
       console.log(2037 - this.birthYear);
     }
@@ -421,11 +422,14 @@
   // Creating an instance of the PersonCl class
   const jessica = new PersonCl('Jessica', 1996);
   jessica.calcAge(); // 41
+  jessica.greet();
   console.log(jessica);
 
-  console.log(jessica.__proto__ === PersonCl.prototype); // true
+  console.log(jessica.__proto__ === PersonCl.prototype); // true (1 level deep)
+  console.log(jessica.__proto__.__proto__ === Object.prototype); // true (2 level deep)
+  console.log(jessica.__proto__.__proto__.__proto__); // null (3 level deep)
 
-  // IMPORTANT: Adding method into PersonCl class "Manually" using "prototype"
+  // IMPORTANT: Adding method into `PersonCl` class "Manually" using "prototype"
   // NOTE: No need to do this 👇 when using class Syntax, because class uses "prototype" behind the scene to Add the Method.
 
   // PersonCl.prototype.greet = function () {
@@ -438,7 +442,6 @@
   // 2. Class are first-class citizen
   // 3. Class are executed in strict mode
 }
- */
 
 //* Setters and Getters
 
