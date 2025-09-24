@@ -525,12 +525,12 @@
 
 /* 
 {
-  // NOTE: The static keyword defines a static method or property for a class. Static properties cannot be directly accessed on instances of the class. Instead, they're accessed on the class itself. (mdn)
+  // NOTE: The `static` keyword defines a static method or property for a class. Static properties cannot be directly accessed on instances of the class. Instead, they're accessed on the class itself. (mdn)
 
   // NOTE: Key Points
   // 1. Static methods are called on the class itself, not on instances of the class.
   // 2. They are useful for utility functions, helper methods, and factory patterns.
-  // 3. Static methods do not have access to this keyword, which refers to instance-specific properties and methods.
+  // 3. Static methods do not have access to `this` keyword, which refers to instance-specific properties and methods.
 
   // Ex: 1
   class ClassWithStaticMethod {
@@ -546,12 +546,10 @@
 
   // Ex: 2
   class MathUtilities {
-    // A static method
     static add(a, b) {
       return a + b;
     }
 
-    // Another static method
     static multiply(a, b) {
       return a * b;
     }
@@ -561,7 +559,7 @@
   console.log(MathUtilities.add(5, 3)); // 8
   console.log(MathUtilities.multiply(5, 3)); // 15
 
-  // In this example, add and multiply are static methods. They are called on the MathUtilities class directly, without creating an instance of the class.
+  // In this example, `add` and `multiply` are static methods. They are called on the MathUtilities class directly, without creating an instance of the class.
 
   // Example of a static method being used in a factory pattern:
   // Ex: 3
@@ -601,7 +599,7 @@
     console.log(`Hey there ✋`);
   };
 
-  // NOTE: Add a static method into Person constructor function. It will not be inherited by the instance of the Person constructor. Because it is not inside the Person's constructor prototype.
+  // NOTE: Add a static method into Person constructor function. It will NOT be inherited by the instance of the Person constructor. Because it is not inside the Person's constructor prototype.
   Person.hey();
   // jonas.hey(); // TypeError: jonas.hey is not a function
 }
@@ -609,7 +607,6 @@
 
 //* Object.create()
 
-/* 
 {
   // IMPORTANT: Object.create() creates a new object and the prototype of the that object will be the object that we passed in.
 
@@ -687,7 +684,6 @@
   // Flexibility: It provides flexibility in creating objects with specific prototypes and properties.
   // Simplicity: It can be simpler and more intuitive compared to constructor functions or ES6 classes for certain use cases.
 }
- */
 
 // Lecture Code
 
