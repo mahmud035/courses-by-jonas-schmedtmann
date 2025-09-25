@@ -899,58 +899,29 @@
 }
  */
 
-//* Encapsulation: Protected Properties and Methods => using underscore (_) convention
-
-/* 
-{
-  class Account {
-    constructor(owner, currency, pin) {
-      this.owner = owner;
-      this.currency = currency;
-      // Protected property (convention)
-      this._pin = pin;
-      this._movements = [];
-      this.locale = navigator.language;
-    }
-
-    _approveLoan(value) {
-      return true;
-    }
-
-    // Public Interface (API)
-    getMovements() {
-      return this._movements;
-    }
-
-    deposit(value) {
-      this._movements.push(value);
-    }
-
-    withdraw(value) {
-      this.deposit(-value);
-    }
-
-    requestLoan(value) {
-      if (this._approveLoan(value)) {
-        this.deposit(value);
-        console.log(`Loan approved`);
-      }
-    }
-  }
-
-  const account1 = new Account('Jonas', 'EUR', 1111);
-  console.log(account1.getMovements());
-}
- */
-
 //* Encapsulation: Private Class Fields and Methods
 
-/* 
 {
-  class Account {
-    // NOTE: Private fields are added before the constructor runs in a base class.
+  // Make sure to review both the links and notes carefully 💚
 
-    //* Private fields
+  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/Private_properties
+  // https://chatgpt.com/share/7451f2f1-fd25-4d98-95bf-460c2494068e
+
+  // Most class elements have their private counterparts:
+
+  // Private fields
+  // Private methods
+  // Private static fields
+  // Private static methods
+  // Private getters
+  // Private setters
+  // Private static getters
+  // Private static setters
+
+  // These features are collectively called "private elements".
+
+  class Account {
+    // Private fields
     #pin;
     #movements = [];
 
@@ -963,17 +934,17 @@
       console.log(`Thanks for opening an account, ${owner}.`);
     }
 
-    //* Private Methods
+    // Private method
     #approveLoan(value) {
+      // Fake method
       return true;
     }
 
-    //* Public method to access the private field
+    // Public methods
     getMovements() {
       return this.#movements;
     }
 
-    // Public Methods
     deposit(value) {
       this.#movements.push(value);
     }
@@ -992,20 +963,18 @@
 
   // Create instance from Account class
   const account1 = new Account('Jonas', 'EUR', 1111);
-  account1.deposit(500); // Deposit 500
-  account1.withdraw(200); // Withdraw 200
-  account1.requestLoan(100); // Request a loan of 100
+  account1.deposit(500);
+  account1.withdraw(200);
+  account1.requestLoan(100);
+  console.log(account1.getMovements());
 
-  console.log(account1.getMovements()); // Output: [500, -200, 100]
-
-  //! The following lines will produce errors because they attempt to access private fields/methods:
-  // console.log(account1.#pin); // Error
-  // console.log(account1.#movements); // Error
-  // console.log(account1.#approveLoan(30)); // Error
+  // The following lines will produce errors because they attempt to access private fields/methods:
+  // account1.#pin; // SyntaxError
+  // account1.#movements; // SyntaxError
+  // account1.#approveLoan(30); // SyntaxError
 
   console.log(account1); // Output: Account { owner: 'Jonas', currency: 'EUR', locale: 'en-US' }
 }
- */
 
 //* Chaining Methods
 
