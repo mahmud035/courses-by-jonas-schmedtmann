@@ -607,6 +607,7 @@
 
 //* Object.create()
 
+/* 
 {
   // IMPORTANT: Object.create() creates a new object and the prototype of the that object will be the object that we passed in.
 
@@ -684,6 +685,7 @@
   // Flexibility: It provides flexibility in creating objects with specific prototypes and properties.
   // Simplicity: It can be simpler and more intuitive compared to constructor functions or ES6 classes for certain use cases.
 }
+ */
 
 // Lecture Code
 
@@ -734,7 +736,7 @@
 
   // Child
   function Student(firstName, birthYear, course) {
-    // NOTE: Here we called Person constructor function as a regular function. And in a regular function call, in strict mode, this is set to undefined. So, we need to manually set the this keyword as well.
+    // NOTE: Here we called `Person` constructor function as a regular function. And in a regular function call, in strict mode, `this` is set to undefined. So, we need to manually set the `this` keyword as well.
     Person.call(this, firstName, birthYear);
     this.course = course;
   }
@@ -760,7 +762,7 @@
   Student.prototype.constructor = Student;
   console.dir(Student.prototype.constructor);
 
-  // console.log(mike);
+  console.log(mike);
 }
  */
 
@@ -796,7 +798,7 @@
       console.log(`My name is ${this.firstName} and I study ${this.course}`);
     }
 
-    //* NOTE: Overwrite the calcAge method (Polymorphism)
+    // NOTE: Overwrite the `calcAge` method (Polymorphism)
     calcAge() {
       console.log(`I am ${2037 - this.birthYear} years old`);
     }
@@ -852,17 +854,19 @@
 /* 
 {
   class Account {
+    #pin; // private field
+
     constructor(owner, currency, pin) {
       this.owner = owner;
       this.currency = currency;
-      this.pin = pin;
+      this.#pin = pin;
       this.movements = [];
       this.locale = navigator.language;
 
       console.log(`Thanks for opening an account, ${owner}.`);
     }
 
-    // Public Interface (API)
+    // public method
     deposit(value) {
       this.movements.push(value);
     }
@@ -872,12 +876,13 @@
       this.deposit(-value);
     }
 
-    approveLoan(value) {
+    // private method
+    #approveLoan(value) {
       return true;
     }
 
     requestLoan(value) {
-      if (this.approveLoan(value)) {
+      if (this.#approveLoan(value)) {
         this.deposit(value);
         console.log(`Loan approved`);
       }
@@ -890,6 +895,7 @@
   account1.requestLoan(100);
 
   console.log(account1);
+  // console.log(account1.#pin); // Property '#pin' is not accessible outside class 'Account' because it has a private identifier.
 }
  */
 
