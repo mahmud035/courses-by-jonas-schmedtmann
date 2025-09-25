@@ -1040,3 +1040,227 @@
   console.log(account1.getMovements()); // [400, 500, -300, 2000, -1000]
 }
  */
+
+//* ES6 Classes Summary
+
+// Claude AI
+
+// 👁️ MUST SEE: Slide (ES6 Classes Summary)
+// 👁️ ALSO MUST SEE (Code Link): https://claude.ai/public/artifacts/a76d7361-a18a-4c37-9826-1dfe7852983d?fullscreen=true
+// 📖 READ Claude AI Generated Code Patiently and Carefully
+
+// 🧠 Article Link: https://claude.ai/share/e430e356-703d-4325-ab4d-2e7179e5ea55
+
+// ==================== ES6 CLASSES COMPLETE REFERENCE ====================
+// Classes are "syntactic sugar" over constructor functions
+// Classes are NOT hoisted and are first-class citizens
+// Class body is ALWAYS executed in strict mode
+
+// ==================== PARENT CLASS ====================
+class Person {
+  // Public field (similar to property, available on created object)
+  nationality = 'Portuguese';
+
+  // Constructor method - called by new operator, mandatory in regular class
+  constructor(fullName, birthYear) {
+    // Instance properties (available on created object)
+    this.fullName = fullName;
+    this.birthYear = birthYear;
+  }
+
+  // Public method
+  calcAge() {
+    return 2024 - this.birthYear;
+  }
+
+  // Public method
+  greet() {
+    console.log(`Hey ${this.fullName}!`);
+  }
+}
+
+// ==================== CHILD CLASS ====================
+class Student extends Person {
+  // Inheritance between classes, automatically sets prototype
+
+  // Public field (similar to property, available on created object)
+  university = 'University of Lisbon';
+
+  // Private fields (not accessible outside of class) - use # prefix
+  #studyHours = 0;
+  #course;
+
+  // Static public field (available only on class)
+  static numSubjects = 10;
+
+  // Constructor method - called by new operator, might be omitted in child class
+  constructor(fullName, birthYear, startYear, course) {
+    // Call to parent (super) class - necessary with extend
+    // Needs to happen before accessing 'this'
+    super(fullName, birthYear);
+
+    // Instance property (available on created object)
+    this.startYear = startYear;
+
+    // Redefining private field
+    this.#course = course;
+  }
+
+  // Public method
+  introduce() {
+    console.log(`I study ${this.#course} at ${this.university}`);
+  }
+
+  // Public method that references private field and method
+  study(hours) {
+    this.#makeCoffee(); // Referencing private method
+    this.#studyHours += hours;
+    console.log(`Studied for ${hours} hours. Total: ${this.#studyHours} hours`);
+  }
+
+  // Private method
+  #makeCoffee() {
+    return 'Here is a coffee for you 🍵';
+  }
+
+  // Getter method - access like property: student.testScore
+  get testScore() {
+    return this._testScore || 0;
+  }
+
+  // Setter method - use _ to set property with same name as method, also auto-adds getter
+  set testScore(score) {
+    this._testScore = score <= 20 ? score : 0;
+  }
+
+  // Get current academic year
+  get currentYear() {
+    return new Date().getFullYear();
+  }
+
+  // Get years studied
+  get yearsStudied() {
+    return this.currentYear - this.startYear;
+  }
+
+  // Static method (available only on class - cannot access instance properties/methods, only static ones)
+  static printCurriculum() {
+    console.log(`There are ${this.numSubjects} subjects in our curriculum`);
+  }
+
+  // Static method with parameter (Factory Pattern)
+  static createMedicalStudent(fullName, birthYear, startYear) {
+    return new this(fullName, birthYear, startYear, 'Medicine');
+  }
+}
+
+// ==================== USAGE EXAMPLES ====================
+
+// Creating new object with new operator
+const student = new Student('Jonas', 1995, 2020, 'Medicine');
+
+// Accessing public properties and methods
+console.log(student.fullName); // 'Jonas'
+console.log(student.university); // 'University of Lisbon'
+student.introduce(); // 'I study Medicine at University of Lisbon'
+
+// Using inherited methods from parent class
+student.greet(); // 'Hey Jonas!'
+console.log(student.calcAge()); // 29
+
+// Using getters and setters
+student.testScore = 18; // Uses setter
+console.log(student.testScore); // 18 (uses getter)
+student.testScore = 25; // Uses setter, but sets to 0 due to validation
+console.log(student.testScore); // 0
+
+// Using other getters
+console.log(student.yearsStudied); // 4
+
+// Public method usage
+student.study(3); // 'Studied for 3 hours. Total: 3 hours'
+
+// Accessing private fields/methods directly will cause error:
+// console.log(student.#studyHours); // SyntaxError
+// student.#makeCoffee(); // SyntaxError
+
+// Static method calls (on class, not instance)
+Student.printCurriculum(); // 'There are 10 subjects in our curriculum'
+console.log(Student.numSubjects); // 10
+
+// Static factory method
+const medStudent = Student.createMedicalStudent('Sarah', 1998, 2021);
+console.log(medStudent); // New Student instance with Medicine course
+
+// ==================== KEY CONCEPTS SUMMARY ====================
+/*
+1. PUBLIC FIELDS: Available on all instances (university = 'value')
+2. PRIVATE FIELDS: Only accessible within class (#studyHours, #course)
+3. STATIC FIELDS: Available only on class itself (numSubjects)
+4. CONSTRUCTOR: Called by 'new', sets up instance
+5. SUPER(): Calls parent constructor, must come before 'this'
+6. PUBLIC METHODS: Available on all instances (introduce, study)
+7. PRIVATE METHODS: Only accessible within class (#makeCoffee)
+8. STATIC METHODS: Available only on class (printCurriculum)
+9. GETTERS: Access like property (get testScore)
+10. SETTERS: Set like property (set testScore)
+11. INHERITANCE: 'extends' creates prototype chain
+12. POLYMORPHISM: Child can override parent methods
+*/
+
+// Code From Slide
+
+/* 
+{
+  // Parent Class
+  class Person {
+    constructor(fullName, birthYear) {
+      this.fullName = fullName;
+      this.birthYear = birthYear;
+    }
+  }
+
+  // Child Class
+  class Student extends Person {
+    university = 'University of Lisbon';
+    #studyHours = 0;
+    #course;
+    static numSubjects = 10;
+
+    constructor(fullName, birthYear, startYear, course) {
+      super(fullName, birthYear);
+
+      this.startYear = startYear;
+      this.#course = course;
+    }
+
+    introduce() {
+      console.log(`I study ${this.#course} at ${this.university}`);
+    }
+
+    study(h) {
+      this.#makeCoffee();
+      this.#studyHours += h;
+    }
+
+    #makeCoffee() {
+      return `Here is a coffee for you 🍵`;
+    }
+
+    get testScore() {
+      return this._testScore;
+    }
+
+    set testScore(score) {
+      this._testScore = score <= 20 ? score : 0;
+    }
+
+    static printCurriculum() {
+      console.log(`There are ${this.numSubjects} subjects`);
+    }
+  }
+
+  const student = new Student('Jonas', 2020, 2037, 'Medicine');
+  console.log(student);
+}
+ */
