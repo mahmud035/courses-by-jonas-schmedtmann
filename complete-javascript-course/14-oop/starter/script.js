@@ -901,6 +901,7 @@
 
 //* Encapsulation: Private Class Fields and Methods
 
+/* 
 {
   // Make sure to review both the links and notes carefully 💚
 
@@ -975,11 +976,16 @@
 
   console.log(account1); // Output: Account { owner: 'Jonas', currency: 'EUR', locale: 'en-US' }
 }
+ */
 
 //* Chaining Methods
 
 /* 
 {
+  // IMPORTANT:
+  // In order to chain methods, We have to return `this` (current object) inside methods.
+  // Return `this` means return current object.
+
   class Account {
     #pin;
     #movements = [];
@@ -997,12 +1003,10 @@
       return true;
     }
 
-    // Public method to access the private field
     getMovements() {
       return this.#movements;
     }
 
-    // Public Methods
     deposit(value) {
       this.#movements.push(value);
       return this; // return current object for chaining
@@ -1010,7 +1014,7 @@
 
     withdraw(value) {
       this.deposit(-value);
-      return this; // return current object
+      return this; // return current object for chaining
     }
 
     requestLoan(value) {
@@ -1032,6 +1036,7 @@
     .requestLoan(2000)
     .withdraw(1000);
 
+  console.log(account1);
   console.log(account1.getMovements()); // [400, 500, -300, 2000, -1000]
 }
  */
