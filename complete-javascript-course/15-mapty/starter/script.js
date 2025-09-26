@@ -1,21 +1,8 @@
 'use strict';
 
-const months = [
-  'January',
-  'February',
-  'March',
-  'April',
-  'May',
-  'June',
-  'July',
-  'August',
-  'September',
-  'October',
-  'November',
-  'December',
-];
+// https://claude.ai/share/1bf69f5f-4974-4f8e-96db-fc56cfeb2988
 
-// Selecting Elements
+// Selecting Elements (moved outside class for global access)
 const form = document.querySelector('.form');
 const containerWorkouts = document.querySelector('.workouts');
 const inputType = document.querySelector('.form__input--type');
@@ -24,170 +11,416 @@ const inputDuration = document.querySelector('.form__input--duration');
 const inputCadence = document.querySelector('.form__input--cadence');
 const inputElevation = document.querySelector('.form__input--elevation');
 
-let map;
-let mapEvent;
+// Workout Base Class
+class Workout {
+  date = new Date(); // Keep this for consistent timestamps
+  id = crypto.randomUUID();
+  #clicks = 0;
 
-const getTime = () => {
-  const date = new Date();
-  const locale = navigator.language;
-  const options = { month: 'long', day: '2-digit' };
-  const time = new Intl.DateTimeFormat(locale, options).format(date);
-  return time;
-};
-
-// Initialize map with fallback coordinates
-const initMap = (coords = [51.505, -0.09]) => {
-  console.log('Initializing map with coordinates:', coords);
-
-  // Clear any existing map
-  if (map) map.remove();
-
-  try {
-    // Create map
-    map = L.map('map').setView(coords, 13);
-
-    // Add tile layer with error handling
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '© OpenStreetMap contributors',
-    }).addTo(map);
-
-    console.log('Map initialized successfully');
-
-    // Handle clicks on map
-    map.on('click', (mapE) => {
-      mapEvent = mapE;
-      form.classList.remove('hidden');
-      inputDistance.focus();
-    });
-
-    // Add a marker at the center to confirm map is working
-    L.marker(coords)
-      .addTo(map)
-      .bindPopup('Map initialized successfully!')
-      .openPopup();
-  } catch (error) {
-    console.error('Error initializing map:', error);
-    alert('Error loading map. Please refresh the page.');
+  constructor(coords, distance, duration) {
+    this.coords = coords; // [lat, lng]
+    this.distance = distance; // in km
+    this.duration = duration; // in min
   }
-};
 
-// Check if geolocation is supported and get position
-if (navigator.geolocation) {
-  console.log('Geolocation is supported, requesting position...');
+  setDescription() {
+    const months = [
+      'January',
+      'February',
+      'March',
+      'April',
+      'May',
+      'June',
+      'July',
+      'August',
+      'September',
+      'October',
+      'November',
+      'December',
+    ];
 
-  navigator.geolocation.getCurrentPosition(
-    (position) => {
-      console.log('Geolocation success:', position);
-      const { latitude, longitude } = position.coords;
-      const coords = [latitude, longitude];
-      initMap(coords);
-    },
+    this.description = `${this.type.at(0).toUpperCase()}${this.type.slice(
+      1
+    )} on ${months[this.date.getMonth()]} ${this.date.getDate()}`;
+  }
 
-    (error) => {
-      console.error('Geolocation error:', error);
+  click() {
+    this.#clicks++;
+  }
 
-      let errorMessage = '';
-      switch (error.code) {
-        case error.PERMISSION_DENIED:
-          errorMessage = 'Location access denied. Using default location.';
-          break;
-        case error.POSITION_UNAVAILABLE:
-          errorMessage =
-            'Location information unavailable. Using default location.';
-          break;
-        case error.TIMEOUT:
-          errorMessage = 'Location request timed out. Using default location.';
-          break;
-        default:
-          errorMessage = 'An unknown error occurred. Using default location.';
-          break;
-      }
-
-      console.log(errorMessage);
-      alert(errorMessage);
-
-      // Initialize with default coordinates (London)
-      initMap();
-    },
-    {
-      // Geolocation options
-      timeout: 10000, // 10 seconds
-      enableHighAccuracy: true,
-      maximumAge: 60000, // 1 minute
-    }
-  );
-} else {
-  console.log('Geolocation not supported, using default location');
-  alert(
-    'Geolocation is not supported by this browser. Using default location.'
-  );
-  initMap();
+  getClicks() {
+    return this.#clicks;
+  }
 }
 
-// Input type change handler
-inputType.addEventListener('change', () => {
-  inputElevation.parentElement.classList.toggle('form__row--hidden');
-  inputCadence.parentElement.classList.toggle('form__row--hidden');
-});
+// Running Workout Class
+class Running extends Workout {
+  type = 'running';
 
-// Form submission handler
-form.addEventListener('submit', (e) => {
-  e.preventDefault();
-
-  if (!mapEvent) {
-    alert('Please click on the map first to select a location.');
-    return;
+  constructor(coords, distance, duration, cadence) {
+    super(coords, distance, duration);
+    this.cadence = cadence;
+    this.#calcPace();
+    this.setDescription();
   }
 
-  // Get form values
-  const type = inputType.value;
-  const distance = inputDistance.value;
-  const duration = inputDuration.value;
-  const cadence = inputCadence.value;
-  const elevation = inputElevation.value;
+  #calcPace() {
+    // min/km
+    this.pace = this.duration / this.distance;
+    return this.pace;
+  }
+}
 
-  // Basic validation
-  if (!distance || !duration) {
-    alert('Please fill in distance and duration.');
-    return;
+// Cycling Working Class
+class Cycling extends Workout {
+  type = 'cycling';
+
+  constructor(coords, distance, duration, elevationGain) {
+    super(coords, distance, duration);
+    this.elevationGain = elevationGain;
+    this.#calcSpeed();
+    this.setDescription();
   }
 
-  // Clear input fields
-  inputDistance.value =
-    inputDuration.value =
-    inputCadence.value =
-    inputElevation.value =
-      '';
+  #calcSpeed() {
+    // km/h
+    this.speed = this.distance / (this.duration / 60);
+    return this.speed;
+  }
+}
 
-  // Display marker & popup
-  const { lat, lng } = mapEvent.latlng;
-  const clickedCoords = [lat, lng];
+// Main Application Class
+class App {
+  #map;
+  #mapZoomLevel = 13;
+  #mapEvent;
+  #workouts = [];
 
-  const workoutEmoji = type === 'running' ? '🏃‍♂️' : '🚴‍♀️';
-  const popupClass = `${type}-popup`;
+  constructor() {
+    // Get user's position
+    this.#getPosition();
 
-  L.marker(clickedCoords)
-    .addTo(map)
-    .bindPopup(
-      L.popup({
-        maxWidth: 250,
-        minWidth: 100,
-        autoClose: false,
-        closeOnClick: false,
-        className: popupClass,
-        content: `${workoutEmoji} ${
-          type.charAt(0).toUpperCase() + type.slice(1)
-        } on ${getTime()}`,
-      })
-    )
-    .openPopup();
+    // Get data from local storage
+    this.#getLocalStorage();
 
-  form.classList.add('hidden');
+    // Attach event handlers
+    form.addEventListener('submit', (e) => this.#newWorkout(e));
+    inputType.addEventListener('change', this.#toggleElevationField);
+    containerWorkouts.addEventListener('click', (e) => this.#moveToPopup(e));
+  }
 
-  console.log('Workout added:', {
-    type,
-    distance,
-    duration,
-    coords: clickedCoords,
-  });
-});
+  #getPosition() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => this.#loadMap(position),
+        (error) => {
+          console.error('Geolocation error:', error);
+
+          let errorMessage = '';
+          switch (error.code) {
+            case error.PERMISSION_DENIED:
+              errorMessage = 'Location access denied. Using default location.';
+              break;
+            case error.POSITION_UNAVAILABLE:
+              errorMessage =
+                'Location information unavailable. Using default location.';
+              break;
+            case error.TIMEOUT:
+              errorMessage =
+                'Location request timed out. Using default location.';
+              break;
+            default:
+              errorMessage =
+                'An unknown error occurred. Using default location.';
+              break;
+          }
+
+          alert(errorMessage);
+          this.#loadMap();
+        },
+        {
+          timeout: 10000,
+          enableHighAccuracy: true,
+          maximumAge: 60000,
+        }
+      );
+    } else {
+      alert('Geolocation is not supported. Using default location.');
+      this.#loadMap();
+    }
+  }
+
+  #loadMap(position) {
+    let coords;
+
+    if (position) {
+      const { latitude, longitude } = position.coords;
+      coords = [latitude, longitude];
+    } else {
+      coords = [51.505, -0.09]; // London default
+    }
+
+    this.#map = L.map('map').setView(coords, this.#mapZoomLevel);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© OpenStreetMap contributors',
+    }).addTo(this.#map);
+
+    // Handling clicks on map
+    this.#map.on('click', (mapE) => this.#showForm(mapE));
+
+    // Render markers for stored workouts
+    this.#workouts.forEach((work) => {
+      this.#renderWorkoutMarker(work);
+    });
+  }
+
+  #showForm(mapE) {
+    this.#mapEvent = mapE;
+    form.classList.remove('hidden');
+    inputDistance.focus();
+  }
+
+  #hideForm() {
+    // Empty inputs
+    inputDistance.value =
+      inputDuration.value =
+      inputCadence.value =
+      inputElevation.value =
+        '';
+
+    form.style.display = 'none';
+    form.classList.add('hidden');
+    setTimeout(() => (form.style.display = 'grid'), 1000);
+  }
+
+  #toggleElevationField() {
+    inputElevation.closest('.form__row').classList.toggle('form__row--hidden');
+    inputCadence.closest('.form__row').classList.toggle('form__row--hidden');
+  }
+
+  #newWorkout(e) {
+    const validInputs = (...inputs) =>
+      inputs.every((inp) => Number.isFinite(inp));
+    const allPositives = (...inputs) => inputs.every((inp) => inp > 0);
+
+    e.preventDefault();
+
+    // Get data from form
+    const type = inputType.value;
+    const distance = +inputDistance.value;
+    const duration = +inputDuration.value;
+    const { lat, lng } = this.#mapEvent.latlng;
+    let workout;
+
+    // If workout running, crate running object
+    if (type === 'running') {
+      const cadence = +inputCadence.value;
+
+      // Check if data is valid
+      if (
+        !validInputs(distance, duration, cadence) ||
+        !allPositives(distance, duration, cadence)
+      )
+        return alert('Inputs have to be positive numbers!');
+
+      workout = new Running([lat, lng], distance, duration, cadence);
+    }
+
+    // If workout cycling, create cycling object
+    if (type === 'cycling') {
+      const elevation = +inputElevation.value;
+
+      // Check if data is valid
+      if (
+        !validInputs(distance, duration, elevation) ||
+        !allPositives(distance, duration)
+      )
+        return alert('Inputs have to be positive numbers!');
+
+      workout = new Cycling([lat, lng], distance, duration, elevation);
+    }
+
+    // Add new object to workout array
+    this.#workouts.push(workout);
+
+    // Render workout on map as marker
+    this.#renderWorkoutMarker(workout);
+
+    // Render workout on list
+    this.#renderWorkout(workout);
+
+    // Hide form + clear input fields
+    this.#hideForm();
+
+    // Set local storage to all workouts
+    this.#setLocalStorage();
+  }
+
+  #renderWorkoutMarker(workout) {
+    L.marker(workout.coords)
+      .addTo(this.#map)
+      .bindPopup(
+        L.popup({
+          maxWidth: 250,
+          minWidth: 100,
+          autoClose: false,
+          closeOnClick: false,
+          className: `${workout.type}-popup`,
+        })
+      )
+      .setPopupContent(
+        `${workout.type === 'running' ? '🏃‍♂️' : '🚴‍♀️'} ${workout.description}`
+      )
+      .openPopup();
+  }
+
+  #renderWorkout(workout) {
+    let html = `
+      <li class="workout workout--${workout.type}" data-id="${workout.id}">
+        <h2 class="workout__title">${workout.description}</h2>
+        <div class="workout__details">
+          <span class="workout__icon">${
+            workout.type === 'running' ? '🏃‍♂️' : '🚴‍♀️'
+          }</span>
+          <span class="workout__value">${workout.distance}</span>
+          <span class="workout__unit">km</span>
+        </div>
+        <div class="workout__details">
+          <span class="workout__icon">⏱</span>
+          <span class="workout__value">${workout.duration}</span>
+          <span class="workout__unit">min</span>
+        </div>
+    `;
+
+    if (workout.type === 'running')
+      html += `
+        <div class="workout__details">
+          <span class="workout__icon">⚡️</span>
+          <span class="workout__value">${workout.pace.toFixed(1)}</span>
+          <span class="workout__unit">min/km</span>
+        </div>
+        <div class="workout__details">
+          <span class="workout__icon">🦶🏼</span>
+          <span class="workout__value">${workout.cadence}</span>
+          <span class="workout__unit">spm</span>
+        </div>
+      </li>
+      `;
+
+    if (workout.type === 'cycling')
+      html += `
+        <div class="workout__details">
+          <span class="workout__icon">⚡️</span>
+          <span class="workout__value">${workout.speed.toFixed(1)}</span>
+          <span class="workout__unit">km/h</span>
+        </div>
+        <div class="workout__details">
+          <span class="workout__icon">⛰</span>
+          <span class="workout__value">${workout.elevationGain}</span>
+          <span class="workout__unit">m</span>
+        </div>
+      </li>
+      `;
+
+    form.insertAdjacentHTML('afterend', html);
+  }
+
+  #moveToPopup(e) {
+    if (!this.#map) return;
+
+    const workoutEl = e.target.closest('.workout');
+
+    if (!workoutEl) return;
+
+    const workout = this.#workouts.find(
+      (work) => work.id === workoutEl.dataset.id
+    );
+
+    this.#map.setView(workout.coords, this.#mapZoomLevel, {
+      animate: true,
+      pan: {
+        duration: 1,
+      },
+    });
+
+    // Using the public interface
+    // workout.click();
+  }
+
+  #setLocalStorage() {
+    localStorage.setItem('workouts', JSON.stringify(this.#workouts));
+  }
+
+  #getLocalStorage() {
+    const data = localStorage.getItem('workouts');
+
+    if (!data) return;
+
+    const workoutData = JSON.parse(data);
+
+    // Reconstruct workout objects with proper class instances
+    workoutData.forEach((data) => {
+      let workout;
+
+      if (data.type === 'running') {
+        workout = new Running(
+          data.coords,
+          data.distance,
+          data.duration,
+          data.cadence
+        );
+      } else if (data.type === 'cycling') {
+        workout = new Cycling(
+          data.coords,
+          data.distance,
+          data.duration,
+          data.elevationGain
+        );
+      }
+
+      // Preserve original date and id
+      if (workout) {
+        workout.date = new Date(data.date);
+        workout.id = data.id;
+        workout.setDescription(); // Regenerate description with preserved date
+
+        this.#workouts.push(workout);
+        this.#renderWorkout(workout);
+      }
+    });
+  }
+
+  reset() {
+    localStorage.removeItem('workouts');
+    location.reload();
+  }
+
+  // Public method for debugging
+  getWorkouts() {
+    return this.#workouts;
+  }
+
+  // Public method to add workout programmatically
+  addWorkout(type, coords, distance, duration, extra) {
+    let workout;
+
+    if (type === 'running') {
+      workout = new Running(coords, distance, duration, extra);
+    } else if (type === 'cycling') {
+      workout = new Cycling(coords, distance, duration, extra);
+    } else {
+      throw new Error('Invalid workout type');
+    }
+
+    this.#workouts.push(workout);
+    this.#renderWorkoutMarker(workout);
+    this.#renderWorkout(workout);
+    this.#setLocalStorage();
+
+    return workout;
+  }
+}
+
+// Initialize the app
+const app = new App();
