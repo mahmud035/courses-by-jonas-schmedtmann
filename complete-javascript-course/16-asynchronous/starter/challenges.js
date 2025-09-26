@@ -26,20 +26,20 @@
   GOOD LUCK 😀
  */
 
-/*   
+/* 
 {
   // TODO: NOTE: IMPORTANT: Combining Promises and Fetch API
-  // Both Promises and Fetch API can be combined to handle network requests in a more readable and manageable way, especially with async/await.
+  // Both Promises and Fetch API can be combined to handle network requests in a more readable and manageable way, especially with `async...await`.
+
+  const countriesContainer = document.querySelector('.countries');
 
   const whereAmI = async (lat, lng) => {
     try {
       //* Reverse Geocoding API (Big Data Cloud)
       const url = `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lng}`;
-      const response = await fetch(url);
-      if (!response.ok) {
-        throw new Error(`Network request was not ok: ${response.status}`);
-      }
-      const data = await response.json();
+      const res = await fetch(url);
+      if (!res.ok) throw new Error(`Network request was not ok: ${res.status}`);
+      const data = await res.json();
       const countryCode = data.countryCode;
       fetchCountry(countryCode);
 
@@ -49,19 +49,17 @@
     }
   };
 
-  whereAmI(52.508, 13.381); // Germany
-  whereAmI(19.037, 72.873); // India
   whereAmI(23.02, 89.769); // Bangladesh
+  whereAmI(19.037, 72.873); // India
+  whereAmI(52.508, 13.381); // Germany
 
   //* Fetch country
   const fetchCountry = async (countryCode) => {
     try {
       const url = `https://restcountries.com/v3.1/alpha/${countryCode}`;
-      const response = await fetch(url);
-      if (!response.ok) {
-        throw new Error(`Network request was not ok: ${response.status}`);
-      }
-      const data = await response.json();
+      const res = await fetch(url);
+      if (!res.ok) throw new Error(`Network request was not ok: ${res.status}`);
+      const data = await res.json();
       displayCountry(data[0]);
     } catch (error) {
       console.log(error.message);
@@ -78,7 +76,7 @@
       ? Object.values(country.languages)[0]
       : 'N/A';
     const currency = country.currencies
-      ? Object.values(country.currencies)[0].name
+      ? Object.values(country.currencies)[0]?.name
       : 'N/A';
 
     const article = document.createElement('article');
@@ -98,7 +96,8 @@
               ${currency}
             </p>
           </div>`;
-    countriesContainer.prepend(article);
+
+    countriesContainer.append(article);
   };
 }
  */
