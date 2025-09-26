@@ -218,3 +218,73 @@ a:visited {
 .cycling-popup .leaflet-popup-content-wrapper {
   border-left: 5px solid var(--color-brand--1);
 }
+
+/* Delete Button Styles */
+
+.workout {
+  position: relative; /* Allow absolute positioning of delete button */
+  background-color: var(--color-dark--2);
+  border-radius: 5px;
+  padding: 1.5rem 2.25rem;
+  margin-bottom: 1.75rem;
+  cursor: pointer;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 0.75rem 1.5rem;
+  transition: background-color 0.2s, transform 0.1s;
+}
+
+.workout:hover {
+  background-color: #4a5056; /* Slightly lighter on hover */
+  transform: translateY(-1px);
+}
+
+.workout__delete {
+  position: absolute;
+  top: 0.8rem;
+  right: 1rem;
+  background: rgba(255, 0, 0, 0.8);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 2.4rem;
+  height: 2.4rem;
+  font-size: 1.8rem;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  opacity: 0;
+  transition: all 0.2s ease;
+  z-index: 10;
+}
+
+.workout__delete:hover {
+  background: rgba(255, 0, 0, 1);
+  transform: scale(1.1);
+  box-shadow: 0 2px 8px rgba(255, 0, 0, 0.3);
+}
+
+.workout__delete:active {
+  transform: scale(0.95);
+}
+
+/* Show delete button on workout hover */
+.workout:hover .workout__delete {
+  opacity: 1;
+}
+
+/* Prevent workout click when delete button is hovered */
+.workout__delete:hover {
+  pointer-events: auto;
+}
+
+/* Ensure title doesn't overlap with delete button */
+.workout__title {
+  font-size: 1.7rem;
+  font-weight: 600;
+  grid-column: 1 / -1;
+  padding-right: 3rem; /* Make space for delete button */
+}

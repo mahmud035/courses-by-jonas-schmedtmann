@@ -95,6 +95,7 @@ class App {
   #mapZoomLevel = 13;
   #mapEvent;
   #workouts = [];
+  #markers = []; // Track map markers for deletion
 
   constructor() {
     // Get user's position
@@ -258,7 +259,7 @@ class App {
   }
 
   #renderWorkoutMarker(workout) {
-    L.marker(workout.coords)
+    const marker = L.marker(workout.coords)
       .addTo(this.#map)
       .bindPopup(
         L.popup({
@@ -273,12 +274,16 @@ class App {
         `${workout.type === 'running' ? '🏃‍♂️' : '🚴‍♀️'} ${workout.description}`
       )
       .openPopup();
+
+    // Store marker with workout ID for later deletion
+    this.#markers.push({ id: workout.id, marker });
   }
 
   #renderWorkout(workout) {
     let html = `
       <li class="workout workout--${workout.type}" data-id="${workout.id}">
         <h2 class="workout__title">${workout.description}</h2>
+        <button class="workout__delete" data-id="${workout.id}">×</button>
         <div class="workout__details">
           <span class="workout__icon">${
             workout.type === 'running' ? '🏃‍♂️' : '🚴‍♀️'
@@ -327,6 +332,12 @@ class App {
   }
 
   #moveToPopup(e) {
+    // Check if delete button was clicked
+    if (e.target.classList.contains('workout__delete')) {
+      this.#deleteWorkout(e.target.dataset.id);
+      return;
+    }
+
     if (!this.#map) return;
 
     const workoutEl = e.target.closest('.workout');
@@ -346,6 +357,40 @@ class App {
 
     // Using the public interface
     // workout.click();
+  }
+
+  #deleteWorkout(workoutId) {
+    // Confirm deletion
+    if (!confirm('Are you sure you want to delete this workout?')) return;
+
+    // Find and remove workout from array
+    const workoutIndex = this.#workouts.findIndex(
+      (work) => work.id === workoutId
+    );
+
+    if (workoutIndex === -1) return; // Workout not found
+
+    // Remove from workouts array
+    this.#workouts.splice(workoutIndex, 1);
+
+    // Remove marker from map
+    const markerIndex = this.#markers.findIndex(
+      (item) => item.id === workoutId
+    );
+
+    if (markerIndex !== -1) {
+      this.#map.removeLayer(this.#markers[markerIndex].marker);
+      this.#markers.splice(markerIndex, 1);
+    }
+
+    // Remove from DOM
+    const workoutElement = document.querySelector(`[data-id="${workoutId}"]`);
+    if (workoutElement) workoutElement.remove();
+
+    // Update local storage
+    this.#setLocalStorage();
+
+    console.log(`Workout ${workoutId} deleted successfully`);
   }
 
   #setLocalStorage() {
