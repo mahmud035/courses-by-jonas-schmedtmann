@@ -82,6 +82,7 @@ const countriesContainer = document.querySelector('.countries');
 
 //* Welcome to Callback Hell
 
+/* 
 {
   // 1. First get the country data by fullName
   const getCountry = async (countryName) => {
@@ -90,27 +91,64 @@ const countriesContainer = document.querySelector('.countries');
         `https://restcountries.com/v3.1/name/${countryName}?fullText=true`
       );
       const data = await res.json();
-      console.log(data[0]);
       getNeighbourCountry(data[0]);
+      displayCountry(data[0]);
+
+      console.log('First get country by name:', data[0]);
     } catch (error) {
       console.log(error);
     }
   };
-  // getCountry('Bangladesh');
+  getCountry('Bangladesh');
 
   // 2. And then get one neighbour country data
   const getNeighbourCountry = async (data) => {
     try {
       const neighbourCountryCode = data?.borders?.[0]; // get first neighbour country code
-
       const res = await fetch(
         `https://restcountries.com/v3.1/alpha/${neighbourCountryCode}`
       );
       const neighbourCountry = await res.json();
-      console.log(neighbourCountry[0]);
+      displayCountry(neighbourCountry[0]);
+
+      console.log('Then get one neighbour country:', neighbourCountry[0]);
     } catch (error) {
       console.log(error);
     }
+  };
+
+  // Display country
+  const displayCountry = (country) => {
+    const name = country?.name?.common;
+    const flag = country?.flags?.svg;
+    const region = country?.region;
+    const population = country?.population;
+    const language = country.languages
+      ? Object.values(country.languages)[0]
+      : 'N/A';
+    const currency = country.currencies
+      ? Object.values(country.currencies)[0]?.name
+      : 'N/A';
+
+    const article = document.createElement('article');
+    article.classList.add('country');
+    article.innerHTML = `      
+          <img class="country__img" src=${flag} />
+          <div class="country__data">
+            <h3 class="country__name">${name}</h3>
+            <h4 class="country__region">${region}</h4>
+            <p class="country__row"><span>👫</span>
+               ${population}
+            </p>
+            <p class="country__row"><span>🗣️</span>
+               ${language}
+            </p>
+            <p class="country__row"><span>💰</span>
+              ${currency}
+            </p>
+          </div>`;
+
+    countriesContainer.append(article);
   };
 
   // WARNING: Don't do this. (Callback Hell)
@@ -123,11 +161,15 @@ const countriesContainer = document.querySelector('.countries');
   //       console.log('3 seconds passed');
   //       setTimeout(() => {
   //         console.log('4 seconds passed');
+  //         setTimeout(() => {
+  //           console.log('5 seconds passed');
+  //         }, 1000);
   //       }, 1000);
   //     }, 1000);
   //   }, 1000);
   // }, 1000);
 }
+ */
 
 //* Promises and the Fetch API
 //* Consuming Promises
@@ -232,13 +274,33 @@ const countriesContainer = document.querySelector('.countries');
   Promise.resolve('Resolved promise 1').then((res) => console.log(res));
 
   Promise.resolve('Resolved promise 2').then((res) => {
-    for (let i = 1; i <= 25000; i++) {}
+    for (let i = 1; i <= 1_00_00_000; i++) {}
     console.log(res);
   });
 
   console.log('Test end');
+
+  // Output:
+  // Test start
+  // Test end
+  // Resolved promise 1
+  // Resolved promise 2
+  // 0 second timer
 }
  */
+
+/*   
+  Key Takeaways:
+  JavaScript's event loop processes synchronous code first, followed by micro-tasks, then callback queue tasks.
+  
+  Synchronous code -> Micro-tasks queue -> Callback queue
+  
+  Promises resolved immediately are placed in the micro-tasks queue, which has priority over timers in the callback queue.
+  
+  Timers with zero delay do not guarantee immediate execution due to micro-task queue precedence.
+  
+  Long-running micro-tasks can delay timer callbacks, affecting timing precision in JavaScript. 
+*/
 
 //* Building a Simple Promise
 
@@ -478,7 +540,7 @@ const countriesContainer = document.querySelector('.countries');
 
 //* Running Promises in Parallel => Promise.all()
 
-// IMPORTANT: `Promise.all()`: Waits for all promises to be fulfilled or for any to be rejected. If any promise is rejected, the entire Promise.all() will be rejected.
+// IMPORTANT: `Promise.all()`: Waits for all promises to be fulfilled or for any to be rejected. If any promise is rejected, the entire Promise.all() promise is rejected.
 
 /* 
 {
@@ -556,6 +618,17 @@ const countriesContainer = document.querySelector('.countries');
  */
 
 //* Other Promise Combinator's: race, allSettled and any
+
+/*
+  Running Promises in Parallel
+  To run promises in parallel, you can use Promise.all(), Promise.allSettled(), Promise.race(), or Promise.any(). Each of these methods has different characteristics:
+ 
+  `Promise.allSettled()`: Waits for all promises to settle (either fulfilled or rejected). This method never rejects and returns an array of objects describing the outcome of each promise.
+
+  `Promise.race()`: Waits for the first promise to settle (either fulfilled or rejected). It returns the value of the first settled promise.
+
+  `Promise.any()`: Waits for the first promise to be fulfilled. If all promises are rejected, it rejects with an AggregateError.
+*/
 
 /* 
 {
