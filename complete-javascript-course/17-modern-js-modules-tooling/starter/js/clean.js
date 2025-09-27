@@ -33,9 +33,9 @@ const newBudget1 = addExpense(budget, 10, 'Pizza 🍕');
 const newBudget2 = addExpense(newBudget1, 100, 'Going to movies 🍿', 'Matilda');
 const newBudget3 = addExpense(newBudget2, 200, 'Stuff', 'Jay');
 
-// console.log('New Budget 1', newBudget1);
-// console.log('New Budget 2', newBudget2);
-// console.log('New Budget 3', newBudget3);
+console.log('New Budget 1', newBudget1);
+console.log('New Budget 2', newBudget2);
+console.log('New Budget 3', newBudget3);
 
 //* Pure Function & Immutability
 const checkExpenses = (state) =>
@@ -55,4 +55,5 @@ const logBigExpenses = function (state, bigLimit) {
 
   console.log(bigExpenses);
 };
+
 logBigExpenses(finalBudget, 500);

@@ -1,10 +1,10 @@
-// Exporting modules
-console.log('Exporting modules');
-
 // Blocking code
 // console.log('Start fetching users');
 // await fetch('https://jsonplaceholder.typicode.com/users');
 // console.log('Finish fetching users');
+
+// Exporting modules
+console.log('--------- Exporting modules ---------');
 
 //* Named Export (In-line individually)
 export const shippingCost = 10;
