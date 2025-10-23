@@ -1200,19 +1200,19 @@
 
 // ==================== KEY CONCEPTS SUMMARY ====================
 /*
-1. PUBLIC FIELDS: Available on all instances (university = 'value')
-2. PRIVATE FIELDS: Only accessible within class (#studyHours, #course)
-3. STATIC FIELDS: Available only on class itself (numSubjects)
-4. CONSTRUCTOR: Called by 'new', sets up instance
-5. SUPER(): Calls parent constructor, must come before 'this'
-6. PUBLIC METHODS: Available on all instances (introduce, study)
-7. PRIVATE METHODS: Only accessible within class (#makeCoffee)
-8. STATIC METHODS: Available only on class (printCurriculum)
-9. GETTERS: Access like property (get testScore)
-10. SETTERS: Set like property (set testScore)
-11. INHERITANCE: 'extends' creates prototype chain
-12. POLYMORPHISM: Child can override parent methods
-*/
+  1. PUBLIC FIELDS: Available on all instances (university = 'value')
+  2. PRIVATE FIELDS: Only accessible within class (#studyHours, #course)
+  3. STATIC FIELDS: Available only on class itself (numSubjects)
+  4. CONSTRUCTOR: Called by 'new', sets up instance
+  5. SUPER(): Calls parent constructor, must come before 'this'
+  6. PUBLIC METHODS: Available on all instances (introduce, study)
+  7. PRIVATE METHODS: Only accessible within class (#makeCoffee)
+  8. STATIC METHODS: Available only on class (printCurriculum)
+  9. GETTERS: Access like property (get testScore)
+  10. SETTERS: Set like property (set testScore)
+  11. INHERITANCE: 'extends' creates prototype chain
+  12. POLYMORPHISM: Child can override parent methods
+ */
 
 // Code From Slide
 

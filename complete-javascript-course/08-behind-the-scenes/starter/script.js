@@ -378,23 +378,27 @@
   }
 }
 
-//* The this Keyword
+//* The `this` Keyword
 
 {
-  /* 
-  What is `this`?
-    In JavaScript, the `this` keyword refers to an object.
-    The `this` keyword refers to different objects depending on how it is used:
+  // ==============================================
+  // IMPORTANT: Key Points To Remember: 👇
 
-    1. In an object method, `this` refers to the object.
-    2. Alone, `this` refers to the global object. (window in browsers, global in Node.js)
-    3. In a function, `this` refers to the global object. (window in browsers, global in Node.js)
-    4. In a function, in strict mode, `this` is `undefined`.
-    5. In an event, `this` refers to the element that received the event.
-    6. Methods like `call()`, `apply()`, and `bind()` can refer this to any object.
+  // 1. In the global context, "this" refers to the global object (browser -> window, node -> global).
 
-    (Note: Methods like call(), apply(), and bind() can explicitly set the value of this to any object you pass to them.)
-  */
+  // 2. Inside a function (in non-strict mode), "this" is the global object, while in strict mode, it is undefined.
+
+  // 3. In methods, "this" refers to the object the method belongs to.
+
+  // 4. Inside constructor functions and classes, "this" refers to the instance of the object.
+
+  // 5. Arrow functions do not have their own "this"; they inherit it from the lexical context.
+
+  // 6. Event listeners set "this" to the element that triggered the event.
+
+  // 7. You can manually set "this" using bind(), call(), or apply().
+
+  // ==============================================
 
   // Example 1: In an object method
   const person = {
