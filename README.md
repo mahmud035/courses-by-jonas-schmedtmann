@@ -1,126 +1,81 @@
-# 📚 Complete JavaScript & Ultimate React Courses by Jonas Schmedtmann
+# 📚 Courses by Jonas Schmedtmann — Complete JavaScript & Ultimate React
 
-This repository contains all the projects, notes, and exercises from the **Complete JavaScript Course** and the **Ultimate React Course** by Jonas Schmedtmann. It is an all-in-one resource to solidify your understanding of JavaScript, React, and related technologies by working through practical, real-world projects.
+My projects, notes, and exercises from two of Jonas Schmedtmann's courses: the **Complete JavaScript Course** and the **Ultimate React Course**. Each course is worked through section by section, from fundamentals to full applications.
 
-## 🚀 Courses Overview
-
-### **Complete JavaScript Course**
-
-Master JavaScript from the ground up, with a focus on understanding the core concepts and applying them to real-world scenarios.
-
-#### Key Sections Covered:
-
-1. **JavaScript Fundamentals**
-
-   - Variables, Data Types, Operators
-   - Control Flow, Loops
-   - Functions, Scoping, and Hoisting
-
-2. **DOM Manipulation & Events**
-
-   - Selecting & Updating the DOM
-   - Event Listeners & Handlers
-
-3. **JavaScript Behind the Scenes**
-
-   - Execution Contexts, Hoisting, Closures
-   - The Call Stack, Event Loop
-
-4. **Advanced JavaScript Features**
-
-   - ES6+ Syntax (Arrow Functions, Destructuring, Spread & Rest Operators)
-   - Promises, Async/Await
-   - Modules & Bundling with Webpack/Babel
-
-5. **Object-Oriented Programming (OOP)**
-
-   - Prototypes & Inheritance
-   - ES6 Classes
-
-6. **Projects & Real-World Applications**
-   - Modal Window, Mapty App
-   - Bankist Application & More!
+> Personal learning archive. Code follows the courses' structure and projects; use it as reference or a study companion.
 
 ---
 
-### **Ultimate React Course**
+## 📂 Repository structure
 
-A complete guide to mastering **React**, focusing on modern development practices and real-world applications.
-
-#### Key Sections Covered:
-
-1. **React Fundamentals**
-
-   - JSX, Components, Props, State Management
-   - Event Handling, Forms, Lists & Conditional Rendering
-
-2. **Advanced React**
-
-   - React Hooks (useState, useEffect, useContext)
-   - Memoization, Performance Optimization
-
-3. **State Management**
-
-   - Context API & React Redux Toolkit
-
-4. **Styling in React**
-
-   - CSS Modules, Styled Components
-
-5. **React Router (v6.4+)**
-
-   - Handling Navigation and Routing
-
-6. **Testing & Debugging**
-
-   - Unit Testing with Jest
-   - Integration Testing with React Testing Library
-
-7. **Deployment**
-   - Deploying React Applications (Netlify, Vercel)
+```
+courses-by-jonas-schmedtmann/
+├── complete-javascript-course/     # 18 sections, fundamentals → Forkify
+├── ultimate-react-course/          # 20+ sections, pure React → full-stack Next.js
+├── js-theory-lectures-*.pdf        # course slides & references
+├── js-all-coding-challenges.pdf
+├── js-assignments-fundamentals.pdf
+└── react-theory-slides-*.pdf
+```
 
 ---
 
-## 💻 Technologies Covered
+## 🟨 Complete JavaScript Course
 
-- **JavaScript (ES6+)**: Promises, Async/Await, Closures, ES6 Modules, OOP
-- **React**: Functional Components, React Hooks (useState, useEffect, useContext)
-- **Next.js**: for full-stack React applications
-- **Redux Toolkit**: Efficient global state management
-- **TanStack Query**: for remote data state management
-- **REST APIs**: for backend communication
-- **CSS**: Flexbox, CSS Grid, CSS Modules, Styled Components
-- **Git & GitHub**: Version control, Branching, and Merging
-- **Webpack & Babel**: Module Bundling & Transpiling
-- **Testing**: Jest, React Testing Library, Cypress (E2E Testing)
-- **Deployment**: Netlify, Vercel
+JavaScript from the ground up, section by section (`01-fundamentals-part-1` → `18-forkify`).
 
-## 🔥 Projects
+**Concepts:** variables, data types, operators, control flow, loops · functions, scoping, hoisting, closures · DOM manipulation & events · execution contexts, the call stack, the event loop · ES6+ (arrow functions, destructuring, spread/rest) · promises & async/await · OOP (prototypes, ES6 classes) · modules & tooling (Webpack, Babel, Parcel).
 
-This repo contains various projects and exercises to practice the concepts covered in the courses, including:
+**Projects built:**
+- **Guess My Number**, **Modal**, **Pig Game** — DOM & events fundamentals
+- **Bankist** (arrays, numbers/dates/timers, advanced DOM) — a banking-app simulation
+- **Mapty** — a workout tracker with Leaflet maps, OOP, and local storage
+- **Forkify** — a recipe app consuming a REST API, with MVC architecture and Parcel bundling
 
-1. **Pig Game** – A simple dice game built with vanilla JavaScript.
-2. **Mapty App** – A workout tracking app with map integration, built using OOP and local storage.
-3. **Bankist App** – A modern banking app simulation using JavaScript for handling transactions, UI manipulation, and data storage.
-4. **Forkify App** – A recipe search application using API data with complex state management in JavaScript.
-5. **React Budget App** – A budget management app built using React, state management with Context API, and Hooks.
-6. **React Projects with Redux** – Advanced projects covering state management with Redux, React Router, and more.
-7. **Full-Stack Next.js Project** – A complete full-stack application using Next.js, with authentication and data fetching using React Query and Supabase.
+## ⚛️ Ultimate React Course
 
-## 🛠 How to Run the Projects
+Modern React from first principles (`01-pure-react` → `21-the-wild-oasis-website`).
 
-To clone and run any of the projects locally, follow these steps:
+**Concepts:** JSX, components, props, state, event handling · lists, forms & conditional rendering · hooks (`useState`, `useEffect`, `useContext`, `useReducer`, custom hooks) · how React works behind the scenes · performance & memoization · Context API and **Redux Toolkit** · **React Router** (v6.4+ data loaders) · **TanStack Query** for server state · **styled-components** · **Next.js** (SSR and the App Router) with **Supabase**.
+
+**Projects built (selected):**
+- **Pizza Menu**, **Travel List**, **Eat-'N-Split** — components, state, and props
+- **usePopcorn** — data fetching, custom hooks, and effects
+- **React Quiz** — `useReducer`-driven state
+- **WorldWise** — routing, context, and maps
+- **Fast React Pizza** — React Router data loaders + Redux Toolkit
+- **The Wild Oasis** — a hotel-management dashboard (Supabase, React Query, styled-components)
+- **The Wild Oasis Website** — a full-stack **Next.js** guest site with Supabase
+
+---
+
+## 💻 Technologies covered
+
+- **JavaScript (ES6+)** — closures, promises, async/await, modules, OOP
+- **React** — functional components, hooks, Context API
+- **Redux Toolkit** — global state management
+- **TanStack Query** — server/remote state
+- **Next.js** — SSR and full-stack React
+- **Supabase** — database, auth, and APIs for the Wild Oasis projects
+- **Styling** — Flexbox, CSS Grid, CSS Modules, styled-components
+- **Tooling** — Webpack, Babel, Parcel, Vite; Create React App's Jest / React Testing Library defaults
+- **Git & GitHub** — version control workflow
+
+---
+
+## 🛠 How to run a project
+
+Projects live under each course folder. Vanilla-JS projects open directly in the browser; React/Next.js projects have their own `package.json`.
 
 ```bash
 # Clone this repository
-git clone https://github.com/mahmud035/Complete-JavaScript-and-Ultimate-React-Courses-by-Jonas-Schemedtmann.git
+git clone https://github.com/mahmud035/courses-by-jonas-schmedtmann.git
+cd courses-by-jonas-schmedtmann
 
-# Navigate into the project folder
-cd Complete-JavaScript-and-Ultimate-React-Courses-by-Jonas-Schemedtmann
-
-# Install dependencies for a project
+# For a React / Next.js project, cd into it, then:
 npm install
-
-# Start the development server (React Projects)
-npm start
+npm start        # CRA/Vite projects
+# or: npm run dev   (Next.js / Vite projects)
 ```
+
+Vanilla-JavaScript sections (e.g. `complete-javascript-course/05-guess-my-number`) can be opened by launching their `index.html` (a Live Server extension works well).
