@@ -12,10 +12,15 @@ My projects, notes, and exercises from two of Jonas Schmedtmann's courses: the *
 courses-by-jonas-schmedtmann/
 ├── complete-javascript-course/     # 18 sections, fundamentals → Forkify
 ├── ultimate-react-course/          # 20+ sections, pure React → full-stack Next.js
-├── js-theory-lectures-*.pdf        # course slides & references
-├── js-all-coding-challenges.pdf
-├── js-assignments-fundamentals.pdf
-└── react-theory-slides-*.pdf
+└── resources/                      # course slides, coding challenges, and reference sheets
+    ├── js-theory-lectures-v2.3.pdf
+    ├── js-all-coding-challenges.pdf
+    ├── js-assignments-fundamentals.pdf
+    ├── js-pathways.pdf
+    ├── react-theory-slides-v1.1.pdf
+    ├── es6-classes-summary.png
+    ├── more-array-tools-and-techniques.png
+    └── which-array-method-to-use.png
 ```
 
 ---
